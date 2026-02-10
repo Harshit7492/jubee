@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm install && npm exec vite build",
+  "outputDirectory": "dist"
+}
