@@ -1,0 +1,270 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* Light Mode Colors */
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0F172A;
+  --muted: #F8FAFC;
+  --muted-foreground: #64748B;
+  --accent: #F1F5F9;
+  --accent-foreground: #0F172A;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: transparent;
+  --input-background: #F8FAFC;
+  --switch-background: #CBD5E1;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #3B82F6;
+  --radius: 0.75rem;
+  
+  /* Light Mode Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #3B82F6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F5F9;
+  --sidebar-accent-foreground: #0F172A;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #3B82F6;
+  
+  /* Jubee Professional Color Palette */
+  --jubee-charcoal: #0F172A;
+  --jubee-ivory: #FDFDFB;
+  --jubee-blue: #3B82F6;
+  --jubee-blue-dark: #2563EB;
+  --jubee-blue-light: #60A5FA;
+  --jubee-blue-bg: #EFF6FF;
+  --jubee-yellow: #FBBF24;
+  --jubee-yellow-light: #FDE68A;
+  --jubee-yellow-bg: #FEF3C7;
+  --jubee-red: #EF4444;
+  --jubee-red-bg: #FEF2F2;
+  --jubee-gray-light: #F8FAFC;
+  --jubee-gray-medium: #64748B;
+  --jubee-border: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  /* Dark Mode - Modern Blue-Black Theme */
+  --background: #0A0E1A;
+  --foreground: #F1F5F9;
+  --card: #0F172A;
+  --card-foreground: #F1F5F9;
+  --popover: #0F172A;
+  --popover-foreground: #F1F5F9;
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1E293B;
+  --secondary-foreground: #F1F5F9;
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
+  --accent: #1E293B;
+  --accent-foreground: #F1F5F9;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(148, 163, 184, 0.15);
+  --input: transparent;
+  --input-background: #1E293B;
+  --switch-background: #475569;
+  --ring: #3B82F6;
+  
+  /* Dark Mode Sidebar - Deep Blue-Black Gradient */
+  --sidebar: #0A0E1A;
+  --sidebar-foreground: #F1F5F9;
+  --sidebar-primary: #3B82F6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #1E293B;
+  --sidebar-accent-foreground: #F1F5F9;
+  --sidebar-border: rgba(148, 163, 184, 0.1);
+  --sidebar-ring: #3B82F6;
+  
+  /* Dark Mode Jubee Colors */
+  --jubee-charcoal: #F1F5F9;
+  --jubee-ivory: #0F172A;
+  --jubee-blue: #3B82F6;
+  --jubee-blue-dark: #2563EB;
+  --jubee-blue-light: #60A5FA;
+  --jubee-blue-bg: rgba(59, 130, 246, 0.1);
+  --jubee-yellow: #FBBF24;
+  --jubee-yellow-light: #FDE68A;
+  --jubee-yellow-bg: rgba(251, 191, 36, 0.1);
+  --jubee-red: #EF4444;
+  --jubee-red-bg: rgba(239, 68, 68, 0.1);
+  --jubee-gray-light: #1E293B;
+  --jubee-gray-medium: #94A3B8;
+  --jubee-border: rgba(148, 163, 184, 0.15);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+/* Jubee Custom Glassmorphism & Effects */
+@layer utilities {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .hairline-border {
+    border-width: 0.5px;
+  }
+  
+  .jubee-shadow-soft {
+    box-shadow: 0 2px 8px rgba(44, 45, 53, 0.04);
+  }
+  
+  .jubee-shadow-medium {
+    box-shadow: 0 4px 16px rgba(44, 45, 53, 0.08);
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+  }
+  
+  .scrutiny-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(59, 130, 246, 0.15) 50%,
+      rgba(59, 130, 246, 0.05) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+  
+  .jubee-gradient-primary {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  }
+  
+  .jubee-gradient-accent {
+    background: linear-gradient(135deg, #3B82F6 0%, #FBBF24 100%);
+  }
+  
+  .jubee-gradient-subtle {
+    background: linear-gradient(135deg, #EFF6FF 0%, #FEF3C7 100%);
+  }
+}
