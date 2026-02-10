@@ -1,1 +1,0 @@
-import jubeeLogo from 'figma:asset/9dcf73d2000c5f43016bea1dd9690cd4d8e79284.png';
