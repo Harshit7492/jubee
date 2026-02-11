@@ -56,14 +56,14 @@ export function PersonalInformationView() {
         {/* Profile Photo Section */}
         <div className="bg-card border border-border rounded-2xl p-6 mb-5">
           <label className="text-sm font-semibold text-foreground mb-4 block">Profile Photo</label>
-          
+
           <div className="flex items-center gap-6">
             {/* Profile Avatar */}
             <div className="relative group">
               <div className="w-20 h-20 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-xl font-bold">VK</span>
+                <span className="text-white text-xl font-bold">VW</span>
               </div>
-              
+
               {/* Upload Overlay */}
               <button className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <Camera className="w-5 h-5 text-white" />
@@ -106,7 +106,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingName ? (
               <div className="flex gap-2">
                 <Input
@@ -142,7 +142,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingName ? (
               <div className="flex gap-2">
                 <Input
@@ -183,7 +183,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingContact ? (
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2">
@@ -234,7 +234,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingEmail ? (
               <div className="flex flex-col gap-2">
                 <Input
@@ -273,7 +273,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingEnrollment ? (
               <div className="flex flex-col gap-2">
                 <Input
@@ -308,7 +308,7 @@ export function PersonalInformationView() {
                 </button>
               )}
             </div>
-            
+
             {isEditingPosition ? (
               <div className="flex flex-col gap-2">
                 <select

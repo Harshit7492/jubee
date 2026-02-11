@@ -15,6 +15,11 @@ export default defineConfig(({ mode }) => ({
     },
   },
 
+  preview: {
+    port: 4173,
+    strictPort: true,
+  },
+
   // 🔥 THIS removes console logs in production build
   esbuild: {
     drop: mode === 'production' ? ['console', 'debugger'] : [],
@@ -22,5 +27,7 @@ export default defineConfig(({ mode }) => ({
 
   build: {
     sourcemap: mode !== 'production',
-  }
+  },
+
+
 }))

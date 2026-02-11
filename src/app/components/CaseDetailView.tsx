@@ -779,7 +779,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                 className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-accent cursor-pointer transition-all group"
               >
                 <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-sm font-bold">VK</span>
+                  <span className="text-white text-sm font-bold">VW</span>
                 </div>
                 <div className="flex-1 min-w-0 text-left">
                   <p className="text-foreground text-sm font-semibold truncate text-left">Vipul Wadhwa</p>
@@ -792,7 +792,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                 className="w-full flex items-center justify-center p-3 rounded-xl hover:bg-accent cursor-pointer transition-all group"
               >
                 <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center shadow-lg">
-                  <span className="text-white text-sm font-bold">VK</span>
+                  <span className="text-white text-sm font-bold">VW</span>
                 </div>
               </button>
             )}
@@ -1428,7 +1428,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-accent cursor-pointer transition-all group"
             >
               <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-sm font-bold">VK</span>
+                <span className="text-white text-sm font-bold">VW</span>
               </div>
               <div className="flex-1 min-w-0 text-left">
                 <p className="text-foreground text-sm font-semibold truncate text-left">Vipul Wadhwa</p>
@@ -1441,7 +1441,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               className="w-full flex items-center justify-center p-3 rounded-xl hover:bg-accent cursor-pointer transition-all group"
             >
               <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-full flex items-center justify-center shadow-lg">
-                <span className="text-white text-sm font-bold">VK</span>
+                <span className="text-white text-sm font-bold">VW</span>
               </div>
             </button>
           )}
