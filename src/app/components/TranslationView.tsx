@@ -937,7 +937,7 @@ export function TranslationView({ onBack }: TranslationViewProps) {
       )}
 
       {/* Jubee Footer */}
-      <JubeeFooter />
+      {/* <JubeeFooter /> */}
     </div>
   );
 }

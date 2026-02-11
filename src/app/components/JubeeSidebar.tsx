@@ -2,6 +2,7 @@ import { Home, FileText, Gavel, Calendar, Bell, Radio, Search, FileSearch, PenTo
 import { Button } from '@/app/components/ui/button';
 import { useTheme } from '@/app/contexts/ThemeContext';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import jubeeLogo from '@/assets/jubee-logo.png';
 import { SearchWithDropdown } from '@/app/components/ui/search-with-dropdown';
 
@@ -30,6 +31,7 @@ interface JubeeSidebarProps {
 
 export function JubeeSidebar({ activeView, onNavigate, onLogout, onClearSession }: JubeeSidebarProps) {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
   const [sidebarSearchQuery, setSidebarSearchQuery] = useState('');
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -54,9 +56,8 @@ export function JubeeSidebar({ activeView, onNavigate, onLogout, onClearSession 
             <button 
               onClick={() => {
                 onClearSession?.();
-                onNavigate('home');
-                // Force navigation to home page
-                window.location.pathname = '/';
+                onNavigate('research-board');
+                navigate('/dashboard');
               }}
               className="flex items-center gap-3 px-[-2px] py-[0px] hover:opacity-80 transition-opacity cursor-pointer"
             >
@@ -76,9 +77,16 @@ export function JubeeSidebar({ activeView, onNavigate, onLogout, onClearSession 
           </div>
         ) : (
           <div className="flex flex-col items-center gap-4">
-            <div className="w-11 h-11 rounded-xl flex items-center justify-center">
+            <button
+              onClick={() => {
+                onClearSession?.();
+                onNavigate('research-board');
+                navigate('/dashboard');
+              }}
+              className="w-11 h-11 rounded-xl flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+            >
               <img src={jubeeLogo} alt="Jubee.ai Logo" className="w-11 h-11 object-contain" />
-            </div>
+            </button>
             <button
               onClick={() => setIsCollapsed(false)}
               className="p-1.5 rounded-lg hover:bg-accent transition-colors"

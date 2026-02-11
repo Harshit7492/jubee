@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { 
-  PenTool, ArrowLeft, Sparkles, Save, Download, Upload, File, X, Send, Bot, 
-  User, AlertCircle, CheckCircle, Lightbulb, BookOpen, Type, AlignLeft, 
+import {
+  PenTool, ArrowLeft, Sparkles, Save, Download, Upload, File, X, Send, Bot,
+  User, AlertCircle, CheckCircle, Lightbulb, BookOpen, Type, AlignLeft,
   FileText, Scale, ChevronDown, Paperclip, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
@@ -57,8 +57,8 @@ type ConversationStage = 'initial' | 'draft-choice' | 'supporting-docs' | 'casel
 const COURTS = [
   { id: 'supreme', name: 'Supreme Court of India' },
   { id: 'delhi-hc', name: 'Delhi High Court' },
-  { id: 'delhi-district', name: 'District Court - Delhi' },
-  { id: 'other', name: 'Other Court' }
+  // { id: 'delhi-district', name: 'District Court - Delhi' },
+  // { id: 'other', name: 'Other Court' }
 ];
 
 const JUDGES = [
@@ -94,14 +94,14 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
   const [selectedBench, setSelectedBench] = useState('');
   const [selectedJudge, setSelectedJudge] = useState(initialContent ? 'Justice Sanjiv Khanna' : '');
   const [jurisdiction, setJurisdiction] = useState(initialContent ? 'Delhi High Court - Justice Sanjiv Khanna' : '');
-  
+
   // Editor phase states
   const [documentContent, setDocumentContent] = useState(initialContent || '');
   const [isRightPaneCollapsed, setIsRightPaneCollapsed] = useState(false);
   const [autoCheckIssues, setAutoCheckIssues] = useState<AutoCheckIssue[]>([]);
   const [isAnalyzingDocument, setIsAnalyzingDocument] = useState(false);
   const [expandedPanel, setExpandedPanel] = useState<'documents' | 'suggestions' | 'chatbot' | null>('suggestions');
-  
+
   // Chatbot states
   const [chatbotMessages, setChatbotMessages] = useState<Array<{
     id: string;
@@ -111,7 +111,7 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
   }>>([]);
   const [chatbotInput, setChatbotInput] = useState('');
   const [isChatbotTyping, setIsChatbotTyping] = useState(false);
-  
+
   // Formatting states
   const [fontSize, setFontSize] = useState('12');
   const [lineSpacing, setLineSpacing] = useState('1.5');
@@ -210,9 +210,9 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
       timestamp: new Date(),
       options
     };
-    
+
     setMessages(prev => [...prev, newMessage]);
-    
+
     // Start typewriter effect for this message
     setTypingMessageId(newMessage.id);
     setVisibleChars(prev => ({ ...prev, [newMessage.id]: 0 }));
@@ -231,7 +231,7 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
 
   const handleOptionSelect = (optionId: string, optionLabel: string) => {
     setIsTyping(true);
-    
+
     if (currentStage === 'initial') {
       if (optionId === 'upload-from-space') {
         addUserMessage('I want to upload from My Space');
@@ -351,7 +351,7 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
     setIsTyping(true);
     setSelectedCourt(courtName);
     addUserMessage(courtName);
-    
+
     setTimeout(() => {
       setIsTyping(false);
       proceedToBenchSelection();
@@ -374,7 +374,7 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
 
   const handleBenchSelect = (benchId: string, benchLabel: string) => {
     setIsTyping(true);
-    
+
     if (benchId === 'skip-bench') {
       addUserMessage('Skip bench selection');
       setSelectedBench('');
@@ -382,7 +382,7 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
       addUserMessage(benchLabel);
       setSelectedBench(benchLabel);
     }
-    
+
     setTimeout(() => {
       setIsTyping(false);
       setIsJudgeModalOpen(true);
@@ -392,17 +392,17 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
 
   const handleJudgeModalConfirm = (selectedJudgesList: Array<{ id: string; name: string; gender: 'Mr.' | 'Ms.' }>) => {
     setIsJudgeModalOpen(false);
-    
+
     if (selectedJudgesList.length === 0) {
       // Skip judge selection
       setIsTyping(true);
       setSelectedJudge('');
       setJurisdiction(selectedCourt);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage('Perfect! I have all the information I need. Preparing your drafting workspace now...');
-        
+
         setTimeout(() => {
           // Initialize document content without judge
           if (draftDoc) {
@@ -411,9 +411,9 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
           } else {
             setDocumentContent(`IN THE ${selectedCourt.toUpperCase()}\n\n\n\n`);
           }
-          
+
           setCurrentStage('processing');
-          
+
           setTimeout(() => {
             // Always use editor to show right panel with suggestions and chatbot
             setCurrentStage('editor');
@@ -422,14 +422,14 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
       }, 800);
       return;
     }
-    
+
     // If judges provided
     const judgeNames = selectedJudgesList.map(j => j.name);
     setSelectedJudges(judgeNames);
     setIsTyping(true);
     setSelectedJudge(judgeNames.join(', '));
     setJurisdiction(`${selectedCourt} - ${judgeNames.join(', ')}`);
-    
+
     // Add user message with judge chips
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -439,11 +439,11 @@ export function DraftsmanTool({ onBack, onToolChange, activeTool, initialContent
       judgeChips: judgeNames
     };
     setMessages(prev => [...prev, userMessage]);
-    
+
     setTimeout(() => {
       setIsTyping(false);
       addAIMessage('Perfect! I have all the information I need. Preparing your drafting workspace now...');
-      
+
       setTimeout(() => {
         // Initialize document content
         if (draftDoc) {
@@ -500,10 +500,10 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
 `);
         }
-        
+
         // Show processing screen
         setCurrentStage('processing');
-        
+
         // After processing, move to editor
         setTimeout(() => {
           // Always use editor to show right panel with suggestions and chatbot
@@ -597,14 +597,14 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
     // Start analyzing animation
     setIsAnalyzingDocument(true);
     setAutoCheckIssues([]);
-    
+
     // Simulate AI analysis delay
     setTimeout(() => {
       const issues: AutoCheckIssue[] = [];
-      
+
       // Simple analysis rules (can be enhanced)
       const lines = content.split('\n');
-      
+
       lines.forEach((line, index) => {
         // Check for incomplete sections
         if (line.includes('[') && line.includes(']')) {
@@ -615,7 +615,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
             line: index + 1
           });
         }
-        
+
         // Check for formatting issues
         if (line.trim().length > 0 && !line.match(/^[A-Z0-9\s\(\)\[\]]/)) {
           issues.push({
@@ -626,7 +626,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           });
         }
       });
-      
+
       // Check for missing elements
       if (!content.includes('PRAYER')) {
         issues.push({
@@ -635,7 +635,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           message: 'Missing "PRAYER" section - Every petition should include a prayer',
         });
       }
-      
+
       if (!content.includes('Date:')) {
         issues.push({
           id: 'missing-date',
@@ -643,7 +643,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           message: 'Missing date field - Add the date at the end of document',
         });
       }
-      
+
       setAutoCheckIssues(issues);
       setIsAnalyzingDocument(false);
     }, 2000); // 2 second delay for AI analysis animation
@@ -707,13 +707,13 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
       const lines = documentContent.split('\n');
       const linesBefore = lines.slice(0, issue.line - 1);
       const charPosition = linesBefore.join('\n').length + (linesBefore.length > 0 ? 1 : 0);
-      
+
       // Focus the editor
       editorRef.current.focus();
-      
+
       // Set cursor position to the start of the line
       editorRef.current.setSelectionRange(charPosition, charPosition + lines[issue.line - 1].length);
-      
+
       // Scroll into view
       editorRef.current.scrollTop = (issue.line - 1) * 20; // Approximate line height
     } else {
@@ -930,7 +930,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         <div className="flex-1 flex overflow-hidden">
           {/* Left Pane: Document Editor */}
           <div className="flex-1 flex flex-col overflow-hidden bg-muted/30">
-            <div className="flex-1 overflow-y-auto p-8">
+            <div className="flex-1 overflow-y-auto ">
               <div className="max-w-5xl mx-auto">
                 <div className="bg-white dark:bg-card shadow-lg rounded-lg p-12">
                   <textarea
@@ -966,8 +966,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
             <div className="w-96 border-l border-border bg-background flex flex-col">
               {/* Section 1: Documents Referenced */}
               <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'documents' 
-                  ? 'flex-1 border-primary/30' 
+                expandedPanel === 'documents'
+                  ? 'flex-1 border-primary/30'
                   : 'flex-shrink-0 border-border'
               }`}>
                 <button
@@ -979,7 +979,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                   }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                  
+
                   <div className="flex items-center gap-2.5 relative z-10">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
                       expandedPanel === 'documents'
@@ -994,8 +994,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                       expandedPanel === 'documents' ? 'text-primary' : 'text-foreground group-hover:text-primary'
                     }`}>Documents Referenced</h4>
                     <Badge variant="secondary" className="text-xs ml-auto mr-2">
-                      {draftDoc || supportingDocs.length > 0 || caselawDocs.length > 0 
-                        ? (draftDoc ? 1 : 0) + supportingDocs.length + caselawDocs.length 
+                      {draftDoc || supportingDocs.length > 0 || caselawDocs.length > 0
+                        ? (draftDoc ? 1 : 0) + supportingDocs.length + caselawDocs.length
                         : 2}
                     </Badge>
                     <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ${
@@ -1004,8 +1004,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                         : 'bg-muted group-hover:bg-primary/10'
                     }`}>
                       <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'documents' 
-                          ? 'rotate-180 text-primary' 
+                        expandedPanel === 'documents'
+                          ? 'rotate-180 text-primary'
                           : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>
@@ -1082,8 +1082,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
               {/* Section 2: Suggestions */}
               <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'suggestions' 
-                  ? 'flex-1 border-primary/30' 
+                expandedPanel === 'suggestions'
+                  ? 'flex-1 border-primary/30'
                   : 'flex-shrink-0 border-border'
               }`}>
                 <button
@@ -1095,7 +1095,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                   }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                  
+
                   <div className="flex items-center gap-2.5 relative z-10">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
                       expandedPanel === 'suggestions'
@@ -1118,8 +1118,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                         : 'bg-muted group-hover:bg-primary/10'
                     }`}>
                       <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'suggestions' 
-                          ? 'rotate-180 text-primary' 
+                        expandedPanel === 'suggestions'
+                          ? 'rotate-180 text-primary'
                           : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>
@@ -1229,8 +1229,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
               {/* Section 3: AI Assistant Chatbot */}
               <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'chatbot' 
-                  ? 'flex-1 border-primary/30' 
+                expandedPanel === 'chatbot'
+                  ? 'flex-1 border-primary/30'
                   : 'flex-shrink-0 border-border'
               }`}>
                 <button
@@ -1242,19 +1242,19 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                   }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                  
+
                   <div className="flex items-center gap-2.5 relative z-10">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
                       expandedPanel === 'chatbot'
                         ? 'bg-primary/15 ring-2 ring-primary/30'
                         : 'bg-primary/10 group-hover:bg-primary/15'
                     }`}>
-                      <img 
-                        src={jubeeLogo} 
-                        alt="Jubee" 
+                      <img
+                        src={jubeeLogo}
+                        alt="Jubee"
                         className={`w-4 h-4 transition-opacity ${
                           expandedPanel === 'chatbot' ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'
-                        }`} 
+                        }`}
                       />
                     </div>
                     <h4 className={`text-sm font-bold transition-colors ${
@@ -1266,8 +1266,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                         : 'bg-muted group-hover:bg-primary/10'
                     }`}>
                       <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'chatbot' 
-                          ? 'rotate-180 text-primary' 
+                        expandedPanel === 'chatbot'
+                          ? 'rotate-180 text-primary'
                           : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>
@@ -1289,7 +1289,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                           </div>
                           <h5 className="text-sm font-semibold text-foreground mb-2">Start a conversation</h5>
                           <p className="text-xs text-muted-foreground max-w-[250px] mb-4">
-                            {!draftDoc && supportingDocs.length === 0 && caselawDocs.length === 0 
+                            {!draftDoc && supportingDocs.length === 0 && caselawDocs.length === 0
                               ? 'Get help with drafting from scratch'
                               : 'Ask me about drafting, legal terms, or document structure'}
                           </p>
@@ -1401,7 +1401,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
             onSelect={handleMySpaceSelect}
           />
         )}
-        
+
         {/* Judge Selection Modal */}
         <JudgeSelectionModal
           isOpen={isJudgeModalOpen}
@@ -1475,12 +1475,12 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                     }`}
                   >
                     <p className="text-base leading-relaxed whitespace-pre-wrap">
-                      {message.type === 'ai' 
+                      {message.type === 'ai'
                         ? message.content.slice(0, visibleChars[message.id] || message.content.length)
                         : message.content
                       }
                     </p>
-                    
+
                     {/* Show uploaded files */}
                     {message.uploadedFiles && message.uploadedFiles.length > 0 && (
                       <div className="mt-3 space-y-2">
@@ -1492,7 +1492,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Show selected judges as chips */}
                     {message.judgeChips && message.judgeChips.length > 0 && (
                       <div className="mt-3 flex flex-wrap gap-2">
@@ -1616,7 +1616,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           onSelect={handleMySpaceSelect}
         />
       )}
-      
+
       {/* Judge Selection Modal */}
       <JudgeSelectionModal
         isOpen={isJudgeModalOpen}

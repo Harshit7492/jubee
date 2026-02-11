@@ -67,8 +67,8 @@ export function ProfileView({ onBack, onNavigate, onLogout }: ProfileViewProps) 
                 onClick={() => setActiveSection(item.id)}
                 className={`
                   w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium group
-                  ${isActive 
-                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/30' 
+                  ${isActive
+                    ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/30'
                     : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                   }
                 `}
@@ -128,11 +128,11 @@ export function ProfileView({ onBack, onNavigate, onLogout }: ProfileViewProps) 
       </aside>
 
       {/* Content Area */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="min-h-[1024px]">
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 overflow-y-auto">
           {renderSection()}
         </div>
-        {onNavigate && <JubeeFooter onNavigate={onNavigate} />}
+        {/* {onNavigate && <JubeeFooter onNavigate={onNavigate} />} */}
       </div>
     </div>
   );

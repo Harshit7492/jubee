@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Bell, CheckCircle2, X, Clock, AlertCircle, Info, CheckCircle, Radio } from 'lucide-react';
+import { Bell, CheckCircle2, X, Clock, AlertCircle, Info, CheckCircle, Radio, Badge, Gavel, Calendar, FileText, FileCheck, Sparkles, XCircle } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { JubeeFooter } from '@/app/components/JubeeFooter';
+import { Tab, Tabs } from './ui/tabs';
 
 interface Notification {
   id: string;
@@ -92,8 +93,8 @@ export function AlertsView() {
   const [notifications, setNotifications] = useState<Notification[]>(mockNotifications);
   const [filter, setFilter] = useState<'all' | 'unread'>('all');
 
-  const filteredNotifications = filter === 'unread' 
-    ? notifications.filter(n => !n.read) 
+  const filteredNotifications = filter === 'unread'
+    ? notifications.filter(n => !n.read)
     : notifications;
 
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -158,7 +159,7 @@ export function AlertsView() {
   };
 
   const markAsRead = (id: string) => {
-    setNotifications(prev => 
+    setNotifications(prev =>
       prev.map(n => n.id === id ? { ...n, read: true } : n)
     );
   };
@@ -194,8 +195,8 @@ export function AlertsView() {
               </div>
             </div>
             {unreadCount > 0 && (
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={markAllAsRead}
                 className="border-primary/30 text-primary hover:bg-primary/10 font-semibold"
               >
@@ -235,7 +236,7 @@ export function AlertsView() {
                 {filter === 'unread' ? 'All Caught Up!' : 'No Notifications'}
               </h2>
               <p className="text-muted-foreground">
-                {filter === 'unread' 
+                {filter === 'unread'
                   ? 'You have no unread notifications at the moment.'
                   : 'You have no notifications yet. We\'ll notify you about important updates.'}
               </p>
@@ -268,8 +269,8 @@ export function AlertsView() {
                             <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
                           )}
                         </div>
-                        <Badge 
-                          variant="outline" 
+                        <Badge
+                          // variant="outline"
                           className="border-border text-muted-foreground text-xs font-medium flex items-center gap-1.5 flex-shrink-0"
                         >
                           {getCategoryIcon(notification.category)}
@@ -312,7 +313,7 @@ export function AlertsView() {
           </div>
         )}
       </div>
-      <JubeeFooter />
+      {/* <JubeeFooter /> */}
     </div>
   );
 }

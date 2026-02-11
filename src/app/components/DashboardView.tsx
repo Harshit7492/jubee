@@ -112,7 +112,7 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
     } else {
       newDate.setMonth(newDate.getMonth() - 1);
     }
-    
+
     // Only allow navigation within the one month range
     if (newDate >= oneMonthAgo && newDate <= today) {
       setViewDate(newDate);
@@ -213,6 +213,7 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
         <div className="px-8 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
+              
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-primary" />
               </div>
@@ -251,11 +252,11 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
               {isCalendarOpen && (
                 <>
                   {/* Backdrop */}
-                  <div 
+                  <div
                     className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
                     onClick={() => setIsCalendarOpen(false)}
                   />
-                  
+
                   {/* Calendar Modal */}
                   <div className="absolute right-0 top-full mt-2 z-50 bg-card rounded-2xl border border-border shadow-2xl p-5 w-[340px]">
                     {/* Month and Year Header */}
@@ -340,8 +341,8 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
                 </thead>
                 <tbody className="divide-y divide-border">
                   {causeList.map((item, index) => (
-                    <tr 
-                      key={item.id} 
+                    <tr
+                      key={item.id}
                       className="hover:bg-accent transition-colors duration-150 group"
                     >
                       <td className="px-4 py-4 text-sm text-muted-foreground font-medium">{index + 1}</td>
@@ -378,8 +379,8 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
               </table>
             </div>
             <div className="border-t border-border px-6 py-4 flex justify-center bg-muted/50">
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 className="text-primary hover:bg-primary/10 font-semibold"
                 onClick={() => onNavigate?.('cause-lists')}
               >
@@ -533,9 +534,9 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
       </div>
 
       {/* Research Board Modal */}
-      <ResearchBoardModal 
-        isOpen={isResearchBoardOpen} 
-        onClose={() => setIsResearchBoardOpen(false)} 
+      <ResearchBoardModal
+        isOpen={isResearchBoardOpen}
+        onClose={() => setIsResearchBoardOpen(false)}
       />
     </div>
   );
