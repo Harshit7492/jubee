@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Search, Sparkles, FileText, Languages, PenTool, MessageSquare, Scale, BookOpen, Send, User, Bot, Loader2, FileCheck, Gavel, FolderOpen, Bell, Type, FileSearch, Radio } from 'lucide-react';
+import { Search, Sparkles, FileText, Languages, PenTool, MessageSquare, Scale, BookOpen, Send, User, Bot, Loader2, FileCheck, Gavel, FolderOpen, Bell, Type, FileSearch, Radio, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { ResearchTool } from '@/app/components/research-tools/ResearchTool';
@@ -163,7 +163,7 @@ export function CaseResearchBoard({ caseData, onNavigate }: CaseResearchBoardPro
 
   const generateAIResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase();
-    
+
     if (lowerQuery.includes('research') || lowerQuery.includes('case') || lowerQuery.includes('precedent')) {
       return `I can help you research legal cases for ${caseData.caseNumber}. Click on "Legal Research" tool to search through Supreme Court and High Court judgments specific to this case.`;
     } else if (lowerQuery.includes('draft') || lowerQuery.includes('pleading') || lowerQuery.includes('notice')) {
@@ -182,15 +182,15 @@ export function CaseResearchBoard({ caseData, onNavigate }: CaseResearchBoardPro
       case 'research':
         return <ResearchTool onBack={() => setActiveTool('chat')} onToolChange={setActiveTool} activeTool={activeTool} />;
       case 'drafting':
-        return <DraftingTool 
-          onBack={() => setActiveTool('chat')} 
+        return <DraftingTool
+          onBack={() => setActiveTool('chat')}
           onToolChange={(tool, initialContent) => {
             if (tool === 'draftsman' && initialContent) {
               setDraftsmanInitialContent(initialContent);
             }
             setActiveTool(tool);
-          }} 
-          activeTool={activeTool} 
+          }}
+          activeTool={activeTool}
         />;
       case 'translation':
         return <TranslationTool onBack={() => setActiveTool('chat')} onToolChange={setActiveTool} activeTool={activeTool} />;

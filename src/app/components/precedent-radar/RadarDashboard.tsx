@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Radio, Plus, Bell, BellOff, Edit, Copy, Trash2, ChevronRight, Activity, ChevronLeft, X, Send, MessageSquare } from 'lucide-react';
+import { Radio, Plus, Bell, BellOff, Edit, Copy, Trash2, ChevronRight, Activity, ChevronLeft, X, Send, MessageSquare, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Badge } from '@/app/components/ui/badge';
 import { cn } from '@/app/components/ui/utils';
 import { WorkspaceQuote, WORKSPACE_QUOTES } from '@/app/components/WorkspaceQuote';
 import jubeeLogo from '@/assets/jubee-logo.png';
+import { Arrow } from '@radix-ui/react-dropdown-menu';
 
 export interface RadarItem {
   id: string;
@@ -42,17 +43,17 @@ export function RadarDashboard({
   onBack
 }: RadarDashboardProps) {
   const [filter, setFilter] = useState<'all' | 'active' | 'inactive'>('all');
-  
+
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
   const [chatInput, setChatInput] = useState('');
   const [isAITyping, setIsAITyping] = useState(false);
-  
+
   const activeRadars = radars.filter(r => r.status === 'active');
   const inactiveRadars = radars.filter(r => r.status === 'inactive');
   const totalIntercepted = radars.reduce((sum, r) => sum + r.casesIntercepted, 0);
-  
+
   const filteredRadars = filter === 'all' ? radars : filter === 'active' ? activeRadars : inactiveRadars;
 
   const handleSendChatMessage = () => {
@@ -77,14 +78,14 @@ export function RadarDashboard({
         "Based on your radar history, I notice some patterns. Would you like me to suggest additional case law areas to monitor?",
         "I can help you understand why certain cases are being intercepted and how to adjust your radar parameters."
       ];
-      
+
       const aiMessage = {
         id: `ai-${Date.now()}`,
         text: aiResponses[Math.floor(Math.random() * aiResponses.length)],
         isAI: true,
         timestamp: new Date()
       };
-      
+
       setIsAITyping(false);
       setChatMessages(prev => [...prev, aiMessage]);
     }, 1500 + Math.random() * 1000);
@@ -99,16 +100,18 @@ export function RadarDashboard({
             {/* Back Button with Page Title */}
             {onBack && (
               <>
-                <button
-                  onClick={onBack}
-                  className="flex items-center text-muted-foreground hover:text-foreground transition-colors group"
-                >
-                  <span className="text-base">←</span>
-                </button>
+                 <Button
+              onClick={onBack}
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-xl hover:bg-accent"
+            >
+              <ArrowLeft className="w-5 h-5 text-foreground" />
+            </Button>
                 <div className="w-px h-5 bg-border" />
               </>
             )}
-            
+
             {/* Title Section */}
             <div className="flex-1">
               <h1 className="text-xl font-bold text-foreground">Jubee Radar</h1>
@@ -180,7 +183,7 @@ export function RadarDashboard({
         <div className="max-w-6xl mb-6">
           <WorkspaceQuote quotes={WORKSPACE_QUOTES.radar} />
         </div>
-        
+
         {filteredRadars.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full py-20">
             <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
@@ -203,8 +206,8 @@ export function RadarDashboard({
                 key={radar.id}
                 className={cn(
                   "bg-card border-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer",
-                  radar.status === 'active' 
-                    ? "border-primary/40 hover:border-primary ring-2 ring-primary/10" 
+                  radar.status === 'active'
+                    ? "border-primary/40 hover:border-primary ring-2 ring-primary/10"
                     : "border-border hover:border-border"
                 )}
               >
@@ -213,8 +216,8 @@ export function RadarDashboard({
                     {/* Radar Icon - Simplified */}
                     <div className={cn(
                       "w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all",
-                      radar.status === 'active' 
-                        ? "bg-primary/10" 
+                      radar.status === 'active'
+                        ? "bg-primary/10"
                         : "bg-accent"
                     )}>
                       <Radio className={cn(
@@ -309,7 +312,7 @@ export function RadarDashboard({
                           View Cases
                           <ChevronRight className="w-3 h-3 ml-1" />
                         </Button>
-                        
+
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -340,7 +343,7 @@ export function RadarDashboard({
                         >
                           <Edit className="w-3.5 h-3.5" />
                         </Button>
-                        
+
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -467,7 +470,7 @@ export function RadarDashboard({
                   </div>
                 </div>
               ))}
-              
+
               {isAITyping && (
                 <div className="flex gap-3 items-start">
                   <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">

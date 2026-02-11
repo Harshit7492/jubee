@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, FileText, ChevronRight, Check, Download, Save, FolderOpen, X, ChevronLeft, Search, ThumbsUp, ThumbsDown, Trash2, FileDown, Eye, ChevronDown, MessageSquare, Send } from 'lucide-react';
+import { Upload, FileText, ChevronRight, Check, Download, Save, FolderOpen, X, ChevronLeft, Search, ThumbsUp, ThumbsDown, Trash2, FileDown, Eye, ChevronDown, MessageSquare, Send, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { MySpaceSaveDialog } from '@/app/components/MySpaceSaveDialog';
@@ -60,7 +60,7 @@ export function CrossExaminerTool({ onBack, onToolChange, activeTool }: CrossExa
   const [selectedQuestion, setSelectedQuestion] = useState<CrossQuestion | null>(null);
   const [showDocumentViewer, setShowDocumentViewer] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
+
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
@@ -152,7 +152,7 @@ DEPONENT`;
   };
 
   const handleCategoryChange = (fileId: string, category: 'evidence' | 'pleading' | 'supporting') => {
-    setUploadedFiles(uploadedFiles.map(f => 
+    setUploadedFiles(uploadedFiles.map(f =>
       f.id === fileId ? { ...f, category } : f
     ));
   };
@@ -306,7 +306,7 @@ DEPONENT`;
   };
 
   const handleFeedback = (questionId: string, feedback: 'positive' | 'negative') => {
-    setQuestions(questions.map(q => 
+    setQuestions(questions.map(q =>
       q.id === questionId ? { ...q, feedback } : q
     ));
   };
@@ -362,14 +362,14 @@ DEPONENT`;
         "The witness statement in paragraph 4 provides good material for cross-examination. I can help you develop a questioning strategy.",
         "Based on the evidence pattern, you might want to explore the timeline contradictions further. Would you like me to generate questions about that?"
       ];
-      
+
       const aiMessage = {
         id: `ai-${Date.now()}`,
         text: aiResponses[Math.floor(Math.random() * aiResponses.length)],
         isAI: true,
         timestamp: new Date()
       };
-      
+
       setIsAITyping(false);
       setChatMessages(prev => [...prev, aiMessage]);
     }, 1500 + Math.random() * 1000);
@@ -381,12 +381,12 @@ DEPONENT`;
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
+              onClick={onBack}
               variant="ghost"
               size="icon"
-              onClick={onBack}
-              className="w-9 h-9 hover:bg-primary/10"
+              className="h-10 w-10 rounded-xl hover:bg-accent"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ArrowLeft className="w-5 h-5 text-foreground" />
             </Button>
             <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
               <MessageSquare className="w-6 h-6 text-primary" />
@@ -510,7 +510,7 @@ DEPONENT`;
               <label className="block text-sm font-bold text-foreground">
                 Select Proceeding Type <span className="text-xs font-normal text-muted-foreground">(Optional but Recommended)</span>
               </label>
-              
+
               {/* Dropdown Selector */}
               <div className="relative">
                 <select
@@ -566,7 +566,7 @@ DEPONENT`;
               <label className="block text-sm font-bold text-foreground">
                 Identification Details <span className="text-xs font-normal text-red-500">*</span>
               </label>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 {/* Witness Name Field */}
                 <div className="space-y-2">
@@ -702,7 +702,7 @@ DEPONENT`;
                   Save
                   <ChevronDown className="w-4 h-4 ml-2" />
                 </Button>
-                
+
                 {/* Dropdown Menu */}
                 <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <div className="p-2 space-y-1">
@@ -763,7 +763,7 @@ DEPONENT`;
                       <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                         <span className="text-sm font-bold text-primary">{index + 1}</span>
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
                         {/* Question Header */}
                         <div className="flex items-start justify-between mb-3">
@@ -773,7 +773,7 @@ DEPONENT`;
                             </span>
                           </div>
                         </div>
-                        
+
                         {/* Question Text */}
                         <p className="text-base text-foreground leading-relaxed mb-3">
                           {question.question}
@@ -865,10 +865,10 @@ DEPONENT`;
                     // Extract paragraph number from the text (e.g., "2. That on..." -> 2)
                     const paragraphMatch = paragraph.trim().match(/^(\d+)\.\s/);
                     const paragraphNumber = paragraphMatch ? parseInt(paragraphMatch[1]) : null;
-                    
+
                     // Check if this paragraph number matches the selected question's source paragraph
                     const isHighlighted = selectedQuestion && paragraphNumber !== null && paragraphNumber === selectedQuestion.sourceParagraph;
-                    
+
                     return (
                       <p
                         key={index}
@@ -1071,7 +1071,7 @@ DEPONENT`;
                   </div>
                 </div>
               ))}
-              
+
               {isAITyping && (
                 <div className="flex gap-3 items-start">
                   <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">

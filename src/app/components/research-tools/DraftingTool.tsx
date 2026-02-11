@@ -56,13 +56,13 @@ interface DraftingToolProps {
     initialContent?: string,
   ) => void;
   activeTool?:
-    | "research"
-    | "drafting"
-    | "translation"
-    | "typing"
-    | "draftsman"
-    | "psi"
-    | "cross-examiner";
+  | "research"
+  | "drafting"
+  | "translation"
+  | "typing"
+  | "draftsman"
+  | "psi"
+  | "cross-examiner";
 }
 
 interface UploadedDocument {
@@ -349,7 +349,7 @@ export function DraftingTool({
   const proceedToStyleUpload = () => {
     const docTypeName = selectedDocType
       ? DOCUMENT_TYPES.find((t) => t.id === selectedDocType)
-          ?.label
+        ?.label
       : customDocType;
 
     if (hasBaseDraftHistory) {
@@ -467,7 +467,7 @@ export function DraftingTool({
 
   const proceedToHouseStyle = () => {
     addAIMessage(
-      "Do you want to add a house style document?",
+      "Please upload or add a house style draft for reference (Optional).",
       [
         {
           id: "upload-from-myspace",
@@ -882,7 +882,7 @@ export function DraftingTool({
   const handleJudgeModalConfirm = (selectedJudges: string[]) => {
     if (selectedJudges.length > 0) {
       setJudgeSelection(selectedJudges);
-      
+
       // Create chips display in chat
       addUserMessage(
         `Selected ${selectedJudges.length} judge${selectedJudges.length > 1 ? 's' : ''}`,
@@ -916,7 +916,7 @@ export function DraftingTool({
     setTimeout(() => {
       const docTypeName = selectedDocType
         ? DOCUMENT_TYPES.find((t) => t.id === selectedDocType)
-            ?.label
+          ?.label
         : customDocType;
 
       const content = `IN THE ${jurisdiction.toUpperCase()}
@@ -1140,7 +1140,7 @@ Advocate for the Petitioner`;
           onBack={onBack}
           activeTool={activeTool}
         />
-        
+
         {/* Generating Loader Screen */}
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-6">
@@ -1151,7 +1151,7 @@ Advocate for the Petitioner`;
               </div>
               <div className="absolute inset-0 w-20 h-20 border-4 border-primary/30 rounded-2xl animate-spin" style={{ animationDuration: '3s' }}></div>
             </div>
-            
+
             {/* Loading Text */}
             <div className="space-y-2">
               <h3 className="text-xl font-semibold text-foreground">
@@ -1161,7 +1161,7 @@ Advocate for the Petitioner`;
                 AI is analyzing your inputs and crafting the document...
               </p>
             </div>
-            
+
             {/* Loading Dots */}
             <div className="flex gap-2 justify-center">
               <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -1187,9 +1187,8 @@ Advocate for the Petitioner`;
         <div className="flex-1 flex overflow-hidden">
           {/* Left Pane: Document Preview */}
           <div
-            className={`bg-card border-r border-border flex flex-col transition-all duration-300 ${
-              isLeftPaneCollapsed ? "w-0" : "w-1/2"
-            }`}
+            className={`bg-card border-r border-border flex flex-col transition-all duration-300 ${isLeftPaneCollapsed ? "w-0" : "w-1/2"
+              }`}
           >
             {!isLeftPaneCollapsed && (
               <>
@@ -1447,11 +1446,10 @@ Advocate for the Petitioner`;
                           </div>
                         )}
                         <div
-                          className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                            message.type === "user"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-card border border-border text-foreground"
-                          }`}
+                          className={`max-w-[80%] rounded-2xl px-4 py-3 ${message.type === "user"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-card border border-border text-foreground"
+                            }`}
                         >
                           <p className="text-sm leading-relaxed whitespace-pre-wrap">
                             {message.content}
@@ -1460,7 +1458,7 @@ Advocate for the Petitioner`;
                           {/* Show uploaded files */}
                           {message.uploadedFiles &&
                             message.uploadedFiles.length >
-                              0 && (
+                            0 && (
                               <div className="mt-2 space-y-1">
                                 {message.uploadedFiles.map(
                                   (file) => (
@@ -1627,19 +1625,18 @@ Advocate for the Petitioner`;
                     </div>
                   )}
                   <div
-                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                      message.type === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-card border border-border text-foreground shadow-sm"
-                    }`}
+                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${message.type === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card border border-border text-foreground shadow-sm"
+                      }`}
                   >
                     <p className="text-base leading-relaxed whitespace-pre-wrap">
                       {message.type === "ai"
                         ? message.content.slice(
-                            0,
-                            visibleChars[message.id] ||
-                              message.content.length,
-                          )
+                          0,
+                          visibleChars[message.id] ||
+                          message.content.length,
+                        )
                         : message.content}
                     </p>
 
@@ -1834,25 +1831,24 @@ Advocate for the Petitioner`;
                     .reverse()
                     .find((m) => m.type === "ai")
                     ?.inputPrompt &&
-                  ![...messages]
-                    .reverse()
-                    .find((m) => m.type === "ai")?.options
-                    ?.length
+                    ![...messages]
+                      .reverse()
+                      .find((m) => m.type === "ai")?.options
+                      ?.length
                     ? `${[...messages].reverse().find((m) => m.type === "ai")?.inputPrompt?.placeholder || "Type your answer here..."} ✍️`
                     : "Type your message here..."
                 }
-                className={`w-full h-16 pl-6 pr-28 text-base rounded-2xl transition-all duration-300 ${
-                  [...messages]
-                    .reverse()
-                    .find((m) => m.type === "ai")
-                    ?.inputPrompt &&
+                className={`w-full h-16 pl-6 pr-28 text-base rounded-2xl transition-all duration-300 ${[...messages]
+                  .reverse()
+                  .find((m) => m.type === "ai")
+                  ?.inputPrompt &&
                   ![...messages]
                     .reverse()
                     .find((m) => m.type === "ai")?.options
                     ?.length
-                    ? "bg-primary/5 border-2 border-primary shadow-lg shadow-primary/20 animate-pulse"
-                    : "bg-card border-2 border-border focus:border-primary"
-                } text-foreground`}
+                  ? "bg-primary/5 border-2 border-primary shadow-lg shadow-primary/20 animate-pulse"
+                  : "bg-card border-2 border-border focus:border-primary"
+                  } text-foreground`}
               />
               <div className="absolute right-2 top-3 flex items-center gap-2">
                 <Button

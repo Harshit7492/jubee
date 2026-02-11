@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, FileText, ChevronRight, Check, Settings, Download, Save, FolderOpen, FileDown, Languages, Clock, ChevronLeft, ChevronDown, X, History, Send } from 'lucide-react';
+import { Upload, FileText, ChevronRight, Check, Settings, Download, Save, FolderOpen, FileDown, Languages, Clock, ChevronLeft, ChevronDown, X, History, Send, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { MySpaceSaveDialog } from '@/app/components/MySpaceSaveDialog';
@@ -187,7 +187,7 @@ export function TranslationView({ onBack }: TranslationViewProps) {
     setTimeout(() => {
       setIsAITyping(false);
       const aiResponse = "I can help you with translation-related questions, explain legal terms, or assist with document formatting. What would you like to know about your translated document?";
-      
+
       setChatMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         text: aiResponse,
@@ -202,19 +202,19 @@ export function TranslationView({ onBack }: TranslationViewProps) {
       <div className="bg-card border-b border-border px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={onBack}
-            className="w-9 h-9 hover:bg-primary/10"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
+              onClick={onBack}
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-xl hover:bg-accent"
+            >
+              <ArrowLeft className="w-5 h-5 text-foreground" />
+            </Button>
           <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
             <Languages className="w-6 h-6 text-primary" />
           </div>
           <h1 className="text-xl font-bold text-foreground">Jubee Bhasha</h1>
         </div>
-        
+
         {/* Action buttons - only show in review step */}
         {currentStep === 'review' && (
           <div className="flex items-center gap-2">
@@ -245,7 +245,7 @@ export function TranslationView({ onBack }: TranslationViewProps) {
                 Save
                 <ChevronDown className="w-4 h-4 ml-1" />
               </Button>
-              
+
               {/* Dropdown Menu */}
               <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="p-2 space-y-1">
@@ -294,7 +294,7 @@ export function TranslationView({ onBack }: TranslationViewProps) {
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Workspace Quote */}
           <WorkspaceQuote quotes={WORKSPACE_QUOTES.translation} />
-          
+
           {/* Upload Section */}
           <div className="bg-card border border-border/50 rounded-2xl p-8 space-y-6">
             <div>
@@ -310,8 +310,8 @@ export function TranslationView({ onBack }: TranslationViewProps) {
               <div
                 onClick={() => !uploadedFile && fileInputRef.current?.click()}
                 className={`group relative border-2 rounded-xl p-3 transition-all duration-300 ${
-                  uploadedFile 
-                    ? 'cursor-not-allowed bg-muted/30 border-border/40' 
+                  uploadedFile
+                    ? 'cursor-not-allowed bg-muted/30 border-border/40'
                     : 'cursor-pointer bg-card border-border hover:border-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/5'
                 }`}
               >
@@ -497,8 +497,8 @@ export function TranslationView({ onBack }: TranslationViewProps) {
                       <label className="block text-xs font-medium text-muted-foreground">
                         Font Family
                       </label>
-                      <Input 
-                        defaultValue={selectedCourt?.font || 'Times New Roman'} 
+                      <Input
+                        defaultValue={selectedCourt?.font || 'Times New Roman'}
                         className="border-2 border-border focus:border-primary"
                       />
                     </div>
@@ -506,9 +506,9 @@ export function TranslationView({ onBack }: TranslationViewProps) {
                       <label className="block text-xs font-medium text-muted-foreground">
                         Font Size (pt)
                       </label>
-                      <Input 
-                        type="number" 
-                        defaultValue={selectedCourt?.fontSize || 14} 
+                      <Input
+                        type="number"
+                        defaultValue={selectedCourt?.fontSize || 14}
                         className="border-2 border-border focus:border-primary"
                       />
                     </div>
@@ -518,18 +518,18 @@ export function TranslationView({ onBack }: TranslationViewProps) {
                       <label className="block text-xs font-medium text-muted-foreground">
                         Line Spacing
                       </label>
-                      <Input 
-                        type="number" 
-                        step="0.1" 
-                        defaultValue={selectedCourt?.lineSpacing || 2.0} 
+                      <Input
+                        type="number"
+                        step="0.1"
+                        defaultValue={selectedCourt?.lineSpacing || 2.0}
                         className="border-2 border-border focus:border-primary"
                       />\n                    </div>
                     <div className="space-y-2">
                       <label className="block text-xs font-medium text-muted-foreground">
                         Margins
                       </label>
-                      <Input 
-                        defaultValue={selectedCourt?.margins || '1in 1in 1in 1in'} 
+                      <Input
+                        defaultValue={selectedCourt?.margins || '1in 1in 1in 1in'}
                         className="border-2 border-border focus:border-primary"
                       />
                     </div>
@@ -893,7 +893,7 @@ export function TranslationView({ onBack }: TranslationViewProps) {
                       </div>
                     </div>
                   ))}
-                  
+
                   {isAITyping && (
                     <div className="flex gap-3 items-start">
                       <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">

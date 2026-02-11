@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, FileText, ChevronRight, Check, Settings, Download, Save, FolderOpen, FileDown, Type, Clock, ChevronLeft, ChevronDown, X, History, Search, Send, User } from 'lucide-react';
+import { Upload, FileText, ChevronRight, Check, Settings, Download, Save, FolderOpen, FileDown, Type, Clock, ChevronLeft, ChevronDown, X, History, Search, Send, User, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { MySpaceSaveDialog } from '@/app/components/MySpaceSaveDialog';
@@ -235,14 +235,14 @@ export function TypingTool({ onBack }: TypingToolProps) {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onBack}
-                className="w-9 h-9 hover:bg-primary/10"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
+               <Button
+              onClick={onBack}
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-xl hover:bg-accent"
+            >
+              <ArrowLeft className="w-5 h-5 text-foreground" />
+            </Button>
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                 <Type className="w-6 h-6 text-primary" />
               </div>
@@ -264,8 +264,8 @@ export function TypingTool({ onBack }: TypingToolProps) {
             <div
               onClick={() => !uploadedFile && fileInputRef.current?.click()}
               className={`group relative border-2 rounded-xl p-6 transition-all duration-300 ${
-                uploadedFile 
-                  ? 'cursor-not-allowed bg-muted/30 border-border/40' 
+                uploadedFile
+                  ? 'cursor-not-allowed bg-muted/30 border-border/40'
                   : 'cursor-pointer bg-card border-border hover:border-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/5'
               }`}
             >
@@ -351,7 +351,7 @@ export function TypingTool({ onBack }: TypingToolProps) {
               <label className="block text-sm font-bold text-foreground">
                 Select Court <span className="text-xs font-normal text-muted-foreground">(Optional)</span>
               </label>
-              
+
               {/* Court Selection Cards - Always Displayed */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {courtFormats.map((court) => (
@@ -440,8 +440,8 @@ export function TypingTool({ onBack }: TypingToolProps) {
                         <label className="block text-xs font-medium text-muted-foreground">
                           Font Size (pt)
                         </label>
-                        <Input 
-                          type="number" 
+                        <Input
+                          type="number"
                           value={customFontSize}
                           onChange={(e) => setCustomFontSize(Number(e.target.value))}
                           min="8"
@@ -491,8 +491,8 @@ export function TypingTool({ onBack }: TypingToolProps) {
                         <label className="block text-xs font-medium text-muted-foreground">
                           Indentation Value (inches)
                         </label>
-                        <Input 
-                          type="number" 
+                        <Input
+                          type="number"
                           value={customIndentValue}
                           onChange={(e) => setCustomIndentValue(Number(e.target.value))}
                           min="0"
@@ -624,7 +624,7 @@ export function TypingTool({ onBack }: TypingToolProps) {
                   Save
                   <ChevronDown className="w-4 h-4 ml-2" />
                 </Button>
-                
+
                 {/* Dropdown Menu */}
                 <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <div className="p-2 space-y-1">
@@ -860,7 +860,7 @@ export function TypingTool({ onBack }: TypingToolProps) {
                         </div>
                       </div>
                     ))}
-                    
+
                     {isAITyping && (
                       <div className="flex gap-3 items-start">
                         <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">
