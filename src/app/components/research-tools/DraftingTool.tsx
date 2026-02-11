@@ -102,6 +102,7 @@ type ConversationStage =
   | "style-upload"
   | "supporting-upload"
   | "house-style-upload"
+  | "supporting-legal-notice"
   | "caselaw-upload"
   | "client-name"
   | "counter-party"
@@ -414,7 +415,7 @@ export function DraftingTool({
 
   const proceedToSupportingDocs = () => {
     addAIMessage(
-      "Next, upload any supporting documents that will help me draft your document.",
+      "Upload any supporting documents that will help me draft your document.",
       [
         {
           id: "upload-from-myspace",
@@ -503,11 +504,67 @@ export function DraftingTool({
       addUserMessage("Skipped");
       setTimeout(() => {
         setIsTyping(false);
-        proceedToStyleUpload();
+        proceedToSupportingDocsForLegalNotice();
       }, 800);
     } else if (choiceId === "continue-house-style") {
       setTimeout(() => {
         setIsTyping(false);
+        proceedToSupportingDocsForLegalNotice();
+      }, 500);
+    }
+  };
+
+  const proceedToSupportingDocsForLegalNotice = () => {
+    addAIMessage(
+      "Upload supporting documents",
+      [
+        {
+          id: "upload-from-myspace",
+          label: "Upload from My Space",
+        },
+        {
+          id: "upload-supporting-legal",
+          label: "Upload New Document",
+        },
+        { id: "skip-supporting-legal", label: "Skip This Step" },
+      ],
+      {
+        category: "supporting",
+        label: "Supporting Documents",
+        description: "Upload relevant documents",
+        allowMultiple: true,
+      },
+    );
+    setCurrentStage("supporting-legal-notice");
+  };
+
+  const handleSupportingDocsLegalNoticeChoice = (choiceId: string) => {
+    setIsTyping(true);
+
+    if (choiceId === "upload-from-myspace") {
+      addUserMessage("Upload supporting documents from My Space");
+      setIsTyping(false);
+      setIsMySpaceDialogOpen(true);
+      currentUploadCategory.current = "supporting";
+    } else if (choiceId === "upload-supporting-legal") {
+      addUserMessage("Upload supporting documents");
+      currentUploadCategory.current = "supporting";
+      fileInputRef.current?.click();
+      setIsTyping(false);
+    } else if (choiceId === "skip-supporting-legal") {
+      addUserMessage("Skipped");
+      setTimeout(() => {
+        setIsTyping(false);
+        setCurrentStage("style-upload");
+        proceedToStyleUpload();
+      }, 800);
+    } else if (choiceId === "continue-supporting-legal") {
+      setTimeout(() => {
+        setIsTyping(false);
+        addAIMessage(
+          "Your documents have been received. If there's anything else you'd like to add, feel free to share it in the chat box."
+        );
+        setCurrentStage("style-upload");
         proceedToStyleUpload();
       }, 500);
     }
@@ -702,7 +759,11 @@ export function DraftingTool({
       );
       setTimeout(() => {
         setIsTyping(false);
-        proceedToStyleUpload();
+        if (currentStage === "house-style-upload") {
+          proceedToSupportingDocsForLegalNotice();
+        } else {
+          proceedToStyleUpload();
+        }
       }, 800);
     } else if (category === "caselaw") {
       setCaselawDocs((prev) => [...prev, ...newDocs]);
@@ -779,7 +840,11 @@ export function DraftingTool({
       );
       setTimeout(() => {
         setIsTyping(false);
-        proceedToStyleUpload();
+        if (currentStage === "house-style-upload") {
+          proceedToSupportingDocsForLegalNotice();
+        } else {
+          proceedToStyleUpload();
+        }
       }, 800);
     } else if (category === "caselaw") {
       setCaselawDocs((prev) => [...prev, ...newDocs]);
@@ -1715,6 +1780,13 @@ Advocate for the Petitioner`;
                                 "house-style-upload"
                               ) {
                                 handleHouseStyleChoice(
+                                  option.id,
+                                );
+                              } else if (
+                                currentStage ===
+                                "supporting-legal-notice"
+                              ) {
+                                handleSupportingDocsLegalNoticeChoice(
                                   option.id,
                                 );
                               } else if (

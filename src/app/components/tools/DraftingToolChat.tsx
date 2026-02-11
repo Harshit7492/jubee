@@ -208,7 +208,7 @@ Date: [Date]`
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl w-full">
                 {[
                   'Bail Applications',
-                  'Legal Notices',
+                  'Legal Notice',
                   'Written Submissions',
                   'Affidavits',
                   'Petitions',

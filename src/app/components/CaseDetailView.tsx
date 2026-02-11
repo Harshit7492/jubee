@@ -403,11 +403,11 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
         setSelectedFolder(folderId);
       }
     };
-    
+
     window.addEventListener('navigate-recent-chats' as any, handleNavigateRecentChats);
     window.addEventListener('navigate-case-files' as any, handleNavigateCaseFiles);
     window.addEventListener('navigate-case-folder' as any, handleNavigateCaseFolder);
-    
+
     return () => {
       window.removeEventListener('navigate-recent-chats' as any, handleNavigateRecentChats);
       window.removeEventListener('navigate-case-files' as any, handleNavigateCaseFiles);
@@ -485,7 +485,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
   };
 
   // Filter documents and chats
-  const filteredDocuments = selectedFolder 
+  const filteredDocuments = selectedFolder
     ? mockDocuments.filter(doc => doc.folder === selectedFolder)
     : [];
 
@@ -528,7 +528,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
           <div className="border-b border-sidebar-border pt-[20px] pr-[12px] pb-[20px] pl-[20px]">
             {!isCollapsed ? (
               <div className="flex items-center justify-between gap-3">
-                <button 
+                <button
                   onClick={() => onNavigate?.('research-board')}
                   className="flex items-center gap-3 px-[-2px] py-[0px] hover:opacity-80 transition-opacity cursor-pointer"
                 >
@@ -805,7 +805,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                   className="fixed inset-0 z-40"
                   onClick={() => setShowProfileMenu(false)}
                 />
-                
+
                 {/* Popup Menu */}
                 <div className="absolute bottom-full left-4 right-4 mb-2 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden">
                   <button
@@ -1051,7 +1051,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                         {filteredChats.map((chat) => {
                           const ToolIcon = getToolIcon(chat.toolName);
                           const toolColor = getToolColor(chat.toolName);
-                          
+
                           return (
                             <div
                               key={chat.id}
@@ -1093,7 +1093,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                                   >
                                     <Eye className="w-4 h-4 text-primary" />
                                   </button>
-                                  
+
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -1119,7 +1119,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                         <p className="text-sm text-muted-foreground mb-4">
                           Start a new conversation for this case
                         </p>
-                        <Button 
+                        <Button
                           onClick={handleNewChat}
                           className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl gap-2"
                         >
@@ -1177,7 +1177,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
         <div className="border-b border-sidebar-border pt-[20px] pr-[12px] pb-[20px] pl-[20px]">
           {!isCollapsed ? (
             <div className="flex items-center justify-between gap-3">
-              <button 
+              <button
                 onClick={() => onNavigate?.('research-board')}
                 className="flex items-center gap-3 px-[-2px] py-[0px] hover:opacity-80 transition-opacity cursor-pointer"
               >
@@ -1454,7 +1454,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                 className="fixed inset-0 z-40"
                 onClick={() => setShowProfileMenu(false)}
               />
-              
+
               {/* Popup Menu */}
               <div className="absolute bottom-full left-4 right-4 mb-2 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden">
                 <button
@@ -1509,6 +1509,12 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             <div className="border-b border-border bg-card/50 backdrop-blur-sm px-8 py-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setSelectedView('new-chat')}
+                    className="p-2 hover:bg-accent rounded-xl transition-all duration-200 group"
+                  >
+                    <ArrowLeft className="w-5 h-5 text-muted-foreground group-hover:text-foreground" />
+                  </button>
                   <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                     {selectedView === 'recent-chats' ? (
                       <MessageSquare className="w-5 h-5 text-primary" />
@@ -1586,7 +1592,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                       {filteredChats.map((chat) => {
                         const ToolIcon = getToolIcon(chat.toolName);
                         const toolColor = getToolColor(chat.toolName);
-                        
+
                         return (
                           <div
                             key={chat.id}
@@ -1626,7 +1632,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                                 >
                                   <Eye className="w-4 h-4 text-primary" />
                                 </button>
-                                
+
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1652,7 +1658,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                       <p className="text-sm text-muted-foreground mb-4">
                         Start a new conversation for this case
                       </p>
-                      <Button 
+                      <Button
                         onClick={handleNewChat}
                         className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl gap-2"
                       >
@@ -1805,7 +1811,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
           <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
             <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(239,68,68,0.12),0px_3px_12px_-2px_rgba(239,68,68,0.06)]" />
-            
+
             <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
               {/* Top Content */}
               <div className="relative shrink-0 w-full">
@@ -1823,7 +1829,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                   </div>
                   <div className="h-[20px] shrink-0 w-full" />
                   <div className="h-px relative shrink-0 w-full bg-border" />
-                  
+
                   {/* Close Button */}
                   <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                     <button

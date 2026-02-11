@@ -87,6 +87,7 @@ export function CaseFilesView({ onBack, onDocumentClick, documents }: CaseFilesV
               documents={filteredDocuments}
               onDocumentClick={onDocumentClick}
               onUploadClick={() => {}}
+              onBackToFiles={handleBackToFolders}
             />
           </div>
         </div>
