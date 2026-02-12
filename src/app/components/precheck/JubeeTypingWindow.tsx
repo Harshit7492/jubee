@@ -85,33 +85,30 @@ export function JubeeTypingWindow({
             <div className="flex items-center gap-1 border-r-[0.5px] border-border pr-3">
               <button
                 onClick={() => setIsBold(!isBold)}
-                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                  isBold
+                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isBold
                     ? 'bg-[#1E3A8A]/20 text-[#1E3A8A]'
                     : 'hover:bg-accent text-muted-foreground'
-                }`}
+                  }`}
                 title="Bold"
               >
                 <Bold className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setIsItalic(!isItalic)}
-                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                  isItalic
+                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isItalic
                     ? 'bg-[#1E3A8A]/20 text-[#1E3A8A]'
                     : 'hover:bg-accent text-muted-foreground'
-                }`}
+                  }`}
                 title="Italic"
               >
                 <Italic className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setIsUnderline(!isUnderline)}
-                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                  isUnderline
+                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${isUnderline
                     ? 'bg-[#1E3A8A]/20 text-[#1E3A8A]'
                     : 'hover:bg-accent text-muted-foreground'
-                }`}
+                  }`}
                 title="Underline"
               >
                 <Underline className="w-4 h-4" />
@@ -156,7 +153,7 @@ export function JubeeTypingWindow({
         <div className="flex-1 overflow-y-auto bg-[#F9F9F9] p-8">
           <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             {/* Page Content */}
-            <div 
+            <div
               className="p-16"
               style={{
                 paddingLeft: '1.5in',
@@ -192,7 +189,7 @@ export function JubeeTypingWindow({
             <div className="flex gap-3">
               <Button
                 onClick={() => onSave(content)}
-                variant="outline"
+                variant="ghost"
                 className="border-[0.5px] border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/5 font-semibold"
               >
                 <Save className="w-4 h-4 mr-2" />

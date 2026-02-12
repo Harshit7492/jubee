@@ -62,13 +62,13 @@ export function RadarPreview({ proposition, jurisdictions, onConfirm, onEdit }: 
                   <div className="absolute inset-8 rounded-full border border-primary/15" />
                   <div className="absolute inset-16 rounded-full border border-primary/10" />
                   <div className="absolute inset-24 rounded-full border border-primary/5" />
-                  
+
                   {/* Center dot */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full shadow-lg shadow-primary/50" />
-                  
+
                   {/* Rotating scanning beam */}
                   {scanning && (
-                    <div 
+                    <div
                       className="absolute top-1/2 left-1/2 w-1/2 h-1 origin-left"
                       style={{
                         background: 'linear-gradient(to right, rgba(59, 130, 246, 0.8), transparent)',
@@ -77,7 +77,7 @@ export function RadarPreview({ proposition, jurisdictions, onConfirm, onEdit }: 
                       }}
                     />
                   )}
-                  
+
                   {/* Success checkmark (appears after scanning) */}
                   {!scanning && (
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -141,7 +141,7 @@ export function RadarPreview({ proposition, jurisdictions, onConfirm, onEdit }: 
               <div className="bg-accent/30 border-t border-border px-8 py-5 flex items-center justify-between gap-4">
                 <Button
                   onClick={onEdit}
-                  variant="outline"
+                  variant="ghost"
                   className="flex-1 border-2 border-border hover:bg-accent font-semibold"
                 >
                   Edit Configuration

@@ -46,30 +46,29 @@ export function MSWordWindow({ isOpen, onClose, content, onContentChange, fileNa
     if (!highlightText) {
       return text.replace(/\n/g, '<br/>');
     }
-    
+
     const highlighted = text.replace(
       new RegExp(`(${highlightText})`, 'gi'),
       '<mark style="background-color: #1E3A8A20; color: inherit; padding: 2px 0;">$1</mark>'
     );
-    
+
     return highlighted.replace(/\n/g, '<br/>');
   };
 
   return (
     <div className={`${isFullWindow ? 'w-full h-screen' : 'fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-in fade-in duration-200'}`}>
-      <div 
-        className={`bg-background ${isFullWindow ? '' : 'border border-border shadow-2xl'} flex flex-col transition-all duration-300 ${
-          isFullWindow ? 'w-full h-full' : isMaximized ? 'w-full h-full' : 'w-[95%] h-[95%] rounded-xl'
-        }`}
+      <div
+        className={`bg-background ${isFullWindow ? '' : 'border border-border shadow-2xl'} flex flex-col transition-all duration-300 ${isFullWindow ? 'w-full h-full' : isMaximized ? 'w-full h-full' : 'w-[95%] h-[95%] rounded-xl'
+          }`}
       >
         {/* MS Word Title Bar */}
         <div className="bg-card border-b border-border flex items-center justify-between px-4 py-2.5">
           <div className="flex items-center gap-3">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={onClose}
-              className="h-8"
+              className="h-8 bg-black dark:bg-black border-border/60 hover:border-primary/50 hover:bg-black"
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
@@ -113,7 +112,7 @@ export function MSWordWindow({ isOpen, onClose, content, onContentChange, fileNa
         </div>
 
         {/* MS Word Ribbon/Toolbar */}
-        <div className="bg-[#F9F9F9] dark:bg-card/50 border-b border-border px-4 py-3">
+        <div className="bg-black dark:bg-black border-b border-border px-4 py-3">
           <div className="flex items-center gap-4">
             {/* Undo/Redo */}
             <div className="flex items-center gap-1 pr-4 border-r border-border">
@@ -194,20 +193,19 @@ export function MSWordWindow({ isOpen, onClose, content, onContentChange, fileNa
         </div>
 
         {/* Document Editor */}
-        <div className="flex-1 overflow-y-auto bg-[#E8E8E8] dark:bg-background/50 p-8">
+        <div className="flex-1 overflow-y-auto bg-[#F9F9F9] dark:bg-background p-8">
           <div className="max-w-[8.5in] mx-auto">
             {/* MS Word Page */}
-            <div className="bg-white dark:bg-card shadow-2xl min-h-[11in] p-[1in] border border-border/50">
+            <div className="bg-black dark:bg-black shadow-2xl min-h-[11in] p-[1in] border border-border/50">
               <div
                 contentEditable
                 suppressContentEditableWarning
                 onInput={handleContentEdit}
-                className="focus:outline-none"
+                className="focus:outline-none text-white"
                 style={{
                   fontFamily: courtFormat?.font || 'Times New Roman',
                   fontSize: `${courtFormat?.fontSize || 14}pt`,
                   lineHeight: courtFormat?.lineSpacing || 2.0,
-                  color: 'inherit'
                 }}
                 dangerouslySetInnerHTML={{ __html: getHighlightedContent(content, highlightedText) }}
               />
@@ -228,9 +226,9 @@ export function MSWordWindow({ isOpen, onClose, content, onContentChange, fileNa
             </div>
             <div className="flex items-center gap-3">
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={onClose}
-                className="h-9"
+                className="h-9 bg-black dark:bg-black border-border/60 hover:border-primary/50 hover:bg-black"
               >
                 Cancel
               </Button>

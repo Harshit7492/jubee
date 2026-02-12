@@ -139,31 +139,31 @@ Place: New Delhi`;
   // Synchronized scrolling
   const handleLeftScroll = () => {
     if (leftScrollRef.current && rightScrollRef.current) {
-      const scrollPercentage = 
-        leftScrollRef.current.scrollTop / 
+      const scrollPercentage =
+        leftScrollRef.current.scrollTop /
         (leftScrollRef.current.scrollHeight - leftScrollRef.current.clientHeight);
-      
-      rightScrollRef.current.scrollTop = 
-        scrollPercentage * 
+
+      rightScrollRef.current.scrollTop =
+        scrollPercentage *
         (rightScrollRef.current.scrollHeight - rightScrollRef.current.clientHeight);
     }
   };
 
   const handleRightScroll = () => {
     if (rightScrollRef.current && leftScrollRef.current) {
-      const scrollPercentage = 
-        rightScrollRef.current.scrollTop / 
+      const scrollPercentage =
+        rightScrollRef.current.scrollTop /
         (rightScrollRef.current.scrollHeight - rightScrollRef.current.clientHeight);
-      
-      leftScrollRef.current.scrollTop = 
-        scrollPercentage * 
+
+      leftScrollRef.current.scrollTop =
+        scrollPercentage *
         (leftScrollRef.current.scrollHeight - leftScrollRef.current.clientHeight);
     }
   };
 
   const handleTranslate = () => {
     setTranslatedContent('');
-    
+
     // Simulate translation process
     setTimeout(() => {
       setTranslatedContent(generatedTranslation);
@@ -186,14 +186,14 @@ Place: New Delhi`;
 
     setTranslatedContent('');
     setShowRedoInput(false);
-    
+
     // Simulate regeneration with improvements
     setTimeout(() => {
       toast.success('Translation regenerated with improvements');
       setTranslatedContent(generatedTranslation);
       setImprovementInstructions('');
     }, 2500);
-    
+
     onRedo();
   };
 
@@ -268,7 +268,7 @@ Place: New Delhi`;
                 </div>
 
                 {/* Left Content - Non-editable */}
-                <div 
+                <div
                   ref={leftScrollRef}
                   onScroll={handleLeftScroll}
                   className="flex-1 overflow-y-auto bg-[#F9F9F9] dark:bg-muted p-8"
@@ -294,7 +294,7 @@ Place: New Delhi`;
                 </div>
 
                 {/* Right Content - Editable */}
-                <div 
+                <div
                   ref={rightScrollRef}
                   onScroll={handleRightScroll}
                   className="flex-1 overflow-y-auto bg-white dark:bg-card p-8"
@@ -305,7 +305,7 @@ Place: New Delhi`;
                       value={translatedContent}
                       onChange={(e) => setTranslatedContent(e.target.value)}
                       className="w-full min-h-full border-none outline-none resize-none font-serif text-sm leading-relaxed bg-transparent text-foreground"
-                      style={{ 
+                      style={{
                         fontFamily: '"Times New Roman", Times, serif',
                         lineHeight: '1.8'
                       }}
@@ -334,7 +334,7 @@ Place: New Delhi`;
                 <div className="bg-card border-t-[0.5px] border-border px-6 py-4 flex gap-3 flex-shrink-0">
                   <Button
                     onClick={handleRedoClick}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 border-[0.5px] border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/5 font-semibold"
                   >
                     <RotateCcw className="w-4 h-4 mr-2" />
@@ -342,7 +342,7 @@ Place: New Delhi`;
                   </Button>
                   <Button
                     onClick={() => onEdit(translatedContent)}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 border-[0.5px] border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/5 font-semibold"
                   >
                     <Edit3 className="w-4 h-4 mr-2" />

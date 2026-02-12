@@ -303,7 +303,7 @@ export function AddCaseDialog({ isOpen, onClose, onAddCase }: AddCaseDialogProps
               <div className="flex items-center gap-3">
                 <Button
                   onClick={handleCancel}
-                  variant="outline"
+                  variant="ghost"
                   className="flex-1 h-11 rounded-xl font-semibold"
                 >
                   Cancel

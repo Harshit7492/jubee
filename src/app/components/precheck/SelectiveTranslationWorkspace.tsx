@@ -174,7 +174,7 @@ Date: 15th April 2023`;
               <Button
                 onClick={goToPreviousPage}
                 disabled={isFirstPage}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="border-[0.5px] border-border dark:border-white/30 disabled:opacity-50"
               >
@@ -186,7 +186,7 @@ Date: 15th April 2023`;
               <Button
                 onClick={goToNextPage}
                 disabled={isLastPage}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="border-[0.5px] border-border dark:border-white/30 disabled:opacity-50"
               >
@@ -198,7 +198,7 @@ Date: 15th April 2023`;
             <div className="flex items-center gap-3">
               <Button
                 onClick={onRedo}
-                variant="outline"
+                variant="ghost"
                 className="border-[0.5px] border-[#1E3A8A]/30 dark:border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/10 dark:hover:bg-[#1E3A8A]/20"
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
@@ -206,7 +206,7 @@ Date: 15th April 2023`;
               </Button>
               <Button
                 onClick={handleEdit}
-                variant="outline"
+                variant="ghost"
                 className="border-[0.5px] border-[#1E3A8A]/30 dark:border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/10 dark:hover:bg-[#1E3A8A]/20"
               >
                 <Edit3 className="w-4 h-4 mr-2" />

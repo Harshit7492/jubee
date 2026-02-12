@@ -52,8 +52,8 @@ export function ConfirmationDialog({
 
   return (
     <>
-      <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" 
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
         onClick={onClose}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
@@ -81,7 +81,7 @@ export function ConfirmationDialog({
           <div className="flex items-center gap-3">
             <Button
               onClick={onClose}
-              variant="outline"
+              variant="ghost"
               className="flex-1 h-12 border-[#1E293B] hover:bg-[#1E293B]/50"
             >
               {cancelText}

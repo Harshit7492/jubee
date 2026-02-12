@@ -54,13 +54,13 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
   const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [saveFormat, setSaveFormat] = useState<'pdf' | 'doc'>('pdf');
   const [showExportMenu, setShowExportMenu] = useState(false);
-  
+
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
+  const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; isAI: boolean; timestamp: Date }>>([]);
   const [chatInput, setChatInput] = useState('');
   const [isAITyping, setIsAITyping] = useState(false);
-  
+
   const [cases, setCases] = useState<CaseItem[]>([
     {
       id: '1',
@@ -172,13 +172,13 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
   ]);
 
   const handleArticleFeedback = (articleId: string, feedback: 'up' | 'down') => {
-    setArticles(articles.map(a => 
+    setArticles(articles.map(a =>
       a.id === articleId ? { ...a, feedback: a.feedback === feedback ? undefined : feedback } : a
     ));
   };
 
   const handleFeedback = (caseId: string, feedback: 'up' | 'down') => {
-    setCases(cases.map(c => 
+    setCases(cases.map(c =>
       c.id === caseId ? { ...c, feedback: c.feedback === feedback ? undefined : feedback } : c
     ));
   };
@@ -206,7 +206,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
     });
   };
 
-  const filteredCases = cases.filter(c => 
+  const filteredCases = cases.filter(c =>
     selectedCourt === 'all' || c.court === selectedCourt
   );
 
@@ -250,14 +250,14 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
         "Based on these cases, I can suggest refinements to improve the accuracy of future interceptions. Would that be helpful?",
         "The relevance scores indicate strong matches. I can help you identify key citations or arguments for your brief preparation."
       ];
-      
+
       const aiMessage = {
         id: `ai-${Date.now()}`,
         text: aiResponses[Math.floor(Math.random() * aiResponses.length)],
         isAI: true,
         timestamp: new Date()
       };
-      
+
       setIsAITyping(false);
       setChatMessages(prev => [...prev, aiMessage]);
     }, 1500 + Math.random() * 1000);
@@ -278,7 +278,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
               <span className="text-sm font-semibold">Back</span>
             </button>
             <div className="w-px h-5 bg-border" />
-            
+
             <div className="flex-1">
               <h1 className="text-lg font-bold text-foreground mb-1">Intercepted Content</h1>
               <p className="text-sm text-muted-foreground line-clamp-1">{proposition}</p>
@@ -354,7 +354,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
               <div className="relative">
                 <Button
                   onClick={() => setShowSaveDropdown(!showSaveDropdown)}
-                  variant="outline"
+                  variant="ghost"
                   className="border-2 border-border hover:bg-accent font-semibold"
                 >
                   <Save className="w-4 h-4 mr-2" />
@@ -386,7 +386,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
               <div className="relative">
                 <Button
                   onClick={() => setShowExportMenu(!showExportMenu)}
-                  variant="outline"
+                  variant="ghost"
                   className="border-2 border-border hover:bg-accent font-semibold"
                 >
                   <Download className="w-4 h-4 mr-2" />
@@ -417,7 +417,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
               {/* Refine Radar */}
               <Button
                 onClick={onRefineRadar}
-                variant="outline"
+                variant="ghost"
                 className="border-2 border-yellow-500/50 text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 font-semibold"
               >
                 Unsatisfied? Refine Radar
@@ -573,7 +573,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
                                     <Button
                                       onClick={onRefineJurisdictions}
                                       size="sm"
-                                      variant="outline"
+                                      variant="ghost"
                                       className="border-white/30 text-white hover:bg-white/10 font-semibold h-9"
                                     >
                                       Re-evaluate Jurisdictions
@@ -724,7 +724,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
                                 <Button
                                   onClick={onRefineJurisdictions}
                                   size="sm"
-                                  variant="outline"
+                                  variant="ghost"
                                   className="border-white/30 text-white hover:bg-white/10 font-semibold h-9"
                                 >
                                   Re-evaluate Jurisdictions
@@ -760,7 +760,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
       {selectedCaseId && (() => {
         const selectedCase = cases.find(c => c.id === selectedCaseId);
         if (!selectedCase) return null;
-        
+
         return (
           <div className="fixed inset-0 z-50 bg-background">
             <JudgmentWorkspace
@@ -785,18 +785,16 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
       {/* Floating Chat Toggle Button */}
       <button
         onClick={() => setShowChat(!showChat)}
-        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-          showChat ? 'scale-0' : 'scale-100'
-        }`}
+        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showChat ? 'scale-0' : 'scale-100'
+          }`}
       >
         <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
       </button>
 
       {/* AI Chat Panel */}
-      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-        showChat ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showChat ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Chat Header */}
         <div className="px-6 py-4 border-b-[0.5px] border-border bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
@@ -869,11 +867,10 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
                     </div>
                   )}
                   <div
-                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                      message.isAI
+                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                         ? 'bg-muted border-[0.5px] border-border'
                         : 'bg-[#1E3A8A] text-white'
-                    }`}
+                      }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>
@@ -882,7 +879,7 @@ export function CaseFeed({ radarId, proposition, onBack, onRefineRadar, onRefine
                   </div>
                 </div>
               ))}
-              
+
               {isAITyping && (
                 <div className="flex gap-3 items-start">
                   <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">

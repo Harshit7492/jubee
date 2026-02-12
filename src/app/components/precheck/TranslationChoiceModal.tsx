@@ -75,7 +75,7 @@ export function TranslationChoiceModal({
         <div className="bg-accent/30 border-t-[0.5px] border-border px-6 py-4">
           <Button
             onClick={onClose}
-            variant="outline"
+            variant="ghost"
             className="w-full border-[0.5px] border-border"
           >
             Cancel

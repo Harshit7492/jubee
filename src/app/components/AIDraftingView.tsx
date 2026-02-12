@@ -84,7 +84,7 @@ MOST RESPECTFULLY SHOWETH:
                 <p className="text-muted-foreground text-sm font-medium">Section 9 Application - ABC Pvt. Ltd. v. XYZ Enterprises</p>
               </div>
               <div className="flex items-center gap-3">
-                <Button variant="outline" className="border-border hover:bg-accent font-semibold">
+                <Button variant="ghost" className="border-border hover:bg-accent font-semibold">
                   <FileText className="w-4 h-4 mr-2" />
                   Export
                 </Button>
@@ -109,9 +109,9 @@ MOST RESPECTFULLY SHOWETH:
                     High Court
                   </Badge>
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   className="hover:bg-accent hover:text-primary text-primary font-semibold"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
@@ -247,7 +247,7 @@ MOST RESPECTFULLY SHOWETH:
                 </div>
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant="ghost"
                   className="w-full border-primary/30 text-primary hover:bg-primary/10 text-xs font-semibold"
                 >
                   View Citation

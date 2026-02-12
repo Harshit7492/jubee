@@ -41,6 +41,7 @@ import {
   DropdownMenuTrigger,
 } from "@/app/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import MSWordEditor from "../common/MSWordEditor";
 
 interface DraftingToolProps {
   onBack: () => void;
@@ -668,8 +669,12 @@ export function DraftingTool({
   };
 
   const proceedToRelief = () => {
+    const reliefPrompt =
+      selectedDocType === "legal-notice"
+        ? "Please describe the nature of relief you seek to claim."
+        : "Please describe the relief sought or claimed in this matter.";
     addAIMessage(
-      "Please describe the relief sought or claimed in this matter.",
+      reliefPrompt,
       undefined,
       undefined,
       {
@@ -891,7 +896,12 @@ export function DraftingTool({
       setCounterPartyName(value);
       setTimeout(() => {
         setIsTyping(false);
-        proceedToJurisdiction();
+        // Skip jurisdiction & judge selection for Legal Notice
+        if (selectedDocType === "legal-notice") {
+          proceedToRelief();
+        } else {
+          proceedToJurisdiction();
+        }
       }, 800);
     } else if (field === "customJudge") {
       setJudgeSelection([value]);
@@ -903,7 +913,11 @@ export function DraftingTool({
       setReliefSought(value);
       setTimeout(() => {
         setIsTyping(false);
-        proceedToAdditionalDetails();
+        if (selectedDocType === "legal-notice") {
+          generateDraft();
+        } else {
+          proceedToAdditionalDetails();
+        }
       }, 800);
     } else if (field === "additionalDetails") {
       setAdditionalDetails(value);
@@ -1222,9 +1236,9 @@ Advocate for the Petitioner`;
               <h3 className="text-xl font-semibold text-foreground">
                 Generating Your Draft
               </h3>
-              <p className="text-muted-foreground">
+              {/* <p className="text-muted-foreground">
                 AI is analyzing your inputs and crafting the document...
-              </p>
+              </p> */}
             </div>
 
             {/* Loading Dots */}
@@ -1258,8 +1272,14 @@ Advocate for the Petitioner`;
             {!isLeftPaneCollapsed && (
               <>
                 {/* Document Header */}
-                <div className="border-b border-border p-4 flex items-center justify-between bg-muted/30">
+                {/* <div className="border-b border-border p-4 flex items-center justify-between bg-muted/30">
                   <div className="flex items-center gap-3">
+                    <button
+                      onClick={onBack}
+                      className="flex items-center gap-2 text-foreground hover:text-primary transition-colors group"
+                    >
+                      <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                    </button>
                     <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                       <FileText className="w-4 h-4 text-primary" />
                     </div>
@@ -1273,9 +1293,7 @@ Advocate for the Petitioner`;
                     </div>
                   </div>
 
-                  {/* Formatting Toolbar */}
                   <div className="flex items-center gap-2">
-                    {/* Font Size */}
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -1309,7 +1327,6 @@ Advocate for the Petitioner`;
                       </DropdownMenuContent>
                     </DropdownMenu>
 
-                    {/* Line Spacing */}
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -1340,7 +1357,6 @@ Advocate for the Petitioner`;
                       </DropdownMenuContent>
                     </DropdownMenu>
 
-                    {/* Court Format */}
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
@@ -1393,8 +1409,8 @@ Advocate for the Petitioner`;
                       <Save className="w-4 h-4" />
                     </Button>
                   </div>
-                </div>
-
+                </div> */}
+                <MSWordEditor />
                 {/* Document Content */}
                 <div className="flex-1 overflow-y-auto p-8">
                   <div
@@ -1453,7 +1469,7 @@ Advocate for the Petitioner`;
 
                 <Button
                   onClick={handleStartOver}
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                 >
                   <Home className="w-4 h-4 mr-2" />
@@ -1467,7 +1483,7 @@ Advocate for the Petitioner`;
               <div className="grid grid-cols-3 gap-2">
                 <Button
                   onClick={handleDownloadDraft}
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   className="font-semibold"
                 >
@@ -1476,7 +1492,7 @@ Advocate for the Petitioner`;
                 </Button>
                 <Button
                   onClick={handleSaveToMySpace}
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   className="font-semibold"
                 >
@@ -1807,7 +1823,12 @@ Advocate for the Petitioner`;
                                   setIsTyping(true);
                                   setTimeout(() => {
                                     setIsTyping(false);
-                                    proceedToJurisdiction();
+                                    // Skip jurisdiction & judge selection for Legal Notice
+                                    if (selectedDocType === "legal-notice") {
+                                      proceedToRelief();
+                                    } else {
+                                      proceedToJurisdiction();
+                                    }
                                   }, 800);
                                 }
                               } else if (

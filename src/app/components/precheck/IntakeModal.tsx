@@ -64,7 +64,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
   const [caseType, setCaseType] = useState('');
   const [mainFile, setMainFile] = useState<File | null>(null);
   const [annexures, setAnnexures] = useState<File[]>([]);
-  
+
   // Temporary input state for adding new entries
   const [petitionerInput, setPetitionerInput] = useState('');
   const [respondentInput, setRespondentInput] = useState('');
@@ -97,11 +97,11 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
   const handleAnnexuresChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     const pdfFiles = files.filter(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
-    
+
     if (pdfFiles.length !== files.length) {
       toast.error('Only PDF files are allowed');
     }
-    
+
     if (pdfFiles.length > 0) {
       setAnnexures(prev => [...prev, ...pdfFiles]);
       toast.success(`${pdfFiles.length} annexure(s) uploaded`);
@@ -117,13 +117,13 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
       // For main petition, we only take the first document
       const doc = documents[0];
       // Convert the MySpace document to a File object
-      const file = new File([], doc.name, { 
+      const file = new File([], doc.name, {
         type: doc.type || 'application/pdf',
         lastModified: doc.lastModified || Date.now()
       });
       // Set file size if available
       Object.defineProperty(file, 'size', { value: doc.size || 0 });
-      
+
       setMainFile(file);
       toast.success(`Selected: ${doc.name}`);
       setShowMainMySpace(false);
@@ -134,7 +134,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
     if (documents.length > 0) {
       // Convert MySpace documents to File objects
       const files = documents.map(doc => {
-        const file = new File([], doc.name, { 
+        const file = new File([], doc.name, {
           type: doc.type || 'application/pdf',
           lastModified: doc.lastModified || Date.now()
         });
@@ -142,7 +142,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
         Object.defineProperty(file, 'size', { value: doc.size || 0 });
         return file;
       });
-      
+
       setAnnexures(prev => [...prev, ...files]);
       toast.success(`${files.length} annexure(s) added from My Space`);
       setShowAnnexureMySpace(false);
@@ -210,11 +210,11 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                   <Label htmlFor="petitioner" className="text-sm font-semibold">
                     Petitioner / Appellant
                   </Label>
-                  
+
                   <Popover open={petitionerOpen} onOpenChange={setPetitionerOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         role="combobox"
                         aria-expanded={petitionerOpen}
                         className="w-full justify-between h-11 border-2 border-border hover:border-primary/50 hover:bg-accent font-medium transition-colors"
@@ -265,27 +265,27 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                             {petitionerSuggestions
                               .filter(s => !petitioners.includes(s))
                               .map((suggestion) => (
-                              <CommandItem
-                                key={suggestion}
-                                value={suggestion}
-                                onSelect={(value) => {
-                                  if (!petitioners.includes(value)) {
-                                    setPetitioners([...petitioners, value]);
-                                    setPetitionerInput('');
-                                  }
-                                }}
-                              >
-                                <Plus className="mr-2 h-4 w-4 text-primary" />
-                                {suggestion}
-                              </CommandItem>
-                            ))}
+                                <CommandItem
+                                  key={suggestion}
+                                  value={suggestion}
+                                  onSelect={(value) => {
+                                    if (!petitioners.includes(value)) {
+                                      setPetitioners([...petitioners, value]);
+                                      setPetitionerInput('');
+                                    }
+                                  }}
+                                >
+                                  <Plus className="mr-2 h-4 w-4 text-primary" />
+                                  {suggestion}
+                                </CommandItem>
+                              ))}
                           </CommandGroup>
                         </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>
                   <p className="text-xs text-muted-foreground">Format: Name and Ors./Anr.</p>
-                  
+
                   {/* Selected Petitioners Badges */}
                   {petitioners.length > 0 && (
                     <div className="flex flex-wrap gap-2 p-3 bg-accent/30 rounded-lg border border-border/50 min-h-[2.5rem]">
@@ -312,11 +312,11 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                   <Label htmlFor="respondent" className="text-sm font-semibold">
                     Respondent
                   </Label>
-                  
+
                   <Popover open={respondentOpen} onOpenChange={setRespondentOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         role="combobox"
                         aria-expanded={respondentOpen}
                         className="w-full justify-between h-11 border-2 border-border hover:border-primary/50 hover:bg-accent font-medium transition-colors"
@@ -367,27 +367,27 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                             {respondentSuggestions
                               .filter(s => !respondents.includes(s))
                               .map((suggestion) => (
-                              <CommandItem
-                                key={suggestion}
-                                value={suggestion}
-                                onSelect={(value) => {
-                                  if (!respondents.includes(value)) {
-                                    setRespondents([...respondents, value]);
-                                    setRespondentInput('');
-                                  }
-                                }}
-                              >
-                                <Plus className="mr-2 h-4 w-4 text-primary" />
-                                {suggestion}
-                              </CommandItem>
-                            ))}
+                                <CommandItem
+                                  key={suggestion}
+                                  value={suggestion}
+                                  onSelect={(value) => {
+                                    if (!respondents.includes(value)) {
+                                      setRespondents([...respondents, value]);
+                                      setRespondentInput('');
+                                    }
+                                  }}
+                                >
+                                  <Plus className="mr-2 h-4 w-4 text-primary" />
+                                  {suggestion}
+                                </CommandItem>
+                              ))}
                           </CommandGroup>
                         </CommandList>
                       </Command>
                     </PopoverContent>
                   </Popover>
                   <p className="text-xs text-muted-foreground">Format: Name and Ors./Anr.</p>
-                  
+
                   {/* Selected Respondents Badges */}
                   {respondents.length > 0 && (
                     <div className="flex flex-wrap gap-2 p-3 bg-accent/30 rounded-lg border border-border/50 min-h-[2.5rem]">
@@ -426,7 +426,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                   <Popover open={courtOpen} onOpenChange={setCourtOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         role="combobox"
                         aria-expanded={courtOpen}
                         className="w-full justify-between h-11 border-2 border-border hover:border-primary/50 hover:bg-accent font-medium transition-colors"
@@ -473,7 +473,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                   <Popover open={caseTypeOpen} onOpenChange={setCaseTypeOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         role="combobox"
                         aria-expanded={caseTypeOpen}
                         disabled={!court}
@@ -530,7 +530,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
               {/* Main File Upload */}
               <div className="space-y-2">
                 <Label className="text-sm font-semibold">Main Petition / Application *</Label>
-                
+
                 {/* Upload Options */}
                 <div className="grid grid-cols-2 gap-3">
                   <div
@@ -543,7 +543,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                     <p className="text-sm font-semibold text-foreground mb-1">Upload Documents</p>
                     <p className="text-xs text-muted-foreground">From your device</p>
                   </div>
-                  
+
                   <div
                     onClick={() => setShowMainMySpace(true)}
                     className="border-2 border-border hover:border-primary/50 rounded-xl p-4 text-center cursor-pointer transition-all bg-accent/20 hover:bg-accent/40 group"
@@ -589,7 +589,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
               {/* Annexures Upload */}
               <div className="space-y-2">
                 <Label className="text-sm font-semibold">Annexures / Exhibits</Label>
-                
+
                 {/* Upload Options */}
                 <div className="grid grid-cols-2 gap-3">
                   <div
@@ -602,7 +602,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
                     <p className="text-sm font-semibold text-foreground mb-1">Upload Documents</p>
                     <p className="text-xs text-muted-foreground">From your device</p>
                   </div>
-                  
+
                   <div
                     onClick={() => setShowAnnexureMySpace(true)}
                     className="border-2 border-border hover:border-primary/50 rounded-xl p-4 text-center cursor-pointer transition-all bg-accent/20 hover:bg-accent/40 group"
@@ -659,7 +659,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
         {/* Modal Footer */}
         <div className="px-8 py-5 border-t border-border bg-accent/20 flex justify-end gap-3">
           <Button
-            variant="outline"
+            variant="ghost"
             className="px-6 font-semibold"
             onClick={() => {
               setPetitioners([]);
@@ -687,7 +687,7 @@ export function IntakeModal({ onComplete }: IntakeModalProps) {
         onClose={() => setShowMainMySpace(false)}
         onSelect={handleMainMySpaceSelect}
       />
-      
+
       <MySpacePickerDialog
         isOpen={showAnnexureMySpace}
         onClose={() => setShowAnnexureMySpace(false)}

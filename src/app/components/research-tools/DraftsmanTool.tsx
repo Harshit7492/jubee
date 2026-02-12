@@ -20,6 +20,7 @@ import {
 } from '@/app/components/ui/dropdown-menu';
 import { toast } from 'sonner';
 import jubeeLogo from '@/assets/jubee-logo.png';
+import MSWordEditor from '../common/MSWordEditor';
 
 interface DraftsmanToolProps {
   onBack: () => void;
@@ -797,12 +798,11 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Button
+                variant={'ghost'}
                 onClick={() => {
                   setCurrentStage('initial');
                   setMessages([]);
                 }}
-                variant="outline"
-                size="sm"
                 className="h-12 px-4 rounded-xl"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -819,7 +819,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
             <div className="flex items-center gap-2">
               <Button
                 onClick={handleSaveToMySpace}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -829,7 +829,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     className="font-semibold border-border hover:bg-accent"
                   >
@@ -859,92 +859,14 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           </div>
         </div>
 
-        {/* Formatting Toolbar */}
-        <div className="bg-card border-b border-border px-6 py-3">
-          <div className="flex items-center gap-6">
-            {/* Font Size */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 gap-1">
-                  <Type className="w-4 h-4" />
-                  <span className="text-xs">{fontSize}pt</span>
-                  <ChevronDown className="w-3 h-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {['10', '11', '12', '13', '14', '16'].map((size) => (
-                  <DropdownMenuItem key={size} onClick={() => setFontSize(size)}>
-                    {size}pt
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Line Spacing */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 gap-1">
-                  <AlignLeft className="w-4 h-4" />
-                  <span className="text-xs">{lineSpacing}</span>
-                  <ChevronDown className="w-3 h-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {['1.0', '1.5', '2.0'].map((spacing) => (
-                  <DropdownMenuItem key={spacing} onClick={() => setLineSpacing(spacing)}>
-                    {spacing}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Court Format */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 gap-1">
-                  <Scale className="w-4 h-4" />
-                  <span className="text-xs hidden lg:inline">
-                    {courtFormats.find(f => f.id === courtFormat)?.name}
-                  </span>
-                  <ChevronDown className="w-3 h-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {courtFormats.map((format) => (
-                  <DropdownMenuItem key={format.id} onClick={() => setCourtFormat(format.id)}>
-                    {format.name}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <div className="flex-1" />
-
-            <Badge variant="secondary" className="font-semibold">
-              Session auto-saved
-            </Badge>
-          </div>
-        </div>
 
         {/* Main Content Area */}
         <div className="flex-1 flex overflow-hidden">
           {/* Left Pane: Document Editor */}
           <div className="flex-1 flex flex-col overflow-hidden bg-muted/30">
-            <div className="flex-1 overflow-y-auto ">
-              <div className="max-w-5xl mx-auto">
-                <div className="bg-white dark:bg-card shadow-lg rounded-lg p-12">
-                  <textarea
-                    ref={editorRef}
-                    value={documentContent}
-                    onChange={(e) => setDocumentContent(e.target.value)}
-                    placeholder="Start typing your legal document here..."
-                    className="w-full min-h-[1000px] text-black dark:text-foreground focus:outline-none resize-none font-serif leading-relaxed"
-                    style={{
-                      fontSize: `${fontSize}pt`,
-                      lineHeight: lineSpacing
-                    }}
-                  />
-                </div>
+            <div className="flex-1 overflow-y-auto">
+              <div className="h-full">
+                <MSWordEditor />
               </div>
             </div>
           </div>
@@ -965,54 +887,46 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           {!isRightPaneCollapsed && (
             <div className="w-96 border-l border-border bg-background flex flex-col">
               {/* Section 1: Documents Referenced */}
-              <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'documents'
-                  ? 'flex-1 border-primary/30'
-                  : 'flex-shrink-0 border-border'
-              }`}>
+              <div className={`border-b-2 flex flex-col transition-all duration-300 ${expandedPanel === 'documents'
+                ? 'flex-1 border-primary/30'
+                : 'flex-shrink-0 border-border'
+                }`}>
                 <button
                   onClick={() => setExpandedPanel(expandedPanel === 'documents' ? null : 'documents')}
-                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${
-                    expandedPanel === 'documents'
-                      ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
-                      : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
-                  }`}
+                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${expandedPanel === 'documents'
+                    ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
+                    : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
+                    }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
                   <div className="flex items-center gap-2.5 relative z-10">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                      expandedPanel === 'documents'
-                        ? 'bg-primary/15 ring-2 ring-primary/30'
-                        : 'bg-primary/10 group-hover:bg-primary/15'
-                    }`}>
-                      <FileText className={`w-4 h-4 transition-colors ${
-                        expandedPanel === 'documents' ? 'text-primary' : 'text-primary/70 group-hover:text-primary'
-                      }`} />
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${expandedPanel === 'documents'
+                      ? 'bg-primary/15 ring-2 ring-primary/30'
+                      : 'bg-primary/10 group-hover:bg-primary/15'
+                      }`}>
+                      <FileText className={`w-4 h-4 transition-colors ${expandedPanel === 'documents' ? 'text-primary' : 'text-primary/70 group-hover:text-primary'
+                        }`} />
                     </div>
-                    <h4 className={`text-sm font-bold transition-colors ${
-                      expandedPanel === 'documents' ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                    }`}>Documents Referenced</h4>
+                    <h4 className={`text-sm font-bold transition-colors ${expandedPanel === 'documents' ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                      }`}>Documents Referenced</h4>
                     <Badge variant="secondary" className="text-xs ml-auto mr-2">
                       {draftDoc || supportingDocs.length > 0 || caselawDocs.length > 0
                         ? (draftDoc ? 1 : 0) + supportingDocs.length + caselawDocs.length
                         : 2}
                     </Badge>
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ${
-                      expandedPanel === 'documents'
-                        ? 'bg-primary/20'
-                        : 'bg-muted group-hover:bg-primary/10'
-                    }`}>
-                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'documents'
-                          ? 'rotate-180 text-primary'
-                          : 'text-muted-foreground group-hover:text-primary'
-                      }`} />
+                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ${expandedPanel === 'documents'
+                      ? 'bg-primary/20'
+                      : 'bg-muted group-hover:bg-primary/10'
+                      }`}>
+                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${expandedPanel === 'documents'
+                        ? 'rotate-180 text-primary'
+                        : 'text-muted-foreground group-hover:text-primary'
+                        }`} />
                     </div>
                   </div>
-                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${
-                    expandedPanel === 'documents' ? 'text-primary/70' : 'text-muted-foreground'
-                  }`}>
+                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${expandedPanel === 'documents' ? 'text-primary/70' : 'text-muted-foreground'
+                    }`}>
                     All uploaded documents • {expandedPanel === 'documents' ? 'Expanded' : 'Click to expand'}
                   </p>
                 </button>
@@ -1081,52 +995,44 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
               </div>
 
               {/* Section 2: Suggestions */}
-              <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'suggestions'
-                  ? 'flex-1 border-primary/30'
-                  : 'flex-shrink-0 border-border'
-              }`}>
+              <div className={`border-b-2 flex flex-col transition-all duration-300 ${expandedPanel === 'suggestions'
+                ? 'flex-1 border-primary/30'
+                : 'flex-shrink-0 border-border'
+                }`}>
                 <button
                   onClick={() => setExpandedPanel(expandedPanel === 'suggestions' ? null : 'suggestions')}
-                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${
-                    expandedPanel === 'suggestions'
-                      ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
-                      : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
-                  }`}
+                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${expandedPanel === 'suggestions'
+                    ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
+                    : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
+                    }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
                   <div className="flex items-center gap-2.5 relative z-10">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                      expandedPanel === 'suggestions'
-                        ? 'bg-primary/15 ring-2 ring-primary/30'
-                        : 'bg-primary/10 group-hover:bg-primary/15'
-                    }`}>
-                      <AlertCircle className={`w-4 h-4 transition-colors ${
-                        expandedPanel === 'suggestions' ? 'text-primary' : 'text-primary/70 group-hover:text-primary'
-                      }`} />
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${expandedPanel === 'suggestions'
+                      ? 'bg-primary/15 ring-2 ring-primary/30'
+                      : 'bg-primary/10 group-hover:bg-primary/15'
+                      }`}>
+                      <AlertCircle className={`w-4 h-4 transition-colors ${expandedPanel === 'suggestions' ? 'text-primary' : 'text-primary/70 group-hover:text-primary'
+                        }`} />
                     </div>
-                    <h4 className={`text-sm font-bold transition-colors ${
-                      expandedPanel === 'suggestions' ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                    }`}>Suggestions</h4>
+                    <h4 className={`text-sm font-bold transition-colors ${expandedPanel === 'suggestions' ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                      }`}>Suggestions</h4>
                     <Badge variant="secondary" className="text-xs ml-auto mr-2">
                       {autoCheckIssues.length}
                     </Badge>
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ${
-                      expandedPanel === 'suggestions'
-                        ? 'bg-primary/20'
-                        : 'bg-muted group-hover:bg-primary/10'
-                    }`}>
-                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'suggestions'
-                          ? 'rotate-180 text-primary'
-                          : 'text-muted-foreground group-hover:text-primary'
-                      }`} />
+                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ${expandedPanel === 'suggestions'
+                      ? 'bg-primary/20'
+                      : 'bg-muted group-hover:bg-primary/10'
+                      }`}>
+                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${expandedPanel === 'suggestions'
+                        ? 'rotate-180 text-primary'
+                        : 'text-muted-foreground group-hover:text-primary'
+                        }`} />
                     </div>
                   </div>
-                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${
-                    expandedPanel === 'suggestions' ? 'text-primary/70' : 'text-muted-foreground'
-                  }`}>
+                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${expandedPanel === 'suggestions' ? 'text-primary/70' : 'text-muted-foreground'
+                    }`}>
                     Real-time document analysis • {expandedPanel === 'suggestions' ? 'Expanded' : 'Click to expand'}
                   </p>
                 </button>
@@ -1195,18 +1101,16 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                         <div
                           key={issue.id}
                           onClick={() => handleIssueClick(issue)}
-                          className={`p-3 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md ${
-                            issue.type === 'error'
-                              ? 'bg-red-500/5 border-red-500/20 hover:border-red-500/40 hover:bg-red-500/10'
-                              : issue.type === 'warning'
+                          className={`p-3 rounded-xl border-2 cursor-pointer transition-all hover:shadow-md ${issue.type === 'error'
+                            ? 'bg-red-500/5 border-red-500/20 hover:border-red-500/40 hover:bg-red-500/10'
+                            : issue.type === 'warning'
                               ? 'bg-yellow-500/5 border-yellow-500/20 hover:border-yellow-500/40 hover:bg-yellow-500/10'
                               : 'bg-blue-500/5 border-blue-500/20 hover:border-blue-500/40 hover:bg-blue-500/10'
-                          }`}
+                            }`}
                         >
                           <div className="flex items-start gap-2">
-                            <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                              issue.type === 'error' ? 'bg-red-500' : issue.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
-                            }`}>
+                            <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 mt-0.5 ${issue.type === 'error' ? 'bg-red-500' : issue.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
+                              }`}>
                               {issue.type === 'error' ? (
                                 <X className="w-3 h-3 text-white" />
                               ) : issue.type === 'warning' ? (
@@ -1228,53 +1132,45 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
               </div>
 
               {/* Section 3: AI Assistant Chatbot */}
-              <div className={`border-b-2 flex flex-col transition-all duration-300 ${
-                expandedPanel === 'chatbot'
-                  ? 'flex-1 border-primary/30'
-                  : 'flex-shrink-0 border-border'
-              }`}>
+              <div className={`border-b-2 flex flex-col transition-all duration-300 ${expandedPanel === 'chatbot'
+                ? 'flex-1 border-primary/30'
+                : 'flex-shrink-0 border-border'
+                }`}>
                 <button
                   onClick={() => setExpandedPanel(expandedPanel === 'chatbot' ? null : 'chatbot')}
-                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${
-                    expandedPanel === 'chatbot'
-                      ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
-                      : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
-                  }`}
+                  className={`group backdrop-blur-sm border-b px-4 py-3.5 transition-all w-full text-left relative overflow-hidden ${expandedPanel === 'chatbot'
+                    ? 'bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-primary/20 shadow-sm'
+                    : 'bg-card/50 hover:bg-primary/5 border-border/50 hover:border-primary/20'
+                    }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
                   <div className="flex items-center gap-2.5 relative z-10">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                      expandedPanel === 'chatbot'
-                        ? 'bg-primary/15 ring-2 ring-primary/30'
-                        : 'bg-primary/10 group-hover:bg-primary/15'
-                    }`}>
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${expandedPanel === 'chatbot'
+                      ? 'bg-primary/15 ring-2 ring-primary/30'
+                      : 'bg-primary/10 group-hover:bg-primary/15'
+                      }`}>
                       <img
                         src={jubeeLogo}
                         alt="Jubee"
-                        className={`w-4 h-4 transition-opacity ${
-                          expandedPanel === 'chatbot' ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'
-                        }`}
+                        className={`w-4 h-4 transition-opacity ${expandedPanel === 'chatbot' ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'
+                          }`}
                       />
                     </div>
-                    <h4 className={`text-sm font-bold transition-colors ${
-                      expandedPanel === 'chatbot' ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                    }`}>Jubee</h4>
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ml-auto ${
-                      expandedPanel === 'chatbot'
-                        ? 'bg-primary/20'
-                        : 'bg-muted group-hover:bg-primary/10'
-                    }`}>
-                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
-                        expandedPanel === 'chatbot'
-                          ? 'rotate-180 text-primary'
-                          : 'text-muted-foreground group-hover:text-primary'
-                      }`} />
+                    <h4 className={`text-sm font-bold transition-colors ${expandedPanel === 'chatbot' ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                      }`}>Jubee</h4>
+                    <div className={`w-6 h-6 rounded-md flex items-center justify-center transition-all ml-auto ${expandedPanel === 'chatbot'
+                      ? 'bg-primary/20'
+                      : 'bg-muted group-hover:bg-primary/10'
+                      }`}>
+                      <ChevronDown className={`w-4 h-4 transition-all duration-300 ${expandedPanel === 'chatbot'
+                        ? 'rotate-180 text-primary'
+                        : 'text-muted-foreground group-hover:text-primary'
+                        }`} />
                     </div>
                   </div>
-                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${
-                    expandedPanel === 'chatbot' ? 'text-primary/70' : 'text-muted-foreground'
-                  }`}>
+                  <p className={`text-xs mt-1.5 transition-colors relative z-10 ${expandedPanel === 'chatbot' ? 'text-primary/70' : 'text-muted-foreground'
+                    }`}>
                     Ask questions about drafting • {expandedPanel === 'chatbot' ? 'Expanded' : 'Click to expand'}
                   </p>
                 </button>
@@ -1458,101 +1354,100 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         <div className="flex-1 overflow-y-auto px-8 py-6" ref={chatContainerRef}>
           <div className="min-h-full flex flex-col justify-end">
             <div className="space-y-6 pb-2">
-            {messages.map((message, index) => (
-              <div key={message.id}>
-                {/* Message Bubble */}
-                <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  {message.type === 'ai' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                      message.type === 'user'
+              {messages.map((message, index) => (
+                <div key={message.id}>
+                  {/* Message Bubble */}
+                  <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    {message.type === 'ai' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+                      </div>
+                    )}
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-5 py-4 ${message.type === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-card border border-border text-foreground shadow-sm'
-                    }`}
-                  >
-                    <p className="text-base leading-relaxed whitespace-pre-wrap">
-                      {message.type === 'ai'
-                        ? message.content.slice(0, visibleChars[message.id] || message.content.length)
-                        : message.content
-                      }
-                    </p>
+                        }`}
+                    >
+                      <p className="text-base leading-relaxed whitespace-pre-wrap">
+                        {message.type === 'ai'
+                          ? message.content.slice(0, visibleChars[message.id] || message.content.length)
+                          : message.content
+                        }
+                      </p>
 
-                    {/* Show uploaded files */}
-                    {message.uploadedFiles && message.uploadedFiles.length > 0 && (
-                      <div className="mt-3 space-y-2">
-                        {message.uploadedFiles.map((file) => (
-                          <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
-                            <File className="w-4 h-4" />
-                            <span>{file.name}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                      {/* Show uploaded files */}
+                      {message.uploadedFiles && message.uploadedFiles.length > 0 && (
+                        <div className="mt-3 space-y-2">
+                          {message.uploadedFiles.map((file) => (
+                            <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
+                              <File className="w-4 h-4" />
+                              <span>{file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-                    {/* Show selected judges as chips */}
-                    {message.judgeChips && message.judgeChips.length > 0 && (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {message.judgeChips.map((judge, idx) => (
-                          <div
-                            key={idx}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1E3A8A]/20 border border-[#1E3A8A]/40 rounded-lg text-sm text-white"
-                          >
-                            <Scale className="w-3.5 h-3.5 text-[#1E3A8A]" />
-                            <span>Hon'ble Mr./Ms. Justice {judge}</span>
-                          </div>
-                        ))}
+                      {/* Show selected judges as chips */}
+                      {message.judgeChips && message.judgeChips.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {message.judgeChips.map((judge, idx) => (
+                            <div
+                              key={idx}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1E3A8A]/20 border border-[#1E3A8A]/40 rounded-lg text-sm text-white"
+                            >
+                              <Scale className="w-3.5 h-3.5 text-[#1E3A8A]" />
+                              <span>Hon'ble Mr./Ms. Justice {judge}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {message.type === 'user' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <User className="w-5 h-5 text-white" />
                       </div>
                     )}
                   </div>
-                  {message.type === 'user' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <User className="w-5 h-5 text-white" />
+
+                  {/* Options (Chips) */}
+                  {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && typingMessageId !== message.id && (
+                    <div className="ml-16 mt-4 flex flex-wrap gap-2">
+                      {message.options.map((option) => {
+                        const Icon = option.icon;
+                        return (
+                          <button
+                            key={option.id}
+                            onClick={() => handleOptionSelect(option.id, option.label)}
+                            className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
+                          >
+                            {Icon && <Icon className="w-4 h-4" />}
+                            {option.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
+              ))}
 
-                {/* Options (Chips) */}
-                {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && typingMessageId !== message.id && (
-                  <div className="ml-16 mt-4 flex flex-wrap gap-2">
-                    {message.options.map((option) => {
-                      const Icon = option.icon;
-                      return (
-                        <button
-                          key={option.id}
-                          onClick={() => handleOptionSelect(option.id, option.label)}
-                          className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
-                        >
-                          {Icon && <Icon className="w-4 h-4" />}
-                          {option.label}
-                        </button>
-                      );
-                    })}
+              {isTyping && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
                   </div>
-                )}
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                </div>
-                <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div ref={messagesEndRef} className="h-4" />
-          </div>
+              <div ref={messagesEndRef} className="h-4" />
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Search, Upload, FileText, Download, Loader2, CheckCircle2, ArrowLeft, Filter, ExternalLink } from 'lucide-react';
+import { Search, Upload, FileText, Download, Loader2, CheckCircle2, ArrowLeft, Filter, ExternalLink, X, Send } from 'lucide-react';
+import jubeeLogo from '@/assets/jubee-logo.png';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Badge } from '@/app/components/ui/badge';
@@ -30,6 +31,17 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedCourts, setSelectedCourts] = useState<string[]>(['all']);
+
+  // AI Chat states
+  const [showAIChat, setShowAIChat] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [isAITyping, setIsAITyping] = useState(false);
+  const [chatMessages, setChatMessages] = useState<Array<{
+    id: string;
+    text: string;
+    isAI: boolean;
+    timestamp: Date;
+  }>>([]);
 
   const courts = ['Supreme Court of India', 'Delhi High Court'];
 
@@ -86,6 +98,32 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
     }
   };
 
+  const handleSendMessage = () => {
+    if (!chatInput.trim()) return;
+
+    setChatMessages(prev => [...prev, {
+      id: Date.now().toString(),
+      text: chatInput,
+      isAI: false,
+      timestamp: new Date()
+    }]);
+
+    setChatInput('');
+    setIsAITyping(true);
+
+    setTimeout(() => {
+      setIsAITyping(false);
+      const aiResponse = "I can help you with legal research queries, explain case law, or assist with finding relevant precedents. What would you like to know?";
+
+      setChatMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        text: aiResponse,
+        isAI: true,
+        timestamp: new Date()
+      }]);
+    }, 1500);
+  };
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Tool Navigation Chips */}
@@ -107,7 +145,7 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
             </Button>
             <h3 className="text-xl font-bold text-foreground">Legal Research</h3>
           </div>
-          <Button variant="outline" size="sm">
+          <Button variant="ghost" size="sm">
             <Download className="w-4 h-4 mr-2" />
             Export Results
           </Button>
@@ -131,8 +169,8 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
                   researchType === 'issue'
                     ? 'e.g., Validity of retrospective tax amendments'
                     : researchType === 'fact'
-                    ? 'e.g., Cases involving tax evasion in real estate transactions'
-                    : 'e.g., (2012) 6 SCC 613'
+                      ? 'e.g., Cases involving tax evasion in real estate transactions'
+                      : 'e.g., (2012) 6 SCC 613'
                 }
                 className="flex-1 h-12 bg-input-background border-border focus:border-primary focus:ring-primary text-foreground"
               />
@@ -198,11 +236,10 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCourts(['all'])}
-                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  selectedCourts.includes('all')
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-accent'
-                }`}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${selectedCourts.includes('all')
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:bg-accent'
+                  }`}
               >
                 All Courts
               </button>
@@ -218,11 +255,10 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
                       setSelectedCourts([...selectedCourts, court]);
                     }
                   }}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                    selectedCourts.includes(court) && !selectedCourts.includes('all')
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground hover:bg-accent'
-                  }`}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${selectedCourts.includes(court) && !selectedCourts.includes('all')
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-accent'
+                    }`}
                 >
                   {court}
                 </button>
@@ -271,7 +307,7 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
                   <div className="flex gap-2">
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="ghost"
                       className="border-border hover:bg-accent font-semibold"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
@@ -279,7 +315,7 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
                     </Button>
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="ghost"
                       className="border-border hover:bg-accent font-semibold"
                     >
                       <Download className="w-4 h-4 mr-2" />
@@ -302,6 +338,149 @@ export function ResearchTool({ onBack, onToolChange, activeTool }: ResearchToolP
           )}
         </div>
       </div>
+
+      {/* AI Chat - Only show when results are available */}
+      {results.length > 0 && (
+        <>
+          {/* Jubee AI Chat - Floating Button */}
+          <button
+            onClick={() => setShowAIChat(!showAIChat)}
+            className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showAIChat ? 'scale-0' : 'scale-100'
+              }`}
+          >
+            <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
+          </button>
+
+          {/* Jubee AI Chat Panel */}
+          <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showAIChat ? 'translate-x-0' : 'translate-x-full'
+            }`}>
+            {/* Chat Header */}
+            <div className="px-6 py-4 border-b-[0.5px] border-border bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1E3A8A] flex items-center justify-center overflow-hidden">
+                    <img src={jubeeLogo} alt="Jubee" className="w-6 h-6 object-contain" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-foreground">Jubee</h3>
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                      <p className="text-xs text-muted-foreground">Active</p>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowAIChat(false)}
+                  className="w-8 h-8 rounded-lg hover:bg-muted flex items-center justify-center transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Your research assistant for legal queries and case analysis
+              </p>
+            </div>
+
+            {/* Chat Messages */}
+            <div className="flex-1 min-h-0 px-6 py-4 overflow-y-auto">
+              {chatMessages.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                  <div className="w-16 h-16 rounded-2xl bg-[#1E3A8A]/10 flex items-center justify-center mb-4 overflow-hidden">
+                    <img src={jubeeLogo} alt="Jubee" className="w-10 h-10 object-contain" />
+                  </div>
+                  <h4 className="text-sm font-semibold text-foreground mb-2">Start a conversation</h4>
+                  <p className="text-xs text-muted-foreground max-w-[280px]">
+                    Ask me about case law, legal precedents, or research queries
+                  </p>
+                  <div className="mt-6 space-y-2 w-full max-w-[280px]">
+                    <button
+                      onClick={() => setChatInput("Explain the key points of this judgment")}
+                      className="w-full text-left px-4 py-2.5 bg-muted hover:bg-[#1E3A8A]/10 rounded-lg text-xs text-foreground transition-colors border-[0.5px] border-border"
+                    >
+                      Explain the key points of this judgment
+                    </button>
+                    <button
+                      onClick={() => setChatInput("Find similar cases on this topic")}
+                      className="w-full text-left px-4 py-2.5 bg-muted hover:bg-[#1E3A8A]/10 rounded-lg text-xs text-foreground transition-colors border-[0.5px] border-border"
+                    >
+                      Find similar cases on this topic
+                    </button>
+                    <button
+                      onClick={() => setChatInput("Summarize the legal principles")}
+                      className="w-full text-left px-4 py-2.5 bg-muted hover:bg-[#1E3A8A]/10 rounded-lg text-xs text-foreground transition-colors border-[0.5px] border-border"
+                    >
+                      Summarize the legal principles
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {chatMessages.map((message) => (
+                    <div
+                      key={message.id}
+                      className={`flex gap-3 ${message.isAI ? 'items-start' : 'items-end flex-row-reverse'}`}
+                    >
+                      {message.isAI && (
+                        <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">
+                          <img src={jubeeLogo} alt="Jubee" className="w-5 h-5 object-contain" />
+                        </div>
+                      )}
+                      <div
+                        className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
+                          ? 'bg-muted border-[0.5px] border-border'
+                          : 'bg-[#1E3A8A] text-white'
+                          }`}
+                      >
+                        <p className="text-sm leading-relaxed">{message.text}</p>
+                        <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>
+                          {message.timestamp.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+
+                  {isAITyping && (
+                    <div className="flex gap-3 items-start">
+                      <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <img src={jubeeLogo} alt="Jubee" className="w-5 h-5 object-contain" />
+                      </div>
+                      <div className="bg-muted border-[0.5px] border-border rounded-2xl px-4 py-3">
+                        <div className="flex gap-1">
+                          <div className="w-2 h-2 bg-[#1E3A8A] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <div className="w-2 h-2 bg-[#1E3A8A] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <div className="w-2 h-2 bg-[#1E3A8A] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Chat Input */}
+            <div className="px-4 py-4 border-t-[0.5px] border-border bg-background flex-shrink-0">
+              <div className="relative">
+                <Input
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                  placeholder="Ask Jubee about research..."
+                  className="w-full h-11 pl-4 pr-12 text-sm bg-muted/50 border-[0.5px] border-border focus:border-primary rounded-xl text-foreground"
+                />
+                <Button
+                  onClick={handleSendMessage}
+                  disabled={!chatInput.trim()}
+                  size="icon"
+                  className="absolute right-1.5 top-1.5 h-8 w-8 rounded-lg bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-sm"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -56,7 +56,7 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Scrutiny Defect Report</h1>
           <p className="text-muted-foreground">Review and resolve defects found in your document submission</p>
-          
+
           {/* Back Button */}
           {onBack && (
             <Button
@@ -80,8 +80,8 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
                   key={defect.id}
                   className={cn(
                     "bg-card rounded-xl border-[0.5px] transition-all flex flex-col",
-                    highlightedDefect === defect.type 
-                      ? "border-[#1E3A8A] shadow-lg shadow-[#1E3A8A]/20" 
+                    highlightedDefect === defect.type
+                      ? "border-[#1E3A8A] shadow-lg shadow-[#1E3A8A]/20"
                       : "border-border hover:border-[#1E3A8A]/50"
                   )}
                 >
@@ -144,7 +144,7 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
                       <Edit className="w-4 h-4" />
                     </Button>
                     <Button
-                      variant="outline"
+                      variant="ghost"
                       size="sm"
                       onClick={() => onIgnoreDefect(defect.type)}
                       className="flex-1 border-[0.5px] border-border hover:bg-accent font-semibold h-9"
@@ -171,7 +171,7 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
                     </div>
                   </div>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     onClick={() => setShowAllDocuments(!showAllDocuments)}
                     className="border-[0.5px] border-[#1E3A8A]/30 text-[#1E3A8A] hover:bg-[#1E3A8A]/10 font-semibold"
@@ -224,7 +224,7 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
                     <div className="text-foreground space-y-4" style={{ fontFamily: '"Source Serif Pro", Georgia, serif', fontSize: '14px', lineHeight: '1.8' }}>
                       <h1 className="text-2xl font-bold text-center mb-6">IN THE SUPREME COURT OF INDIA</h1>
                       <p className="text-center font-semibold mb-8">CIVIL ORIGINAL JURISDICTION</p>
-                      
+
                       <div className="mb-8">
                         <p className="font-semibold">Petitioner: <span className="font-normal">ABC Corporation</span></p>
                         <p className="text-center my-2">Versus</p>
@@ -241,9 +241,9 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
 
                       <ol className="list-decimal list-inside space-y-4">
                         <li>That the Petitioner is a company incorporated under the Companies Act, 2013, having its registered office at New Delhi, and is engaged in the business of manufacturing and trading of industrial equipment.</li>
-                        
+
                         <li>That the Respondent No. 1 is the State of Delhi, represented through its Chief Secretary, having jurisdiction over the subject matter of the present petition.</li>
-                        
+
                         <li>That the Petitioner has been aggrieved by the arbitrary action of the Respondents in rejecting the tender application without providing adequate reasons, which is in violation of the principles of natural justice.</li>
 
                         <li>That the Petitioner has filed this petition seeking relief as detailed in the prayer clause, and submits that this Hon'ble Court has the jurisdiction to entertain the same.</li>
@@ -253,7 +253,7 @@ export function PreCheckDefectReport({ onFixDefect, onEditDefect, onIgnoreDefect
 
                       <p className="mt-8 font-semibold">PRAYER</p>
                       <p className="mb-4">In light of the facts and circumstances stated above, it is most respectfully prayed that this Hon'ble Court may be pleased to:</p>
-                      
+
                       <ol className="list-alpha list-inside space-y-2">
                         <li>Issue a writ of mandamus directing the Respondents to reconsider the tender application;</li>
                         <li>Pass such other and further orders as this Hon'ble Court may deem fit in the interest of justice;</li>

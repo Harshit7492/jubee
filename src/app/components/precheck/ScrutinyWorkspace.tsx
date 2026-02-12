@@ -206,7 +206,7 @@ function AnnexureUploadModal({
         <div className="bg-accent/30 border-t-[0.5px] border-[#1E3A8A]/20 px-6 py-4">
           <Button
             onClick={onClose}
-            variant="outline"
+            variant="ghost"
             className="w-full border-[0.5px] border-border"
           >
             Cancel
@@ -324,7 +324,7 @@ export function ScrutinyWorkspace({
 
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
+  const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; isAI: boolean; timestamp: Date }>>([]);
   const [chatInput, setChatInput] = useState('');
   const [isAITyping, setIsAITyping] = useState(false);
 
@@ -816,11 +816,10 @@ d) Pass any other order as deemed fit.
                     setHighlightMarginsText(true);
                   }
                 }}
-                className={`border-[1.5px] rounded-xl transition-all cursor-pointer overflow-hidden relative ${
-                  selectedDefect?.id === defect.id
+                className={`border-[1.5px] rounded-xl transition-all cursor-pointer overflow-hidden relative ${selectedDefect?.id === defect.id
                     ? 'border-[#3B82F6] bg-[#3B82F6]/10 dark:bg-[#3B82F6]/20 shadow-lg shadow-[#3B82F6]/20'
                     : 'border-border dark:border-white/20 bg-card dark:bg-white/5 hover:border-[#3B82F6]/50 dark:hover:border-[#3B82F6] hover:bg-[#3B82F6]/5 dark:hover:bg-[#3B82F6]/10'
-                } ${defect.status === 'resolved' ? 'opacity-60' : ''}`}
+                  } ${defect.status === 'resolved' ? 'opacity-60' : ''}`}
               >
                 {/* Loading Overlay */}
                 {resolvingDefectId === defect.id && (
@@ -857,11 +856,10 @@ d) Pass any other order as deemed fit.
                   {/* Header */}
                   <div className="flex items-start gap-5 mb-5">
                     {/* Number/Status */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold ${
-                      defect.status === 'resolved'
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold ${defect.status === 'resolved'
                         ? 'bg-[#3B82F6]/20 dark:bg-[#3B82F6]/30 text-[#3B82F6]'
                         : 'bg-[#3B82F6]/10 dark:bg-[#3B82F6]/20 text-[#3B82F6]'
-                    }`}>
+                      }`}>
                       {defect.status === 'resolved' ? '✓' : index + 1}
                     </div>
 
@@ -906,7 +904,7 @@ d) Pass any other order as deemed fit.
                           e.stopPropagation();
                           handleIgnore(defect.id);
                         }}
-                        variant="outline"
+                        variant="ghost"
                         className="flex-1 border-[1.5px] border-border dark:border-white/30 hover:border-[#3B82F6] hover:bg-[#3B82F6]/5 dark:hover:bg-[#3B82F6]/20 font-semibold"
                       >
                         Ignore
@@ -979,7 +977,7 @@ d) Pass any other order as deemed fit.
             </div>
             <Button
               onClick={() => setShowDocumentInventory(!showDocumentInventory)}
-              variant="outline"
+              variant="ghost"
               size="sm"
               className="border-[0.5px] border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A]/10 h-8 px-3"
             >
@@ -1090,11 +1088,10 @@ d) Pass any other order as deemed fit.
                             THIS DEED OF SALE is executed on this 15th day of March, 2024, at New Delhi between:
                           </p>
 
-                          <div className={`p-4 rounded-lg border-l-4 shadow-sm transition-all mb-4 ${
-                            highlightMarginsText
+                          <div className={`p-4 rounded-lg border-l-4 shadow-sm transition-all mb-4 ${highlightMarginsText
                               ? 'text-[#1E3A8A] dark:text-[#3B82F6] bg-[#1E3A8A]/10 dark:bg-[#3B82F6]/20 border-[#1E3A8A] dark:border-[#3B82F6] animate-pulse relative'
                               : 'text-foreground dark:text-white bg-background dark:bg-slate-700 border-border'
-                          }`}>
+                            }`}>
                             {highlightMarginsText && !marginsCorrected && (
                               <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-[#1E3A8A] dark:bg-[#3B82F6] rounded-full animate-pulse" />
                             )}
@@ -1159,18 +1156,16 @@ d) Pass any other order as deemed fit.
       {/* Floating Chat Toggle Button */}
       <button
         onClick={() => setShowChat(!showChat)}
-        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-          showChat ? 'scale-0' : 'scale-100'
-        }`}
+        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showChat ? 'scale-0' : 'scale-100'
+          }`}
       >
         <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
       </button>
 
       {/* AI Chat Panel */}
-      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-        showChat ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showChat ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Chat Header */}
         <div className="px-6 py-4 border-b-[0.5px] border-border bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
@@ -1243,11 +1238,10 @@ d) Pass any other order as deemed fit.
                     </div>
                   )}
                   <div
-                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                      message.isAI
+                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                         ? 'bg-muted border-[0.5px] border-border'
                         : 'bg-[#1E3A8A] text-white'
-                    }`}
+                      }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>

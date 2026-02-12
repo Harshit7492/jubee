@@ -207,24 +207,22 @@ export function RemindersView() {
             return (
               <div
                 key={reminder.id}
-                className={`bg-card rounded-xl border shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                  reminder.status === 'completed' 
-                    ? 'border-border opacity-60' 
-                    : reminder.daysRemaining <= 3 
-                      ? 'border-red-500/30 ring-2 ring-red-500/10' 
+                className={`bg-card rounded-xl border shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl ${reminder.status === 'completed'
+                    ? 'border-border opacity-60'
+                    : reminder.daysRemaining <= 3
+                      ? 'border-red-500/30 ring-2 ring-red-500/10'
                       : 'border-border'
-                }`}
+                  }`}
               >
                 <div className="p-6">
                   <div className="flex items-start gap-4">
                     {/* Icon */}
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ring-2 ${
-                      reminder.status === 'completed' 
-                        ? 'bg-muted ring-border' 
-                        : reminder.priority === 'high' 
-                          ? 'bg-red-50 dark:bg-red-500/10 ring-red-200 dark:ring-red-500/20' 
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ring-2 ${reminder.status === 'completed'
+                        ? 'bg-muted ring-border'
+                        : reminder.priority === 'high'
+                          ? 'bg-red-50 dark:bg-red-500/10 ring-red-200 dark:ring-red-500/20'
                           : 'bg-primary/10 ring-primary/20'
-                    }`}>
+                      }`}>
                       {reminder.status === 'completed' ? (
                         <CheckCircle2 className="w-6 h-6 text-muted-foreground" />
                       ) : reminder.daysRemaining <= 3 ? (
@@ -239,11 +237,10 @@ export function RemindersView() {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className={`font-semibold ${
-                              reminder.status === 'completed' 
-                                ? 'text-muted-foreground line-through' 
+                            <h3 className={`font-semibold ${reminder.status === 'completed'
+                                ? 'text-muted-foreground line-through'
                                 : 'text-foreground'
-                            }`}>
+                              }`}>
                               {reminder.title}
                             </h3>
                             <Badge className={getPriorityColor(reminder.priority) + ' font-semibold'}>
@@ -267,24 +264,23 @@ export function RemindersView() {
                               <span className="text-foreground font-semibold">Due: {reminder.dueDate}</span>
                             </div>
                             <span className={`font-bold ${urgency.color}`}>
-                              {reminder.daysRemaining < 0 
-                                ? `${Math.abs(reminder.daysRemaining)} days overdue` 
+                              {reminder.daysRemaining < 0
+                                ? `${Math.abs(reminder.daysRemaining)} days overdue`
                                 : `${reminder.daysRemaining} days remaining`}
                             </span>
                           </div>
                           <div className="flex items-center gap-3">
-                            <Progress 
-                              value={urgency.progress} 
-                              className={`h-2 flex-1 ${
-                                reminder.daysRemaining < 0 || reminder.daysRemaining <= 3 
-                                  ? 'bg-red-100 dark:bg-red-500/10' 
+                            <Progress
+                              value={urgency.progress}
+                              className={`h-2 flex-1 ${reminder.daysRemaining < 0 || reminder.daysRemaining <= 3
+                                  ? 'bg-red-100 dark:bg-red-500/10'
                                   : 'bg-primary/10'
-                              }`}
+                                }`}
                               indicatorClassName={
-                                reminder.daysRemaining < 0 || reminder.daysRemaining <= 3 
-                                  ? 'bg-gradient-to-r from-red-500 to-red-600' 
-                                  : reminder.daysRemaining <= 7 
-                                    ? 'bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80' 
+                                reminder.daysRemaining < 0 || reminder.daysRemaining <= 3
+                                  ? 'bg-gradient-to-r from-red-500 to-red-600'
+                                  : reminder.daysRemaining <= 7
+                                    ? 'bg-gradient-to-r from-[#F59E0B] to-[#F59E0B]/80'
                                     : 'bg-gradient-to-r from-primary to-primary/80'
                               }
                             />
@@ -317,7 +313,7 @@ export function RemindersView() {
                       ) : (
                         <Button
                           size="sm"
-                          variant="outline"
+                          variant="ghost"
                           className="border-border hover:bg-accent font-semibold"
                         >
                           View Details
@@ -337,11 +333,11 @@ export function RemindersView() {
             Showing <span className="font-bold text-foreground">1-6</span> of{' '}
             <span className="font-bold text-foreground">24</span> reminders
           </div>
-          
+
           {/* Pagination Controls */}
           <div className="flex items-center gap-2">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
@@ -349,7 +345,7 @@ export function RemindersView() {
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            
+
             <div className="flex items-center gap-1">
               {[...Array(totalPages)].map((_, index) => {
                 const pageNumber = index + 1;
@@ -359,8 +355,8 @@ export function RemindersView() {
                     variant={currentPage === pageNumber ? "default" : "ghost"}
                     size="sm"
                     onClick={() => setCurrentPage(pageNumber)}
-                    className={currentPage === pageNumber 
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold min-w-[2.5rem]" 
+                    className={currentPage === pageNumber
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold min-w-[2.5rem]"
                       : "hover:bg-accent text-foreground font-semibold min-w-[2.5rem]"
                     }
                   >
@@ -369,9 +365,9 @@ export function RemindersView() {
                 );
               })}
             </div>
-            
+
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}

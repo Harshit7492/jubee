@@ -99,7 +99,7 @@ export function RecentCourtOrdersView({ caseNumber, clientName, onBack }: Recent
           <Button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            variant="outline"
+            variant="ghost"
             className="border-border hover:bg-accent font-semibold"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />

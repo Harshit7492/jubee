@@ -76,13 +76,12 @@ export function ToolOnboardingDialog({ isOpen, onClose, toolId, steps }: ToolOnb
             {steps.map((_, index) => (
               <div
                 key={index}
-                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                  index === currentStep
+                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${index === currentStep
                     ? 'bg-primary'
                     : index < currentStep
-                    ? 'bg-primary/50'
-                    : 'bg-border'
-                }`}
+                      ? 'bg-primary/50'
+                      : 'bg-border'
+                  }`}
               />
             ))}
           </div>
@@ -109,7 +108,7 @@ export function ToolOnboardingDialog({ isOpen, onClose, toolId, steps }: ToolOnb
           {/* Navigation Buttons */}
           <div className="flex items-center justify-between gap-4">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={handleClose}
               className="px-6 py-2.5 rounded-xl border-2 border-border hover:bg-muted"
             >
@@ -119,7 +118,7 @@ export function ToolOnboardingDialog({ isOpen, onClose, toolId, steps }: ToolOnb
             <div className="flex items-center gap-3">
               {currentStep > 0 && (
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={handlePrevious}
                   className="px-6 py-2.5 rounded-xl border-2 border-border hover:bg-muted flex items-center gap-2"
                 >

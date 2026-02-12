@@ -122,7 +122,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
     const file = e.target.files?.[0];
     if (file) {
       setCurrentFileName(file.name);
-      
+
       // Add user message
       const userMessage: Message = {
         id: Date.now().toString(),
@@ -136,7 +136,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
         }
       };
       setMessages(prev => [...prev, userMessage]);
-      
+
       // Add AI response asking for language with language selector
       setIsTyping(true);
       setTimeout(() => {
@@ -161,7 +161,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
       timestamp: new Date()
     };
     setMessages(prev => [...prev, userMessage]);
-    
+
     setIsTyping(true);
     setTimeout(() => {
       const aiMessage: Message = {
@@ -183,7 +183,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
       timestamp: new Date()
     };
     setMessages(prev => [...prev, userMessage]);
-    
+
     // Show processing message
     setIsTyping(true);
     setTimeout(() => {
@@ -194,7 +194,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
         timestamp: new Date()
       };
       setMessages(prev => [...prev, processingMessage]);
-      
+
       // After 2.5 seconds, show the translation result
       setTimeout(() => {
         const resultMessage: Message = {
@@ -281,7 +281,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
               <p className="text-muted-foreground mb-8 max-w-md">
                 Upload legal documents for AI-powered translation with context-aware accuracy
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl w-full">
                 <div className="p-5 bg-card border border-border rounded-xl text-left hover:border-primary transition-all">
                   <FileText className="w-8 h-8 text-primary mb-3" />
@@ -308,13 +308,12 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
                   key={message.id}
                   className={`flex gap-4 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    message.type === 'user'
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${message.type === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : message.type === 'system'
-                      ? 'bg-yellow-500/20'
-                      : 'bg-gradient-to-br from-primary to-primary/80'
-                  }`}>
+                        ? 'bg-yellow-500/20'
+                        : 'bg-gradient-to-br from-primary to-primary/80'
+                    }`}>
                     {message.type === 'user' ? (
                       <User className="w-5 h-5" />
                     ) : message.type === 'system' ? (
@@ -324,15 +323,14 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
                     )}
                   </div>
                   <div className={`flex-1 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
-                    <div className={`inline-block p-4 rounded-2xl max-w-full ${
-                      message.type === 'user'
+                    <div className={`inline-block p-4 rounded-2xl max-w-full ${message.type === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : message.type === 'system'
-                        ? 'bg-yellow-500/10 text-foreground border border-yellow-500/30'
-                        : 'bg-muted text-foreground'
-                    }`}>
+                          ? 'bg-yellow-500/10 text-foreground border border-yellow-500/30'
+                          : 'bg-muted text-foreground'
+                      }`}>
                       <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-                      
+
                       {/* File Attachment */}
                       {message.attachment && (
                         <div className="mt-3 p-3 bg-background/50 rounded-xl flex items-center gap-3">
@@ -429,7 +427,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
                               Save to My Space
                             </Button>
                             <div className="relative group">
-                              <Button variant="outline" size="sm" className="gap-2">
+                              <Button variant="ghost" size="sm" className="gap-2">
                                 <Download className="w-4 h-4" />
                                 Export
                                 <ChevronRight className="w-3 h-3" />
@@ -464,7 +462,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
               {messages.length === 1 && messages[0].type === 'ai' && (
                 <div className="flex flex-col gap-4 items-center py-8">
                   {/* Upload New Document */}
-                  <div 
+                  <div
                     onClick={() => fileInputRef.current?.click()}
                     className="w-full max-w-2xl p-8 border-2 border-dashed border-border hover:border-primary rounded-2xl cursor-pointer transition-all duration-200 bg-card/50 backdrop-blur-sm hover:bg-primary/5 group"
                   >
@@ -482,7 +480,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
                   </div>
 
                   {/* Add from My Space */}
-                  <div 
+                  <div
                     onClick={handleSelectFromMySpace}
                     className="w-full max-w-2xl p-8 border-2 border-border hover:border-primary rounded-2xl cursor-pointer transition-all duration-200 bg-card/50 backdrop-blur-sm hover:bg-primary/5 group"
                   >
@@ -545,7 +543,7 @@ export function TranslationToolChat({ onBack, sessionId, initialMessages = [], s
               </button>
             </div>
           )}
-          
+
           <div className="relative">
             <Input
               value={inputValue}

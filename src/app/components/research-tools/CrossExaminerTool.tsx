@@ -63,7 +63,7 @@ export function CrossExaminerTool({ onBack, onToolChange, activeTool }: CrossExa
 
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
+  const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; isAI: boolean; timestamp: Date }>>([]);
   const [chatInput, setChatInput] = useState('');
   const [isAITyping, setIsAITyping] = useState(false);
 
@@ -439,7 +439,7 @@ DEPONENT`;
 
               {/* Add from My Space */}
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={() => setShowMySpaceBrowser(true)}
                 className="group relative border-2 !border-border rounded-xl p-3 transition-all duration-300 cursor-pointer hover:!border-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/5 h-auto bg-transparent justify-start"
               >
@@ -752,11 +752,10 @@ DEPONENT`;
                 {questions.map((question, index) => (
                   <div
                     key={question.id}
-                    className={`bg-card border-[0.5px] rounded-xl p-5 transition-all cursor-pointer ${
-                      selectedQuestion?.id === question.id
+                    className={`bg-card border-[0.5px] rounded-xl p-5 transition-all cursor-pointer ${selectedQuestion?.id === question.id
                         ? 'border-primary shadow-lg shadow-primary/10'
                         : 'border-border/50 hover:border-primary/50 hover:shadow-md'
-                    }`}
+                      }`}
                     onClick={() => handleQuestionClick(question)}
                   >
                     <div className="flex items-start gap-4">
@@ -801,11 +800,10 @@ DEPONENT`;
                                 e.stopPropagation();
                                 handleFeedback(question.id, 'positive');
                               }}
-                              className={`p-1.5 rounded-lg transition-colors ${
-                                question.feedback === 'positive'
+                              className={`p-1.5 rounded-lg transition-colors ${question.feedback === 'positive'
                                   ? 'bg-green-500/10 text-green-500'
                                   : 'hover:bg-accent text-muted-foreground'
-                              }`}
+                                }`}
                             >
                               <ThumbsUp className="w-4 h-4" />
                             </button>
@@ -814,11 +812,10 @@ DEPONENT`;
                                 e.stopPropagation();
                                 handleFeedback(question.id, 'negative');
                               }}
-                              className={`p-1.5 rounded-lg transition-colors ${
-                                question.feedback === 'negative'
+                              className={`p-1.5 rounded-lg transition-colors ${question.feedback === 'negative'
                                   ? 'bg-red-500/10 text-red-500'
                                   : 'hover:bg-accent text-muted-foreground'
-                              }`}
+                                }`}
                             >
                               <ThumbsDown className="w-4 h-4" />
                             </button>
@@ -881,11 +878,10 @@ DEPONENT`;
                             }, 100);
                           }
                         }}
-                        className={`mb-4 transition-all duration-300 ${
-                          isHighlighted
+                        className={`mb-4 transition-all duration-300 ${isHighlighted
                             ? 'bg-yellow-100 dark:bg-yellow-500/20 border-l-4 border-yellow-500 pl-4 py-2 rounded-r-lg shadow-sm'
                             : ''
-                        }`}
+                          }`}
                       >
                         {paragraph}
                       </p>
@@ -973,9 +969,8 @@ DEPONENT`;
       {currentStep === 'results' && (
         <button
           onClick={() => setShowChat(!showChat)}
-          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-            showChat ? 'scale-0' : 'scale-100'
-          }`}
+          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showChat ? 'scale-0' : 'scale-100'
+            }`}
         >
           <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
@@ -983,9 +978,8 @@ DEPONENT`;
       )}
 
       {/* AI Chat Panel */}
-      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-        showChat ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showChat ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Chat Header */}
         <div className="px-6 py-4 border-b-[0.5px] border-border bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
@@ -1058,11 +1052,10 @@ DEPONENT`;
                     </div>
                   )}
                   <div
-                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                      message.isAI
+                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                         ? 'bg-muted border-[0.5px] border-border'
                         : 'bg-[#1E3A8A] text-white'
-                    }`}
+                      }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>

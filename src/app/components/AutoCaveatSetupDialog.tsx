@@ -34,8 +34,8 @@ export function AutoCaveatSetupDialog({ isOpen, onClose, onSubmit }: AutoCaveatS
 
   return (
     <>
-      <div 
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" 
+      <div
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
@@ -71,18 +71,16 @@ export function AutoCaveatSetupDialog({ isOpen, onClose, onSubmit }: AutoCaveatS
                   <button
                     key={court}
                     onClick={() => setSelectedCourt(court)}
-                    className={`w-full p-3 rounded-xl border-2 transition-all text-left ${
-                      selectedCourt === court
+                    className={`w-full p-3 rounded-xl border-2 transition-all text-left ${selectedCourt === court
                         ? 'border-primary bg-primary/10'
                         : 'border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                        selectedCourt === court
+                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${selectedCourt === court
                           ? 'border-primary bg-primary'
                           : 'border-border'
-                      }`}>
+                        }`}>
                         {selectedCourt === court && (
                           <div className="w-2 h-2 rounded-full bg-white" />
                         )}
@@ -146,7 +144,7 @@ export function AutoCaveatSetupDialog({ isOpen, onClose, onSubmit }: AutoCaveatS
           <div className="flex gap-3 mt-5">
             <Button
               onClick={onClose}
-              variant="outline"
+              variant="ghost"
               className="flex-1 border-border hover:bg-accent font-semibold h-11"
             >
               Cancel

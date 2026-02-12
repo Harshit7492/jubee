@@ -65,7 +65,7 @@ export function NarrationResolutionDialog({ defect, onClose, onResolve }: Narrat
           {/* Resolution Options */}
           <div className="space-y-3">
             <h3 className="font-semibold text-foreground text-sm">Choose resolution method:</h3>
-            
+
             {/* Option 1: Update Petition */}
             <button
               onClick={() => onResolve('update-petition')}
@@ -78,7 +78,7 @@ export function NarrationResolutionDialog({ defect, onClose, onResolve }: Narrat
                 <div className="flex-1">
                   <h4 className="font-semibold text-foreground mb-1">Option 1: Update Petition Text</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Modify the petition narration to match the annexure date (21st March 2024). 
+                    Modify the petition narration to match the annexure date (21st March 2024).
                     Jubee will automatically update all references in the petition.
                   </p>
                   <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-primary">
@@ -101,7 +101,7 @@ export function NarrationResolutionDialog({ defect, onClose, onResolve }: Narrat
                 <div className="flex-1">
                   <h4 className="font-semibold text-foreground mb-1">Option 2: Replace Annexure Document</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Upload the correct annexure document that matches the petition date (1st October 2024). 
+                    Upload the correct annexure document that matches the petition date (1st October 2024).
                     The existing Annexure P-4 will be replaced.
                   </p>
                   <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-primary">
@@ -116,7 +116,7 @@ export function NarrationResolutionDialog({ defect, onClose, onResolve }: Narrat
           {/* Warning Note */}
           <div className="p-3 rounded-lg bg-accent border border-border">
             <p className="text-xs text-muted-foreground leading-relaxed">
-              <span className="font-semibold text-foreground">Note:</span> Narration inconsistencies may cause 
+              <span className="font-semibold text-foreground">Note:</span> Narration inconsistencies may cause
               Registry objections. Ensure the corrected version accurately reflects the actual facts of the case.
             </p>
           </div>
@@ -125,7 +125,7 @@ export function NarrationResolutionDialog({ defect, onClose, onResolve }: Narrat
         {/* Footer */}
         <div className="px-6 py-4 border-t border-border bg-accent/20">
           <Button
-            variant="outline"
+            variant="ghost"
             onClick={onClose}
             className="w-full font-semibold"
           >

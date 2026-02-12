@@ -127,7 +127,7 @@ export function PageReplacementModal({
         <div className="bg-accent/30 dark:bg-slate-800/50 border-t-[0.5px] border-border dark:border-white/10 px-6 py-4">
           <Button
             onClick={onClose}
-            variant="outline"
+            variant="ghost"
             className="w-full border-[0.5px] border-border dark:border-white/30"
           >
             Cancel

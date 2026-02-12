@@ -29,10 +29,10 @@ const folders: Folder[] = [
   { id: 'drafts', name: 'My Drafts', icon: FolderOpen, color: 'text-pink-500' },
 ];
 
-export function MySpaceSaveDialog({ 
-  isOpen, 
-  onClose, 
-  onSave, 
+export function MySpaceSaveDialog({
+  isOpen,
+  onClose,
+  onSave,
   defaultFileName = 'Untitled Document.txt',
   format = 'pdf'
 }: MySpaceSaveDialogProps) {
@@ -107,11 +107,10 @@ export function MySpaceSaveDialog({
                   <button
                     key={folder.id}
                     onClick={() => setSelectedFolder(folder.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all border-2 ${ 
-                      selectedFolder === folder.id
+                    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all border-2 ${selectedFolder === folder.id
                         ? 'bg-primary/10 border-primary text-primary'
                         : 'bg-card border-border hover:border-primary/50 text-foreground hover:bg-muted'
-                    }`}
+                      }`}
                   >
                     <Icon className={`w-5 h-5 ${selectedFolder === folder.id ? 'text-primary' : folder.color}`} />
                     <span className="text-sm font-semibold flex-1 text-left">{folder.name}</span>
@@ -150,7 +149,7 @@ export function MySpaceSaveDialog({
           <div className="flex gap-3">
             <Button
               onClick={onClose}
-              variant="outline"
+              variant="ghost"
               className="border-border hover:bg-muted font-semibold"
             >
               Cancel

@@ -112,7 +112,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
     targetLang: string;
     fileName: string;
   } | null>(null);
-  
+
   // Approval and editing states
   const [isApproved, setIsApproved] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
@@ -212,9 +212,9 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
     const file = e.target.files?.[0];
     if (file) {
       setCurrentFileName(file.name);
-      
+
       addUserMessage(`Uploaded document`, [{ id: Date.now().toString(), name: file.name }]);
-      
+
       setIsTyping(true);
       setTimeout(() => {
         setIsTyping(false);
@@ -231,15 +231,15 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
     if (!language) return;
 
     addUserMessage(`Translate to ${language.label} (${language.native})`);
-    
+
     setIsTyping(true);
     setTimeout(() => {
       setIsTyping(false);
       addAIMessage('⚡ Processing Translation\n\nJubee is generating a legal-grade draft translation...\n\n✓ Document analyzed\n⟳ Translating with legal context\n○ Formatting for court standards');
-      
+
       setTimeout(() => {
         addAIMessage('✅ Translation Complete\n\nYour document has been translated while preserving legal terminology and formatting. Opening translation view...');
-        
+
         // Set translation data and switch to viewing stage
         setTimeout(() => {
           setTranslationData({
@@ -250,7 +250,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
             fileName: currentFileName || 'Legal_Notice.pdf'
           });
           setCurrentStage('viewing');
-          
+
           // Add contextual message for the viewing stage
           setTimeout(() => {
             addAIMessage(
@@ -317,7 +317,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                 <h3 className="text-lg font-bold text-foreground">Translation Workspace</h3>
                 <p className="text-sm text-muted-foreground">{translationData.sourceLang} → {translationData.targetLang} • {translationData.fileName}</p>
               </div>
-              
+
               {/* Pane Toggle Controls */}
               <div className="flex items-center gap-1 ml-4 pl-4 border-l border-border">
                 <Button
@@ -351,83 +351,83 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
             </div>
 
             <div className="flex items-center gap-2">{!isApproved ? (
-                // Before Approval: Show Approve and Start Again buttons
-                <>
-                  <Button
-                    onClick={() => setIsApproved(true)}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
-                    size="sm"
-                  >
-                    <CheckCircle className="w-4 h-4" />
-                    Approve
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      setCurrentStage('chat');
-                      setIsApproved(false);
-                      setIsEdited(false);
-                      toast.info('Starting new translation...');
-                    }}
-                    variant="outline"
-                    size="sm"
-                    className="font-semibold border-border hover:bg-accent gap-2"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    Start Again
-                  </Button>
-                </>
-              ) : (
-                // After Approval: Show Format & Edit, Save, and Export buttons
-                <>
-                  <Button
-                    onClick={() => setIsFormatDialogOpen(true)}
-                    variant="outline"
-                    size="sm"
-                    className="font-semibold border-border hover:bg-accent gap-2"
-                  >
-                    <Edit3 className="w-4 h-4" />
-                    Format & Edit
-                  </Button>
-                  <Button
-                    onClick={handleSaveToMySpace}
-                    variant="outline"
-                    size="sm"
-                    className="font-semibold border-border hover:bg-accent gap-2"
-                  >
-                    <Save className="w-4 h-4" />
-                    Save to My Space
-                  </Button>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="font-semibold border-border hover:bg-accent gap-2"
-                      >
-                        <Download className="w-4 h-4" />
-                        Export
-                        <ChevronDown className="w-4 h-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuItem
-                        onClick={() => handleExport('pdf')}
-                        className="cursor-pointer font-semibold"
-                      >
-                        <FileText className="w-4 h-4 mr-2" />
-                        Save as PDF
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => handleExport('docx')}
-                        className="cursor-pointer font-semibold"
-                      >
-                        <FileText className="w-4 h-4 mr-2" />
-                        Save as DOC
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </>
-              )}
+              // Before Approval: Show Approve and Start Again buttons
+              <>
+                <Button
+                  onClick={() => setIsApproved(true)}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+                  size="sm"
+                >
+                  <CheckCircle className="w-4 h-4" />
+                  Approve
+                </Button>
+                <Button
+                  onClick={() => {
+                    setCurrentStage('chat');
+                    setIsApproved(false);
+                    setIsEdited(false);
+                    toast.info('Starting new translation...');
+                  }}
+                  variant="ghost"
+                  size="sm"
+                  className="font-semibold border-border hover:bg-accent gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Start Again
+                </Button>
+              </>
+            ) : (
+              // After Approval: Show Format & Edit, Save, and Export buttons
+              <>
+                <Button
+                  onClick={() => setIsFormatDialogOpen(true)}
+                  variant="ghost"
+                  size="sm"
+                  className="font-semibold border-border hover:bg-accent gap-2"
+                >
+                  <Edit3 className="w-4 h-4" />
+                  Format & Edit
+                </Button>
+                <Button
+                  onClick={handleSaveToMySpace}
+                  variant="ghost"
+                  size="sm"
+                  className="font-semibold border-border hover:bg-accent gap-2"
+                >
+                  <Save className="w-4 h-4" />
+                  Save to My Space
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="font-semibold border-border hover:bg-accent gap-2"
+                    >
+                      <Download className="w-4 h-4" />
+                      Export
+                      <ChevronDown className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem
+                      onClick={() => handleExport('pdf')}
+                      className="cursor-pointer font-semibold"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Save as PDF
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => handleExport('docx')}
+                      className="cursor-pointer font-semibold"
+                    >
+                      <FileText className="w-4 h-4 mr-2" />
+                      Save as DOC
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            )}
             </div>
           </div>
         </div>
@@ -465,11 +465,10 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                       <button
                         key={format.id}
                         onClick={() => setCourtFormat(format.id)}
-                        className={`px-4 py-3 rounded-xl border-2 transition-all text-left ${ 
-                          courtFormat === format.id
+                        className={`px-4 py-3 rounded-xl border-2 transition-all text-left ${courtFormat === format.id
                             ? 'border-primary bg-primary/10 text-primary font-semibold'
                             : 'border-border bg-card text-foreground hover:border-primary/50'
-                        }`}
+                          }`}
                       >
                         {format.name}
                       </button>
@@ -485,7 +484,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                   </label>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="w-full justify-between">
+                      <Button variant="ghost" className="w-full justify-between">
                         <span>{fontSize}pt</span>
                         <ChevronDown className="w-4 h-4" />
                       </Button>
@@ -508,7 +507,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                   </label>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="w-full justify-between">
+                      <Button variant="ghost" className="w-full justify-between">
                         <span>{lineHeight}</span>
                         <ChevronDown className="w-4 h-4" />
                       </Button>
@@ -528,7 +527,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
               <div className="px-6 py-4 border-t border-border flex gap-2">
                 <Button
                   onClick={() => setIsFormatDialogOpen(false)}
-                  variant="outline"
+                  variant="ghost"
                   className="flex-1"
                 >
                   Cancel
@@ -575,7 +574,7 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                         }}
                       />
                     ) : (
-                      <div 
+                      <div
                         className="text-black dark:text-foreground whitespace-pre-wrap font-serif leading-relaxed text-sm"
                         style={{
                           fontSize: `${fontSize}pt`,
@@ -614,9 +613,8 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
 
           {/* Floating AI Chat Panel - Slides from Right */}
           <div
-            className={`absolute top-0 right-0 h-full w-[400px] bg-background border-l border-border shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${
-              isChatPaneCollapsed ? 'translate-x-full' : 'translate-x-0'
-            }`}
+            className={`absolute top-0 right-0 h-full w-[400px] bg-background border-l border-border shadow-2xl transform transition-transform duration-300 ease-in-out z-50 ${isChatPaneCollapsed ? 'translate-x-full' : 'translate-x-0'
+              }`}
           >
             {/* Chat Header */}
             <div className="border-b border-border/50 p-4 bg-primary/5 backdrop-blur-sm flex items-center justify-between">
@@ -650,11 +648,10 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                       </div>
                     )}
                     <div
-                      className={`max-w-[75%] rounded-xl px-3 py-2 ${ 
-                        message.type === 'user'
+                      className={`max-w-[75%] rounded-xl px-3 py-2 ${message.type === 'user'
                           ? 'bg-primary text-primary-foreground shadow-sm'
                           : 'bg-card/50 border border-border/50 text-foreground backdrop-blur-sm'
-                      }`}
+                        }`}
                     >
                       <p className="text-xs leading-relaxed whitespace-pre-wrap">
                         {message.type === 'ai'
@@ -794,18 +791,17 @@ export function TranslationTool({ onBack, activeTool, onToolChange }: Translatio
                     </div>
                   )}
                   <div
-                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                      message.type === 'user'
+                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${message.type === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-card border border-border text-foreground shadow-sm'
-                    }`}
+                      }`}
                   >
                     <p className="text-base leading-relaxed whitespace-pre-wrap">
                       {message.type === 'ai'
                         ? message.content.slice(
-                            0,
-                            visibleChars[message.id] || message.content.length
-                          )
+                          0,
+                          visibleChars[message.id] || message.content.length
+                        )
                         : message.content}
                     </p>
 

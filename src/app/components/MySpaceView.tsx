@@ -1,17 +1,17 @@
 import { useState, useRef } from 'react';
-import { 
-  FolderPlus, 
-  Upload, 
-  File, 
-  Folder, 
-  MoreVertical, 
-  Trash2, 
-  Download, 
-  Edit2, 
-  Share2, 
-  Clock, 
-  Grid3x3, 
-  List, 
+import {
+  FolderPlus,
+  Upload,
+  File,
+  Folder,
+  MoreVertical,
+  Trash2,
+  Download,
+  Edit2,
+  Share2,
+  Clock,
+  Grid3x3,
+  List,
   Search,
   ArrowLeft,
   FileText,
@@ -167,7 +167,7 @@ export function MySpaceView() {
 
   // Filter items based on current folder
   const currentItems = items.filter(item => item.parentId === currentFolderId);
-  
+
   // Apply search and client filter
   let filteredAndSortedItems = currentItems.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -272,7 +272,7 @@ export function MySpaceView() {
   };
 
   const handleStarItem = (itemId: string) => {
-    setItems(prev => prev.map(item => 
+    setItems(prev => prev.map(item =>
       item.id === itemId ? { ...item, starred: !item.starred } : item
     ));
     setContextMenu(null);
@@ -280,7 +280,7 @@ export function MySpaceView() {
 
   const handleRenameItem = (itemId: string | null, newName: string) => {
     if (itemId && newName.trim()) {
-      setItems(prev => prev.map(item => 
+      setItems(prev => prev.map(item =>
         item.id === itemId ? { ...item, name: newName.trim() } : item
       ));
       toast.success('Renamed successfully!');
@@ -361,7 +361,7 @@ export function MySpaceView() {
           <div className="flex gap-2">
             <Button
               onClick={() => setNewFolderDialog(true)}
-              variant="outline"
+              variant="ghost"
               className="border-border hover:bg-accent font-semibold"
             >
               <FolderPlus className="w-4 h-4 mr-1" />
@@ -369,7 +369,7 @@ export function MySpaceView() {
             </Button>
             <Button
               onClick={() => fileInputRef.current?.click()}
-              variant="outline"
+              variant="ghost"
               className="border-border hover:bg-accent font-semibold"
             >
               <Upload className="w-4 h-4 mr-1" />
@@ -429,21 +429,19 @@ export function MySpaceView() {
           <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-xl transition-colors ${
-                viewMode === 'grid'
+              className={`p-2 rounded-xl transition-colors ${viewMode === 'grid'
                   ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               <Grid3x3 className="w-4 h-4" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-xl transition-colors ${
-                viewMode === 'list'
+              className={`p-2 rounded-xl transition-colors ${viewMode === 'list'
                   ? 'bg-primary text-primary-foreground'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               <List className="w-4 h-4" />
             </button>
@@ -467,20 +465,19 @@ export function MySpaceView() {
               <span>Sort By</span>
               <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
-            
+
             {showSortMenu && (
               <>
-                <div 
-                  className="fixed inset-0 z-[60]" 
+                <div
+                  className="fixed inset-0 z-[60]"
                   onClick={() => setShowSortMenu(false)}
                 />
                 <div className="absolute top-full left-0 mt-2 w-48 bg-background dark:bg-slate-900 border-[0.5px] border-border rounded-xl shadow-2xl overflow-hidden z-[70] backdrop-blur-[16px]">
                   <div className="py-1">
                     <button
                       onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                        sortBy === 'name-asc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
-                      }`}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${sortBy === 'name-asc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
+                        }`}
                     >
                       {sortBy === 'name-asc' && <Check className="w-4 h-4" />}
                       {sortBy !== 'name-asc' && <div className="w-4" />}
@@ -488,9 +485,8 @@ export function MySpaceView() {
                     </button>
                     <button
                       onClick={() => { setSortBy('date-desc'); setShowSortMenu(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                        sortBy === 'date-desc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
-                      }`}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${sortBy === 'date-desc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
+                        }`}
                     >
                       {sortBy === 'date-desc' && <Check className="w-4 h-4" />}
                       {sortBy !== 'date-desc' && <div className="w-4" />}
@@ -498,9 +494,8 @@ export function MySpaceView() {
                     </button>
                     <button
                       onClick={() => { setSortBy('size-desc'); setShowSortMenu(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
-                        sortBy === 'size-desc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
-                      }`}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${sortBy === 'size-desc' ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
+                        }`}
                     >
                       {sortBy === 'size-desc' && <Check className="w-4 h-4" />}
                       {sortBy !== 'size-desc' && <div className="w-4" />}
@@ -530,11 +525,11 @@ export function MySpaceView() {
               )}
               <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
-            
+
             {showFilterMenu && (
               <>
-                <div 
-                  className="fixed inset-0 z-[60]" 
+                <div
+                  className="fixed inset-0 z-[60]"
                   onClick={() => setShowFilterMenu(false)}
                 />
                 <div className="absolute top-full left-0 mt-2 w-64 bg-background dark:bg-slate-900 border-[0.5px] border-border rounded-xl shadow-2xl overflow-hidden z-[70] backdrop-blur-[16px] max-h-[300px] overflow-y-auto">
@@ -545,7 +540,7 @@ export function MySpaceView() {
                         <User className="w-4 h-4 text-[#1E3A8A]" />
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Client Name</p>
                       </div>
-                      
+
                       {/* Client List */}
                       <div className="space-y-1">
                         {uniqueClients.map(client => (
@@ -555,9 +550,8 @@ export function MySpaceView() {
                               setFilterByClient(filterByClient === client ? null : client);
                               setShowFilterMenu(false);
                             }}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                              filterByClient === client ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
-                            }`}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${filterByClient === client ? 'bg-[#1E3A8A]/10 text-[#1E3A8A] font-semibold' : 'text-foreground hover:bg-accent'
+                              }`}
                           >
                             {filterByClient === client && <Check className="w-3.5 h-3.5 inline mr-2" />}
                             {client}
@@ -602,7 +596,6 @@ export function MySpaceView() {
               className="hover:bg-accent h-10 px-4 rounded-xl"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
-              Back
             </Button>
             <div className="h-6 w-px bg-border" />
             <h2 className="text-lg font-semibold text-foreground">
@@ -724,11 +717,10 @@ export function MySpaceView() {
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          item.type === 'folder'
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${item.type === 'folder'
                             ? 'bg-primary/10 text-primary'
                             : `bg-muted ${getFileColor(item.fileType)}`
-                        }`}>
+                          }`}>
                           {item.type === 'folder' ? (
                             <Folder className="w-5 h-5" />
                           ) : (
@@ -824,14 +816,14 @@ export function MySpaceView() {
       {/* Share Dialog */}
       {shareDialog.isOpen && shareDialog.itemId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setShareDialog({ isOpen: false, itemId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 {/* Top Content */}
                 <div className="relative shrink-0 w-full">
@@ -849,7 +841,7 @@ export function MySpaceView() {
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     {/* Close Button */}
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
@@ -928,22 +920,20 @@ export function MySpaceView() {
                         <div className="grid grid-cols-2 gap-2">
                           <button
                             onClick={() => setSharePermission('view')}
-                            className={`p-3 rounded-[12px] border-2 transition-all ${
-                              sharePermission === 'view'
+                            className={`p-3 rounded-[12px] border-2 transition-all ${sharePermission === 'view'
                                 ? 'border-primary bg-primary/10 text-foreground'
                                 : 'border-border hover:border-primary/50 text-muted-foreground'
-                            }`}
+                              }`}
                           >
                             <Eye className="w-4 h-4 mx-auto mb-1" />
                             <p className="text-xs font-semibold">Can View</p>
                           </button>
                           <button
                             onClick={() => setSharePermission('edit')}
-                            className={`p-3 rounded-[12px] border-2 transition-all ${
-                              sharePermission === 'edit'
+                            className={`p-3 rounded-[12px] border-2 transition-all ${sharePermission === 'edit'
                                 ? 'border-primary bg-primary/10 text-foreground'
                                 : 'border-border hover:border-primary/50 text-muted-foreground'
-                            }`}
+                              }`}
                           >
                             <Edit2 className="w-4 h-4 mx-auto mb-1" />
                             <p className="text-xs font-semibold">Can Edit</p>
@@ -993,8 +983,8 @@ export function MySpaceView() {
       {/* New Folder Dialog */}
       {newFolderDialog && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => {
               setNewFolderDialog(false);
               setNewFolderName('');
@@ -1003,7 +993,7 @@ export function MySpaceView() {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 {/* Top Content */}
                 <div className="relative shrink-0 w-full">
@@ -1021,7 +1011,7 @@ export function MySpaceView() {
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     {/* Close Button */}
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
@@ -1090,14 +1080,14 @@ export function MySpaceView() {
       {/* Delete Confirmation Dialog */}
       {deleteDialog.isOpen && deleteDialog.itemId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setDeleteDialog({ isOpen: false, itemId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(239,68,68,0.12),0px_3px_12px_-2px_rgba(239,68,68,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 {/* Top Content */}
                 <div className="relative shrink-0 w-full">
@@ -1115,7 +1105,7 @@ export function MySpaceView() {
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     {/* Close Button */}
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
@@ -1134,11 +1124,10 @@ export function MySpaceView() {
                     {/* Item Info */}
                     <div className="mb-4 p-4 bg-muted/50 border border-border rounded-xl w-full">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          items.find(i => i.id === deleteDialog.itemId)?.type === 'folder'
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${items.find(i => i.id === deleteDialog.itemId)?.type === 'folder'
                             ? 'bg-primary/10 text-primary'
                             : 'bg-muted'
-                        }`}>
+                          }`}>
                           {items.find(i => i.id === deleteDialog.itemId)?.type === 'folder' ? (
                             <Folder className="w-5 h-5" />
                           ) : (
@@ -1202,14 +1191,14 @@ export function MySpaceView() {
       {/* Rename Dialog */}
       {renameDialog.isOpen && renameDialog.itemId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setRenameDialog({ isOpen: false, itemId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 {/* Top Content */}
                 <div className="relative shrink-0 w-full">
@@ -1227,7 +1216,7 @@ export function MySpaceView() {
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     {/* Close Button */}
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button

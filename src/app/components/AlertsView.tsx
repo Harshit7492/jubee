@@ -186,7 +186,7 @@ export function AlertsView() {
                 <h1 className="text-foreground text-[22px] font-bold flex items-center gap-2">
                   Alerts
                   {unreadCount > 0 && (
-                    <Badge className="bg-red-500 text-white border-0 font-semibold">
+                    <Badge variant="outline" className="bg-red-500 text-white border-0 font-semibold">
                       {unreadCount} New
                     </Badge>
                   )}
@@ -196,7 +196,7 @@ export function AlertsView() {
             </div>
             {unreadCount > 0 && (
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={markAllAsRead}
                 className="border-primary/30 text-primary hover:bg-primary/10 font-semibold"
               >
@@ -248,9 +248,8 @@ export function AlertsView() {
               {filteredNotifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`px-6 py-4 transition-all hover:bg-accent/50 ${
-                    !notification.read ? 'bg-primary/5' : ''
-                  }`}
+                  className={`px-6 py-4 transition-all hover:bg-accent/50 ${!notification.read ? 'bg-primary/5' : ''
+                    }`}
                 >
                   <div className="flex items-start gap-4">
                     {/* Icon */}
@@ -270,7 +269,7 @@ export function AlertsView() {
                           )}
                         </div>
                         <Badge
-                          // variant="outline"
+                          variant="outline"
                           className="border-border text-muted-foreground text-xs font-medium flex items-center gap-1.5 flex-shrink-0"
                         >
                           {getCategoryIcon(notification.category)}

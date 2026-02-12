@@ -29,13 +29,13 @@ type FlowStage = 'form' | 'searching' | 'results' | 'success' | 'error';
 
 export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModalProps) {
   const [stage, setStage] = useState<FlowStage>('form');
-  
+
   // Form fields
   const [selectedCourt, setSelectedCourt] = useState('');
   const [caseType, setCaseType] = useState('');
   const [year, setYear] = useState('');
   const [caseNumber, setCaseNumber] = useState('');
-  
+
   // Results
   const [searchResults, setSearchResults] = useState<CaseResult[]>([]);
   const [selectedCase, setSelectedCase] = useState<CaseResult | null>(null);
@@ -120,9 +120,9 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
 
   const handleContinue = () => {
     if (!selectedCase) return;
-    
+
     setStage('success');
-    
+
     // Call parent callback after a short delay
     setTimeout(() => {
       if (onCaseAdded) {
@@ -338,11 +338,10 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
                   <div
                     key={caseData.id}
                     onClick={() => handleSelectCase(caseData)}
-                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${
-                      selectedCase?.id === caseData.id
+                    className={`p-5 rounded-xl border-2 cursor-pointer transition-all ${selectedCase?.id === caseData.id
                         ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
                         : 'border-border hover:border-primary/50 bg-card hover:bg-accent'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
@@ -356,8 +355,8 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
                               caseData.status === 'Active'
                                 ? 'border-primary/30 text-primary bg-primary/10 font-semibold'
                                 : caseData.status === 'Pending'
-                                ? 'border-yellow-300 text-yellow-600 bg-yellow-50 dark:bg-[#FBBF24]/10 font-semibold'
-                                : 'border-border text-muted-foreground font-semibold'
+                                  ? 'border-yellow-300 text-yellow-600 bg-yellow-50 dark:bg-[#FBBF24]/10 font-semibold'
+                                  : 'border-border text-muted-foreground font-semibold'
                             }
                           >
                             {caseData.status}
@@ -370,11 +369,10 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
                           {caseData.caseType} • {caseData.stage}
                         </p>
                       </div>
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                        selectedCase?.id === caseData.id
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${selectedCase?.id === caseData.id
                           ? 'border-primary bg-primary'
                           : 'border-border'
-                      }`}>
+                        }`}>
                         {selectedCase?.id === caseData.id && (
                           <CheckCircle2 className="w-4 h-4 text-primary-foreground" />
                         )}
@@ -435,7 +433,7 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
               {/* Action Buttons */}
               <div className="flex gap-3 pt-4">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={handleClose}
                   className="flex-1 h-12 border-border hover:bg-accent font-bold"
                 >
@@ -528,7 +526,7 @@ export function AddNewCaseModal({ isOpen, onClose, onCaseAdded }: AddNewCaseModa
               {/* Action Buttons */}
               <div className="flex gap-3 max-w-md mx-auto">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={handleClose}
                   className="flex-1 h-12 border-border hover:bg-accent font-bold"
                 >

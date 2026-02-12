@@ -80,8 +80,8 @@ export function SubscriptionView() {
                 </div>
               </div>
 
-              <Button 
-                variant="outline" 
+              <Button
+                variant="ghost"
                 className="w-full border-primary/30 text-primary hover:bg-primary/10 font-semibold h-10"
                 disabled
               >

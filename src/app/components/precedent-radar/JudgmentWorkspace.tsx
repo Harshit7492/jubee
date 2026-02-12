@@ -177,19 +177,19 @@ JANUARY 15, 2024`;
 
   const generateMockResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase();
-    
+
     if (lowerQuery.includes('ratio') || lowerQuery.includes('decidendi')) {
       return 'The ratio decidendi of this case is that courts can exercise discretion under Section 9 of the Arbitration Act to temporarily stay invocation of bank guarantees when there is a prima facie case and the balance of convenience favors the petitioner, even though such relief is exceptional.';
     }
-    
+
     if (lowerQuery.includes('fraud')) {
       return 'The Court noted that while fraud must be of an "egregious nature" to warrant interference with bank guarantees, in this case there was sufficient prima facie evidence through test reports that required detailed examination, creating doubt about the respondent\'s fraud allegations.';
     }
-    
+
     if (lowerQuery.includes('precedent') || lowerQuery.includes('relied')) {
       return 'The judgment relied on State Bank of India v. Rahul Enterprises (2024) 1 SCC 567 and National Highway Authority v. Construction Co. 2024 SCC OnLine SC 234 to establish the legal framework for granting interim relief against bank guarantee invocation.';
     }
-    
+
     return 'Based on the judgment, the Court balanced the equities by considering the petitioner\'s prima facie case and the potential for irretrievable harm against the principle that bank guarantees are independent contracts. The 90-day stay with conditions for additional security represents this careful balancing.';
   };
 
@@ -214,7 +214,6 @@ JANUARY 15, 2024`;
               className="hover:bg-accent"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
-              Back
             </Button>
             <div className="h-6 w-px bg-border" />
             <div className="flex-1 min-w-0">
@@ -223,7 +222,7 @@ JANUARY 15, 2024`;
             </div>
             <div className="flex items-center gap-2">
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="border-[0.5px] hover:bg-accent text-xs"
               >
@@ -231,7 +230,7 @@ JANUARY 15, 2024`;
                 Download PDF
               </Button>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="border-[0.5px] hover:bg-accent text-xs"
               >
@@ -249,7 +248,7 @@ JANUARY 15, 2024`;
           <h2 className="text-sm font-bold text-foreground uppercase tracking-wide">Full Judgment</h2>
         </div>
         <ScrollArea className="flex-1 px-12 py-8">
-          <div 
+          <div
             className="max-w-4xl mx-auto text-foreground leading-relaxed"
             style={{ fontFamily: '"Source Serif Pro", Georgia, serif', fontSize: '15px', lineHeight: '1.8' }}
           >
@@ -265,18 +264,16 @@ JANUARY 15, 2024`;
       {/* Floating Chat Toggle Button */}
       <button
         onClick={() => setShowChat(!showChat)}
-        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-          showChat ? 'scale-0' : 'scale-100'
-        }`}
+        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showChat ? 'scale-0' : 'scale-100'
+          }`}
       >
         <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
       </button>
 
       {/* AI Assistant Chat Panel */}
-      <div className={`fixed top-0 right-0 h-full w-[480px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-        showChat ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`fixed top-0 right-0 h-full w-[480px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showChat ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Assistant Header */}
         <div className="px-6 py-4 border-b-[0.5px] border-[#1E3A8A]/20 bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
@@ -360,8 +357,8 @@ JANUARY 15, 2024`;
               </div>
               <span className={cn(
                 "text-[10px] font-semibold px-2 py-0.5 rounded",
-                chatLimit.used >= chatLimit.total 
-                  ? "bg-red-500/10 text-red-600" 
+                chatLimit.used >= chatLimit.total
+                  ? "bg-red-500/10 text-red-600"
                   : "bg-[#1E3A8A]/10 text-[#1E3A8A]"
               )}>
                 {chatLimit.used}/{chatLimit.total} operations
@@ -433,7 +430,7 @@ JANUARY 15, 2024`;
                 <Send className="w-3.5 h-3.5" />
               </Button>
             </div>
-            
+
             {/* Chat Limit Warning */}
             {chatLimit.used >= chatLimit.total && (
               <p className="text-[10px] text-red-600 dark:text-red-500 font-semibold">

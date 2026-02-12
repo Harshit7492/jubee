@@ -82,7 +82,7 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
 
   const generateResponse = (input: string) => {
     const lowerInput = input.toLowerCase();
-    
+
     if (lowerInput.includes('summary') || lowerInput.includes('summarize')) {
       return `**Document Summary:**\n\nThis ${document.name} contains:\n\n1. **Background:** The petition seeks interim relief under Section 9 of the Arbitration and Conciliation Act, 1996.\n\n2. **Key Arguments:**\n   - Petitioner claims breach of contract by the Respondent\n   - Non-payment of dues amounting to ₹2.5 Crores\n   - Arbitration clause exists in the agreement dated 15/03/2024\n\n3. **Relief Sought:**\n   - Appointment of arbitrator\n   - Interim injunction restraining respondent from alienating assets\n   - Award of costs\n\n4. **Supporting Documents:** 12 annexures including contract agreement, email correspondence, and payment records.\n\nWould you like me to elaborate on any specific section?`;
     } else if (lowerInput.includes('parties') || lowerInput.includes('who')) {
@@ -90,7 +90,7 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
     } else if (lowerInput.includes('relief') || lowerInput.includes('prayer')) {
       return `**Relief/Prayer Sought:**\n\n1. **Primary Relief:**\n   - Appoint a sole arbitrator to adjudicate the disputes\n   - Direct the Respondent to maintain status quo regarding assets\n\n2. **Interim Relief:**\n   - Restrain the Respondent from creating third-party rights over assets worth ₹5 Crores\n   - Direct the Respondent to deposit ₹1 Crore in an escrow account\n\n3. **Ancillary Relief:**\n   - Award costs of litigation\n   - Grant any other relief deemed fit by this Hon'ble Court\n\nThe Court has granted partial interim relief as per Order dated 10/01/2026.`;
     }
-    
+
     return `Based on the ${document.name}, I can provide information about:\n\n• The factual background and timeline\n• Legal grounds and cited precedents\n• Arguments made by both parties\n• Relief sought and orders passed\n• Key dates and events\n\nWhat specific aspect would you like to know more about?`;
   };
 
@@ -110,7 +110,7 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
             <div className="h-6 w-px bg-border" />
             <h2 className="text-lg font-bold text-foreground">{document.name}</h2>
           </div>
-          
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
@@ -124,11 +124,11 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="rounded-lg gap-2">
+              <Button variant="ghost" size="sm" className="rounded-lg gap-2">
                 <Eye className="w-4 h-4" />
                 View PDF
               </Button>
-              <Button variant="outline" size="sm" className="rounded-lg gap-2">
+              <Button variant="ghost" size="sm" className="rounded-lg gap-2">
                 <Download className="w-4 h-4" />
                 Download
               </Button>
@@ -146,11 +146,10 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
                 key={message.id}
                 className={`flex gap-4 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  message.type === 'user'
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${message.type === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-gradient-to-br from-primary to-primary/80'
-                }`}>
+                  }`}>
                   {message.type === 'user' ? (
                     <User className="w-5 h-5" />
                   ) : (
@@ -158,11 +157,10 @@ export function DocumentChatView({ document, caseData, onBack }: DocumentChatVie
                   )}
                 </div>
                 <div className={`flex-1 ${message.type === 'user' ? 'text-right' : 'text-left'}`}>
-                  <div className={`inline-block p-4 rounded-2xl max-w-full ${
-                    message.type === 'user'
+                  <div className={`inline-block p-4 rounded-2xl max-w-full ${message.type === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted text-foreground'
-                  }`}>
+                    }`}>
                     <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
                   </div>
                   <p className="text-xs text-muted-foreground mt-1 px-1">

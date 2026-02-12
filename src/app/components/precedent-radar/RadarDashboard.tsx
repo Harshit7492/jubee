@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Radio, Plus, Bell, BellOff, Edit, Copy, Trash2, ChevronRight, Activity, ChevronLeft, X, Send, MessageSquare, ArrowLeft } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
-import { Badge } from '@/app/components/ui/badge';
 import { cn } from '@/app/components/ui/utils';
 import { WorkspaceQuote, WORKSPACE_QUOTES } from '@/app/components/WorkspaceQuote';
 import jubeeLogo from '@/assets/jubee-logo.png';
-import { Arrow } from '@radix-ui/react-dropdown-menu';
 
 export interface RadarItem {
   id: string;
@@ -46,7 +44,7 @@ export function RadarDashboard({
 
   // AI Chat states
   const [showChat, setShowChat] = useState(false);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string; text: string; isAI: boolean; timestamp: Date}>>([]);
+  const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; isAI: boolean; timestamp: Date }>>([]);
   const [chatInput, setChatInput] = useState('');
   const [isAITyping, setIsAITyping] = useState(false);
 
@@ -100,14 +98,14 @@ export function RadarDashboard({
             {/* Back Button with Page Title */}
             {onBack && (
               <>
-                 <Button
-              onClick={onBack}
-              variant="ghost"
-              size="icon"
-              className="h-10 w-10 rounded-xl hover:bg-accent"
-            >
-              <ArrowLeft className="w-5 h-5 text-foreground" />
-            </Button>
+                <Button
+                  onClick={onBack}
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 rounded-xl hover:bg-accent"
+                >
+                  <ArrowLeft className="w-5 h-5 text-foreground" />
+                </Button>
                 <div className="w-px h-5 bg-border" />
               </>
             )}
@@ -319,7 +317,7 @@ export function RadarDashboard({
                             onToggleStatus(radar.id);
                           }}
                           size="sm"
-                          variant="outline"
+                          variant="ghost"
                           className={cn(
                             "h-7 text-xs font-semibold",
                             radar.status === 'active'
@@ -373,18 +371,16 @@ export function RadarDashboard({
       {/* Floating Chat Toggle Button */}
       <button
         onClick={() => setShowChat(!showChat)}
-        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-          showChat ? 'scale-0' : 'scale-100'
-        }`}
+        className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showChat ? 'scale-0' : 'scale-100'
+          }`}
       >
         <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
       </button>
 
       {/* AI Chat Panel */}
-      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${
-        showChat ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`fixed top-0 right-0 h-full w-[400px] bg-background border-l-[0.5px] border-border shadow-2xl transition-transform duration-300 ease-in-out z-50 flex flex-col ${showChat ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         {/* Chat Header */}
         <div className="px-6 py-4 border-b-[0.5px] border-border bg-gradient-to-r from-[#1E3A8A]/5 to-transparent flex-shrink-0">
           <div className="flex items-center justify-between mb-2">
@@ -457,11 +453,10 @@ export function RadarDashboard({
                     </div>
                   )}
                   <div
-                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                      message.isAI
-                        ? 'bg-muted border-[0.5px] border-border'
-                        : 'bg-[#1E3A8A] text-white'
-                    }`}
+                    className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
+                      ? 'bg-muted border-[0.5px] border-border'
+                      : 'bg-[#1E3A8A] text-white'
+                      }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>

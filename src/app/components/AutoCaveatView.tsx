@@ -100,8 +100,8 @@ export function AutoCaveatView({ court, clientName, onBack, onNewCaveat }: AutoC
 
   const filteredOrders = mockOrders.filter(order => {
     const matchesSearch = order.caseTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         order.caseNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase());
+      order.caseNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterStatus === 'all' || order.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
@@ -157,7 +157,7 @@ export function AutoCaveatView({ court, clientName, onBack, onNewCaveat }: AutoC
           <Button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            variant="outline"
+            variant="ghost"
             className="border-[0.5px] border-border hover:bg-accent/50"
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
@@ -207,31 +207,28 @@ export function AutoCaveatView({ court, clientName, onBack, onNewCaveat }: AutoC
           <div className="flex items-center gap-1 bg-accent/30 rounded-xl p-1 border-[0.5px] border-border">
             <button
               onClick={() => setFilterStatus('all')}
-              className={`px-5 py-2 text-sm rounded-lg transition-all ${
-                filterStatus === 'all'
-                  ? 'bg-background text-foreground font-semibold shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              className={`px-5 py-2 text-sm rounded-lg transition-all ${filterStatus === 'all'
+                ? 'bg-background text-foreground font-semibold shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+                }`}
             >
               All ({mockOrders.length})
             </button>
             <button
               onClick={() => setFilterStatus('urgent')}
-              className={`px-5 py-2 text-sm rounded-lg transition-all ${
-                filterStatus === 'urgent'
-                  ? 'bg-background text-foreground font-semibold shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              className={`px-5 py-2 text-sm rounded-lg transition-all ${filterStatus === 'urgent'
+                ? 'bg-background text-foreground font-semibold shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+                }`}
             >
               Urgent ({mockOrders.filter(o => o.status === 'urgent').length})
             </button>
             <button
               onClick={() => setFilterStatus('normal')}
-              className={`px-5 py-2 text-sm rounded-lg transition-all ${
-                filterStatus === 'normal'
-                  ? 'bg-background text-foreground font-semibold shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              className={`px-5 py-2 text-sm rounded-lg transition-all ${filterStatus === 'normal'
+                ? 'bg-background text-foreground font-semibold shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+                }`}
             >
               Active ({mockOrders.filter(o => o.status === 'normal').length})
             </button>
@@ -273,7 +270,7 @@ export function AutoCaveatView({ court, clientName, onBack, onNewCaveat }: AutoC
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-3">
                         <h3 className="text-base font-semibold text-foreground">{order.caseTitle}</h3>
-                        <Badge className={`${getStatusColor(order.status)} border-[0.5px] text-xs px-2 py-0.5`}>
+                        <Badge varient="outline" className={`${getStatusColor(order.status)} border-[0.5px] text-xs px-2 py-0.5`}>
                           {order.status === 'urgent' && <AlertCircle className="w-3 h-3 mr-1" />}
                           {getStatusLabel(order.status)}
                         </Badge>
@@ -306,7 +303,7 @@ export function AutoCaveatView({ court, clientName, onBack, onNewCaveat }: AutoC
 
                   <div className="flex items-center justify-between gap-4">
                     <div className="text-xs text-muted-foreground">
-                      Judge: <span className="font-medium text-foreground">{order.judge}</span> • 
+                      Judge: <span className="font-medium text-foreground">{order.judge}</span> •
                       Order No: <span className="font-medium text-foreground">{order.orderNumber}</span>
                     </div>
                     <div className="flex items-center gap-2">

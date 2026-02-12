@@ -174,15 +174,14 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
           key={day}
           onClick={() => !disabled && handleDateClick(day)}
           disabled={disabled}
-          className={`h-9 text-xs font-medium rounded-lg transition-all ${
-            selected
-              ? 'bg-primary text-primary-foreground'
-              : disabled
+          className={`h-9 text-xs font-medium rounded-lg transition-all ${selected
+            ? 'bg-primary text-primary-foreground'
+            : disabled
               ? 'text-muted-foreground/30 cursor-not-allowed'
               : todayDate
-              ? 'text-primary hover:bg-primary/10'
-              : 'text-foreground hover:bg-accent'
-          }`}
+                ? 'text-primary hover:bg-primary/10'
+                : 'text-foreground hover:bg-accent'
+            }`}
         >
           {day}
         </button>
@@ -213,7 +212,7 @@ export function DashboardView({ onNavigate }: DashboardViewProps = {}) {
         <div className="px-8 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              
+
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-primary" />
               </div>

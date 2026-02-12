@@ -16,7 +16,7 @@ interface RadarSetupWizardProps {
 const jurisdictions = [
   // Supreme Court
   { value: 'supreme-court', label: 'Supreme Court of India', category: 'Supreme Court' },
-  
+
   // High Courts (26)
   { value: 'allahabad-hc', label: 'Allahabad High Court', category: 'High Courts' },
   { value: 'andhra-pradesh-hc', label: 'Andhra Pradesh High Court', category: 'High Courts' },
@@ -44,7 +44,7 @@ const jurisdictions = [
   { value: 'tripura-hc', label: 'Tripura High Court', category: 'High Courts' },
   { value: 'uttarakhand-hc', label: 'Uttarakhand High Court', category: 'High Courts' },
   { value: 'uttar-pradesh-hc', label: 'Uttar Pradesh High Court', category: 'High Courts' },
-  
+
   // Tribunals
   { value: 'ncdrc', label: 'NCDRC - National Consumer Disputes Redressal Commission', category: 'Tribunals' },
   { value: 'nclt', label: 'NCLT - National Company Law Tribunal', category: 'Tribunals' },
@@ -117,7 +117,6 @@ export function RadarSetupWizard({ onComplete, onBack }: RadarSetupWizardProps) 
                 size="sm"
               >
                 <ArrowLeft className="w-5 h-5 mr-2" />
-                Back
               </Button>
               <div className="h-6 w-px bg-border" />
             </>
@@ -145,14 +144,14 @@ export function RadarSetupWizard({ onComplete, onBack }: RadarSetupWizardProps) 
                   </div>
                   <Label className="text-lg font-bold text-foreground">Legal Proposition</Label>
                 </div>
-                
+
                 <textarea
                   value={proposition}
                   onChange={(e) => setProposition(e.target.value)}
                   placeholder="Enter your legal proposition here..."
                   className="w-full min-h-[140px] px-4 py-3 bg-background border-2 border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none transition-all"
                 />
-                
+
                 <div className="flex items-start gap-2 text-sm text-muted-foreground">
                   <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
                   <p>Be specific and elaborate to ensure radar precision. Include relevant sections, acts, or legal principles.</p>
@@ -191,7 +190,7 @@ export function RadarSetupWizard({ onComplete, onBack }: RadarSetupWizardProps) 
                   <Popover open={jurisdictionOpen} onOpenChange={setJurisdictionOpen}>
                     <PopoverTrigger asChild>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         className="w-full justify-between h-12 border-2 border-border hover:border-primary hover:bg-primary/5 transition-all"
                       >
                         <span className="text-muted-foreground">Select courts and tribunals...</span>
@@ -203,7 +202,7 @@ export function RadarSetupWizard({ onComplete, onBack }: RadarSetupWizardProps) 
                         <CommandInput placeholder="Search jurisdiction..." />
                         <CommandList className="max-h-[400px]">
                           <CommandEmpty>No jurisdiction found.</CommandEmpty>
-                          
+
                           {['Supreme Court', 'High Courts', 'Tribunals'].map(category => {
                             const categoryItems = jurisdictions.filter(j => j.category === category);
                             return (
@@ -308,8 +307,8 @@ export function RadarSetupWizard({ onComplete, onBack }: RadarSetupWizardProps) 
                     size="lg"
                     className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg shadow-accent/30"
                   >
-                    <ChevronLeft className="w-5 h-5 mr-2" />
-                    Back
+                    <ArrowLeft className="w-5 h-5 mr-2" />
+
                   </Button>
                 )}
                 <Button

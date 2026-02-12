@@ -73,7 +73,7 @@ export function PersonalInformationView() {
             {/* Upload/Remove Actions */}
             <div className="flex flex-col gap-2">
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >

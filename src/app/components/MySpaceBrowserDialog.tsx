@@ -47,7 +47,7 @@ export function MySpaceBrowserDialog({ isOpen, onClose, onSelect }: MySpaceBrows
 
   if (!isOpen) return null;
 
-  const currentFiles = selectedFolder 
+  const currentFiles = selectedFolder
     ? mockFiles.filter(f => f.folder === selectedFolder)
     : mockFiles;
 
@@ -114,11 +114,10 @@ export function MySpaceBrowserDialog({ isOpen, onClose, onSelect }: MySpaceBrows
             <p className="text-xs font-medium text-muted-foreground mb-2 px-2">FOLDERS</p>
             <button
               onClick={() => setSelectedFolder(null)}
-              className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors mb-1 ${
-                selectedFolder === null
+              className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors mb-1 ${selectedFolder === null
                   ? 'bg-primary text-white'
                   : 'hover:bg-accent text-foreground'
-              }`}
+                }`}
             >
               <Folder className="w-4 h-4" />
               All Files
@@ -127,19 +126,17 @@ export function MySpaceBrowserDialog({ isOpen, onClose, onSelect }: MySpaceBrows
               <button
                 key={folder.id}
                 onClick={() => setSelectedFolder(folder.id)}
-                className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-sm transition-colors mb-1 ${
-                  selectedFolder === folder.id
+                className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-sm transition-colors mb-1 ${selectedFolder === folder.id
                     ? 'bg-primary text-white'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-2 min-w-0">
                   <Folder className="w-4 h-4 flex-shrink-0" />
                   <span className="truncate">{folder.name}</span>
                 </div>
-                <span className={`text-xs ${
-                  selectedFolder === folder.id ? 'text-white/80' : 'text-muted-foreground'
-                }`}>
+                <span className={`text-xs ${selectedFolder === folder.id ? 'text-white/80' : 'text-muted-foreground'
+                  }`}>
                   {folder.fileCount}
                 </span>
               </button>
@@ -161,18 +158,15 @@ export function MySpaceBrowserDialog({ isOpen, onClose, onSelect }: MySpaceBrows
                     <button
                       key={file.id}
                       onClick={() => handleFileToggle(file.id)}
-                      className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all text-left ${
-                        isSelected
+                      className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all text-left ${isSelected
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50 bg-background'
-                      }`}
+                        }`}
                     >
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                        isSelected ? 'bg-primary/20' : 'bg-muted'
-                      }`}>
-                        <FileText className={`w-5 h-5 ${
-                          isSelected ? 'text-primary' : 'text-muted-foreground'
-                        }`} />
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${isSelected ? 'bg-primary/20' : 'bg-muted'
+                        }`}>
+                        <FileText className={`w-5 h-5 ${isSelected ? 'text-primary' : 'text-muted-foreground'
+                          }`} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-foreground truncate">
@@ -194,7 +188,7 @@ export function MySpaceBrowserDialog({ isOpen, onClose, onSelect }: MySpaceBrows
             {selectedFiles.length} file{selectedFiles.length !== 1 ? 's' : ''} selected
           </p>
           <div className="flex gap-3">
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="ghost" onClick={onClose}>
               Cancel
             </Button>
             <Button

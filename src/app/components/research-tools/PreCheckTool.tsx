@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { 
-  FileSearch, ArrowLeft, Upload, File, X, Send, Bot, User, CheckCircle, 
+import {
+  FileSearch, ArrowLeft, Upload, File, X, Send, Bot, User, CheckCircle,
   XCircle, AlertTriangle, Download, Save, Eye, Lightbulb, AlertCircle,
   Paperclip, ChevronRight, Languages, Edit3, RotateCcw, FileText, Scale,
   BookOpen, Link as LinkIcon, Sparkles, ChevronDown, RefreshCw, FolderOpen,
@@ -111,17 +111,17 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
   const [selectedCourt, setSelectedCourt] = useState('');
   const [selectedCourtId, setSelectedCourtId] = useState('');
   const [selectedCaseType, setSelectedCaseType] = useState('');
-  
+
   // Document states
   const [mainFile, setMainFile] = useState<UploadedDocument | null>(null);
   const [annexures, setAnnexures] = useState<UploadedDocument[]>([]);
-  
+
   // Workspace states
   const [defects, setDefects] = useState<DefectItem[]>([]);
   const [selectedDefect, setSelectedDefect] = useState<DefectItem | null>(null);
   const [documentContent, setDocumentContent] = useState('');
   const [expandedDefect, setExpandedDefect] = useState<string | null>(null);
-  
+
   // Resolution modal states
   const [resolutionModal, setResolutionModal] = useState<ResolutionModalType>(null);
   const [activeDefectForResolution, setActiveDefectForResolution] = useState<DefectItem | null>(null);
@@ -192,9 +192,9 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
       timestamp: new Date(),
       options
     };
-    
+
     setMessages(prev => [...prev, newMessage]);
-    
+
     setTypingMessageId(newMessage.id);
     setVisibleChars(prev => ({ ...prev, [newMessage.id]: 0 }));
   };
@@ -214,14 +214,14 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
     if (!inputValue.trim()) return;
 
     const trimmedInput = inputValue.trim();
-    
+
     if (currentStage === 'initial') {
       // Petitioner name
       setPetitionerName(trimmedInput);
       addUserMessage(trimmedInput);
       setInputValue('');
       setIsTyping(true);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage('Great! Now please provide the Respondent name (you can add \'and anr\' or \'and ors\' if multiple):');
@@ -233,7 +233,7 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
       addUserMessage(trimmedInput);
       setInputValue('');
       setIsTyping(true);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage(
@@ -247,7 +247,7 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
       addUserMessage(trimmedInput);
       setInputValue('');
       setIsTyping(true);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage(
@@ -264,13 +264,13 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
 
   const handleOptionSelect = (optionId: string, optionLabel: string) => {
     setIsTyping(true);
-    
+
     if (COURTS.find(c => c.id === optionId)) {
       // Court selection
       setSelectedCourt(optionLabel);
       setSelectedCourtId(optionId);
       addUserMessage(optionLabel);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         const caseTypes = CASE_TYPES[optionId] || [];
@@ -284,7 +284,7 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
       // Case type selection
       setSelectedCaseType(optionLabel);
       addUserMessage(optionLabel);
-      
+
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage(
@@ -426,13 +426,13 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
     setIsTyping(false);
     setIsProcessing(true);
     addAIMessage('Perfect! I have all the documents. Starting Pre-Check now...');
-    
+
     setCurrentStage('processing');
-    
+
     // Simulate processing
     setTimeout(() => {
       setIsProcessing(false);
-      
+
       // Generate comprehensive mock defects across all categories
       const mockDefects: DefectItem[] = [
         // Category A: Annexure Completeness
@@ -612,12 +612,12 @@ export function PreCheckTool({ onBack, onToolChange, activeTool }: PreCheckToolP
           affectedFile: 'Annexure A-1'
         }
       ];
-      
+
       setDefects(mockDefects);
-      
+
       // Initialize document content with mock petition
       setDocumentContent(generateMockPetition());
-      
+
       setCurrentStage('workspace');
     }, 3000);
   };
@@ -673,7 +673,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
   // Advanced Resolution Handlers
   const handleResolveDefect = (defect: DefectItem) => {
     setActiveDefectForResolution(defect);
-    
+
     if (defect.resolutionType === 'auto') {
       // Auto-fix
       handleAutoFix(defect);
@@ -698,9 +698,9 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
     toast.success('Re-running Pre-Check...', {
       description: defect.title
     });
-    
+
     setTimeout(() => {
-      setDefects(prev => prev.map(d => 
+      setDefects(prev => prev.map(d =>
         d.id === defect.id ? { ...d, status: 'resolved' } : d
       ));
       setIsReProcessing(false);
@@ -711,11 +711,11 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
   const handleApplyToSimilar = (defect: DefectItem) => {
     if (!defect.similarCount || defect.similarCount === 0) return;
-    
+
     toast.success(`Applying fix to ${defect.similarCount} similar defects...`);
-    
+
     setTimeout(() => {
-      setDefects(prev => prev.map(d => 
+      setDefects(prev => prev.map(d =>
         d.type === defect.type && d.status === 'pending'
           ? { ...d, status: 'resolved' }
           : d
@@ -725,23 +725,23 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
   };
 
   const handleIgnoreDefect = (defectId: string) => {
-    setDefects(prev => prev.map(d => 
+    setDefects(prev => prev.map(d =>
       d.id === defectId ? { ...d, status: 'ignored' } : d
     ));
     toast.info('Defect marked as ignored');
   };
 
   const handleRectifyAll = () => {
-    const autoFixableDefects = defects.filter(d => 
+    const autoFixableDefects = defects.filter(d =>
       d.resolutionType === 'auto' && d.status === 'pending'
     );
-    
+
     toast.success(`Rectifying ${autoFixableDefects.length} global defects...`, {
       description: 'Fixing margins, formatting, OCR, and pagination'
     });
-    
+
     setTimeout(() => {
-      setDefects(prev => prev.map(d => 
+      setDefects(prev => prev.map(d =>
         d.resolutionType === 'auto' && d.status === 'pending'
           ? { ...d, status: 'resolved' }
           : d
@@ -767,13 +767,13 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
   const handleTranslationFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
-    
+
     if (activeDefectForResolution) {
       setIsReProcessing(true);
       setCurrentStage('processing');
-      
+
       if (uploadOption === 'append') {
         toast.success('Re-running Pre-Check...', {
           description: `Adding translation: ${file.name}`
@@ -783,9 +783,9 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
           description: `Replacing with: ${file.name}`
         });
       }
-      
+
       setTimeout(() => {
-        setDefects(prev => prev.map(d => 
+        setDefects(prev => prev.map(d =>
           d.id === activeDefectForResolution.id ? { ...d, status: 'resolved' } : d
         ));
         setIsReProcessing(false);
@@ -793,11 +793,11 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         toast.success('Pre-Check complete - Translation processed and defect resolved');
       }, 2500);
     }
-    
+
     setResolutionModal(null);
     setActiveDefectForResolution(null);
     setUploadOption(null);
-    
+
     if (resolutionFileInputRef.current) {
       resolutionFileInputRef.current.value = '';
     }
@@ -811,18 +811,18 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
-    
+
     if (activeDefectForResolution) {
       setIsReProcessing(true);
       setCurrentStage('processing');
       toast.success('Re-running Pre-Check...', {
         description: `Uploaded: ${file.name}`
       });
-      
+
       setTimeout(() => {
-        setDefects(prev => prev.map(d => 
+        setDefects(prev => prev.map(d =>
           d.id === activeDefectForResolution.id ? { ...d, status: 'resolved' } : d
         ));
         setIsReProcessing(false);
@@ -830,10 +830,10 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         toast.success('Pre-Check complete - Document uploaded and defect resolved');
       }, 2500);
     }
-    
+
     setResolutionModal(null);
     setActiveDefectForResolution(null);
-    
+
     if (resolutionFileInputRef.current) {
       resolutionFileInputRef.current.value = '';
     }
@@ -841,22 +841,22 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
   // Rename Resolution Handler
   const [renameValue, setRenameValue] = useState('');
-  
+
   const handleRenameSubmit = () => {
     if (!renameValue.trim()) {
       toast.error('Please enter a new name');
       return;
     }
-    
+
     if (activeDefectForResolution) {
       setIsReProcessing(true);
       setCurrentStage('processing');
       toast.success('Re-running Pre-Check...', {
         description: `Renaming to ${renameValue}`
       });
-      
+
       setTimeout(() => {
-        setDefects(prev => prev.map(d => 
+        setDefects(prev => prev.map(d =>
           d.id === activeDefectForResolution.id ? { ...d, status: 'resolved' } : d
         ));
         setIsReProcessing(false);
@@ -864,7 +864,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         toast.success('Pre-Check complete - Annexure renamed successfully');
       }, 2500);
     }
-    
+
     setResolutionModal(null);
     setActiveDefectForResolution(null);
     setRenameValue('');
@@ -872,22 +872,22 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
   // Edit Resolution Handler
   const [editValue, setEditValue] = useState('');
-  
+
   const handleEditSubmit = () => {
     if (!editValue.trim()) {
       toast.error('Please enter the corrected text');
       return;
     }
-    
+
     if (activeDefectForResolution) {
       setIsReProcessing(true);
       setCurrentStage('processing');
       toast.success('Re-running Pre-Check...', {
         description: 'Updating document text'
       });
-      
+
       setTimeout(() => {
-        setDefects(prev => prev.map(d => 
+        setDefects(prev => prev.map(d =>
           d.id === activeDefectForResolution.id ? { ...d, status: 'resolved' } : d
         ));
         setIsReProcessing(false);
@@ -895,7 +895,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         toast.success('Pre-Check complete - Text corrected successfully');
       }, 2500);
     }
-    
+
     setResolutionModal(null);
     setActiveDefectForResolution(null);
     setEditValue('');
@@ -974,7 +974,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
             <div className="flex items-center gap-2">
               <Button
                 onClick={handleRectifyAll}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-primary/30 hover:bg-primary/10 hover:border-primary text-primary"
               >
@@ -983,7 +983,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
               </Button>
               <Button
                 onClick={handleSaveToMySpace}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -992,7 +992,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
               </Button>
               <Button
                 onClick={handleDownload}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -1033,9 +1033,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         <div className="flex-1 flex overflow-hidden">
           {/* Left Pane: Document Viewer */}
           {fullScreenPanel !== 'defects' && (
-            <div className={`flex flex-col overflow-hidden bg-muted/20 transition-all ${
-              fullScreenPanel === 'document' ? 'flex-1' : 'flex-1'
-            }`}>
+            <div className={`flex flex-col overflow-hidden bg-muted/20 transition-all ${fullScreenPanel === 'document' ? 'flex-1' : 'flex-1'
+              }`}>
               {/* Document Header with Full-Screen Toggle */}
               <div className="bg-gradient-to-r from-blue-50 to-blue-50/20 dark:from-blue-950/30 dark:to-blue-950/10 border-b border-border px-6 py-3">
                 <div className="flex items-center justify-between">
@@ -1060,7 +1059,7 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                   </Button>
                 </div>
               </div>
-              
+
               <div className="flex-1 overflow-y-auto p-8">
                 <div className="max-w-5xl mx-auto">
                   <div className="bg-white dark:bg-card shadow-sm border border-border rounded-lg p-6">
@@ -1082,9 +1081,8 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
 
           {/* Right Pane: Defect & Resolution Center */}
           {fullScreenPanel !== 'document' && (
-            <div className={`border-l border-border bg-muted/10 flex flex-col transition-all ${
-              fullScreenPanel === 'defects' ? 'flex-1' : 'w-[460px]'
-            }`}>
+            <div className={`border-l border-border bg-muted/10 flex flex-col transition-all ${fullScreenPanel === 'defects' ? 'flex-1' : 'w-[460px]'
+              }`}>
               {/* Header */}
               <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b-2 border-primary/20 px-5 py-4">
                 <div className="flex items-center justify-between mb-1">
@@ -1113,256 +1111,251 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                 </p>
               </div>
 
-            {/* Categories List */}
-            <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
-              {Object.entries(groupedDefects)
-                .sort(([, defectsA], [, defectsB]) => {
-                  // Sort: categories with pending defects first, then completed categories
-                  const hasPendingA = defectsA.some(d => d.status === 'pending');
-                  const hasPendingB = defectsB.some(d => d.status === 'pending');
-                  
-                  if (hasPendingA && !hasPendingB) return -1;
-                  if (!hasPendingA && hasPendingB) return 1;
-                  return 0;
-                })
-                .map(([category, categoryDefects]) => {
-                const categoryInfo = CATEGORY_DETAILS[category as DefectCategory];
-                const categoryPendingCount = categoryDefects.filter(d => d.status === 'pending').length;
-                const categoryResolvedCount = categoryDefects.filter(d => d.status === 'resolved').length;
-                const allResolved = categoryPendingCount === 0 && categoryDefects.length > 0;
+              {/* Categories List */}
+              <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
+                {Object.entries(groupedDefects)
+                  .sort(([, defectsA], [, defectsB]) => {
+                    // Sort: categories with pending defects first, then completed categories
+                    const hasPendingA = defectsA.some(d => d.status === 'pending');
+                    const hasPendingB = defectsB.some(d => d.status === 'pending');
 
-                return (
-                  <div key={category} className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-                    {/* Category Header */}
-                    <div className={`px-5 py-4 border-b-2 ${
-                      allResolved 
-                        ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800/50' 
-                        : 'bg-muted/30 border-border'
-                    }`}>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold shadow-sm ${
-                            allResolved 
-                              ? 'bg-green-500 text-white' 
-                              : 'bg-primary text-primary-foreground'
+                    if (hasPendingA && !hasPendingB) return -1;
+                    if (!hasPendingA && hasPendingB) return 1;
+                    return 0;
+                  })
+                  .map(([category, categoryDefects]) => {
+                    const categoryInfo = CATEGORY_DETAILS[category as DefectCategory];
+                    const categoryPendingCount = categoryDefects.filter(d => d.status === 'pending').length;
+                    const categoryResolvedCount = categoryDefects.filter(d => d.status === 'resolved').length;
+                    const allResolved = categoryPendingCount === 0 && categoryDefects.length > 0;
+
+                    return (
+                      <div key={category} className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
+                        {/* Category Header */}
+                        <div className={`px-5 py-4 border-b-2 ${allResolved
+                          ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800/50'
+                          : 'bg-muted/30 border-border'
                           }`}>
-                            {category}
-                          </div>
-                          <div>
-                            <p className="text-base font-bold text-foreground">{categoryInfo.name}</p>
-                            <p className="text-xs text-muted-foreground mt-0.5">{categoryInfo.description}</p>
-                          </div>
-                        </div>
-                        {allResolved ? (
-                          <div className="flex items-center gap-2 bg-green-500/15 px-3 py-1.5 rounded-full border border-green-500/30">
-                            <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
-                            <span className="text-sm font-bold text-green-700 dark:text-green-400">Complete</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
-                            <Circle className="w-3 h-3 text-primary fill-primary" />
-                            <span className="text-sm font-bold text-primary">{categoryPendingCount} pending</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Defects in this category */}
-                    <div className="divide-y divide-border/40">
-                      {categoryDefects
-                        .sort((a, b) => {
-                          // Sort: pending first, then resolved, then ignored
-                          const statusOrder = { pending: 0, resolved: 1, ignored: 2 };
-                          return statusOrder[a.status] - statusOrder[b.status];
-                        })
-                        .map((defect, index, array) => {
-                          // Check if we need a separator (transition from pending to resolved/ignored)
-                          const prevDefect = index > 0 ? array[index - 1] : null;
-                          const needsSeparator = prevDefect && prevDefect.status === 'pending' && defect.status !== 'pending';
-                          
-                          return (
-                            <div key={defect.id}>
-                              {needsSeparator && (
-                                <div className="px-6 py-4 bg-gradient-to-r from-muted/50 to-muted/20">
-                                  <div className="flex items-center gap-3">
-                                    <div className="flex-1 h-px bg-border"></div>
-                                    <div className="flex items-center gap-2 bg-card px-3 py-1 rounded-full border border-border">
-                                      <CheckCircle className="w-3 h-3 text-green-500" />
-                                      <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                                        Completed Items
-                                      </span>
-                                    </div>
-                                    <div className="flex-1 h-px bg-border"></div>
-                                  </div>
-                                </div>
-                              )}
-                              <div
-                                className={`px-6 py-5 transition-all ${
-                                  defect.status === 'resolved'
-                                    ? 'bg-green-50/50 dark:bg-green-950/10'
-                                    : defect.status === 'ignored'
-                                    ? 'bg-muted/20'
-                                    : 'bg-background hover:bg-muted/20'
-                                }`}
-                              >
-                          {/* Defect Header */}
-                          <div className="flex items-start gap-4">
-                            {/* Status Icon */}
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm ${
-                              defect.status === 'resolved'
-                                ? 'bg-green-500'
-                                : defect.status === 'ignored'
-                                ? 'bg-gray-400'
-                                : defect.severity === 'critical'
-                                ? 'bg-red-500'
-                                : defect.severity === 'warning'
-                                ? 'bg-yellow-500'
-                                : 'bg-blue-500'
-                            }`}>
-                              {defect.status === 'resolved' ? (
-                                <Check className="w-4 h-4 text-white" />
-                              ) : defect.status === 'ignored' ? (
-                                <X className="w-4 h-4 text-white" />
-                              ) : defect.severity === 'critical' ? (
-                                <XCircle className="w-4 h-4 text-white" />
-                              ) : defect.severity === 'warning' ? (
-                                <AlertTriangle className="w-4 h-4 text-white" />
-                              ) : (
-                                <Lightbulb className="w-4 h-4 text-white" />
-                              )}
-                            </div>
-
-                            {/* Defect Content */}
-                            <div className="flex-1 min-w-0 space-y-3">
-                              {/* Title & Meta */}
-                              <div>
-                                <div className="flex items-start justify-between gap-3 mb-2">
-                                  <h5 className="text-base font-bold text-foreground leading-tight">
-                                    {defect.title}
-                                  </h5>
-                                  {defect.status !== 'pending' && (
-                                    <Badge 
-                                      className={`flex-shrink-0 text-[11px] h-6 px-2.5 font-bold ${
-                                        defect.status === 'resolved' 
-                                          ? 'bg-green-500 hover:bg-green-500 text-white border-0' 
-                                          : 'bg-gray-400 hover:bg-gray-400 text-white border-0'
-                                      }`}
-                                    >
-                                      {defect.status === 'resolved' ? '✓ Resolved' : 'Ignored'}
-                                    </Badge>
-                                  )}
-                                </div>
-                                
-                                <div className="flex items-center gap-2">
-                                  {defect.page && (
-                                    <Badge variant="outline" className="text-[11px] h-5 px-2 font-medium border-muted-foreground/30">
-                                      Page {defect.page}
-                                    </Badge>
-                                  )}
-                                  {defect.similarCount && defect.similarCount > 0 && defect.status === 'pending' && (
-                                    <Badge className="text-[11px] h-5 px-2 bg-primary/10 text-primary border-primary/20 font-semibold">
-                                      +{defect.similarCount} similar issues
-                                    </Badge>
-                                  )}
-                                </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold shadow-sm ${allResolved
+                                ? 'bg-green-500 text-white'
+                                : 'bg-primary text-primary-foreground'
+                                }`}>
+                                {category}
                               </div>
+                              <div>
+                                <p className="text-base font-bold text-foreground">{categoryInfo.name}</p>
+                                <p className="text-xs text-muted-foreground mt-0.5">{categoryInfo.description}</p>
+                              </div>
+                            </div>
+                            {allResolved ? (
+                              <div className="flex items-center gap-2 bg-green-500/15 px-3 py-1.5 rounded-full border border-green-500/30">
+                                <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400" />
+                                <span className="text-sm font-bold text-green-700 dark:text-green-400">Complete</span>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
+                                <Circle className="w-3 h-3 text-primary fill-primary" />
+                                <span className="text-sm font-bold text-primary">{categoryPendingCount} pending</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
 
-                              {/* Description */}
-                              <p className="text-sm text-muted-foreground leading-relaxed">
-                                {defect.description}
-                              </p>
+                        {/* Defects in this category */}
+                        <div className="divide-y divide-border/40">
+                          {categoryDefects
+                            .sort((a, b) => {
+                              // Sort: pending first, then resolved, then ignored
+                              const statusOrder = { pending: 0, resolved: 1, ignored: 2 };
+                              return statusOrder[a.status] - statusOrder[b.status];
+                            })
+                            .map((defect, index, array) => {
+                              // Check if we need a separator (transition from pending to resolved/ignored)
+                              const prevDefect = index > 0 ? array[index - 1] : null;
+                              const needsSeparator = prevDefect && prevDefect.status === 'pending' && defect.status !== 'pending';
 
-                              {/* AI Recommendation - Only for pending */}
-                              {defect.status === 'pending' && (
-                                <div className="bg-gradient-to-r from-blue-50 to-blue-50/20 dark:from-blue-950/30 dark:to-blue-950/10 border-l-4 border-primary rounded-r-lg pl-4 pr-4 py-3">
-                                  <div className="flex items-start gap-2.5">
-                                    <Sparkles className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                                    <div className="flex-1">
-                                      <p className="text-[11px] font-bold text-primary uppercase tracking-wide mb-1">AI Suggestion</p>
-                                      <p className="text-sm text-foreground/90 leading-relaxed">{defect.aiRecommendation}</p>
+                              return (
+                                <div key={defect.id}>
+                                  {needsSeparator && (
+                                    <div className="px-6 py-4 bg-gradient-to-r from-muted/50 to-muted/20">
+                                      <div className="flex items-center gap-3">
+                                        <div className="flex-1 h-px bg-border"></div>
+                                        <div className="flex items-center gap-2 bg-card px-3 py-1 rounded-full border border-border">
+                                          <CheckCircle className="w-3 h-3 text-green-500" />
+                                          <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                                            Completed Items
+                                          </span>
+                                        </div>
+                                        <div className="flex-1 h-px bg-border"></div>
+                                      </div>
+                                    </div>
+                                  )}
+                                  <div
+                                    className={`px-6 py-5 transition-all ${defect.status === 'resolved'
+                                      ? 'bg-green-50/50 dark:bg-green-950/10'
+                                      : defect.status === 'ignored'
+                                        ? 'bg-muted/20'
+                                        : 'bg-background hover:bg-muted/20'
+                                      }`}
+                                  >
+                                    {/* Defect Header */}
+                                    <div className="flex items-start gap-4">
+                                      {/* Status Icon */}
+                                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm ${defect.status === 'resolved'
+                                        ? 'bg-green-500'
+                                        : defect.status === 'ignored'
+                                          ? 'bg-gray-400'
+                                          : defect.severity === 'critical'
+                                            ? 'bg-red-500'
+                                            : defect.severity === 'warning'
+                                              ? 'bg-yellow-500'
+                                              : 'bg-blue-500'
+                                        }`}>
+                                        {defect.status === 'resolved' ? (
+                                          <Check className="w-4 h-4 text-white" />
+                                        ) : defect.status === 'ignored' ? (
+                                          <X className="w-4 h-4 text-white" />
+                                        ) : defect.severity === 'critical' ? (
+                                          <XCircle className="w-4 h-4 text-white" />
+                                        ) : defect.severity === 'warning' ? (
+                                          <AlertTriangle className="w-4 h-4 text-white" />
+                                        ) : (
+                                          <Lightbulb className="w-4 h-4 text-white" />
+                                        )}
+                                      </div>
+
+                                      {/* Defect Content */}
+                                      <div className="flex-1 min-w-0 space-y-3">
+                                        {/* Title & Meta */}
+                                        <div>
+                                          <div className="flex items-start justify-between gap-3 mb-2">
+                                            <h5 className="text-base font-bold text-foreground leading-tight">
+                                              {defect.title}
+                                            </h5>
+                                            {defect.status !== 'pending' && (
+                                              <Badge
+                                                className={`flex-shrink-0 text-[11px] h-6 px-2.5 font-bold ${defect.status === 'resolved'
+                                                  ? 'bg-green-500 hover:bg-green-500 text-white border-0'
+                                                  : 'bg-gray-400 hover:bg-gray-400 text-white border-0'
+                                                  }`}
+                                              >
+                                                {defect.status === 'resolved' ? '✓ Resolved' : 'Ignored'}
+                                              </Badge>
+                                            )}
+                                          </div>
+
+                                          <div className="flex items-center gap-2">
+                                            {defect.page && (
+                                              <Badge variant="outline" className="text-[11px] h-5 px-2 font-medium border-muted-foreground/30">
+                                                Page {defect.page}
+                                              </Badge>
+                                            )}
+                                            {defect.similarCount && defect.similarCount > 0 && defect.status === 'pending' && (
+                                              <Badge className="text-[11px] h-5 px-2 bg-primary/10 text-primary border-primary/20 font-semibold">
+                                                +{defect.similarCount} similar issues
+                                              </Badge>
+                                            )}
+                                          </div>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                          {defect.description}
+                                        </p>
+
+                                        {/* AI Recommendation - Only for pending */}
+                                        {defect.status === 'pending' && (
+                                          <div className="bg-gradient-to-r from-blue-50 to-blue-50/20 dark:from-blue-950/30 dark:to-blue-950/10 border-l-4 border-primary rounded-r-lg pl-4 pr-4 py-3">
+                                            <div className="flex items-start gap-2.5">
+                                              <Sparkles className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                              <div className="flex-1">
+                                                <p className="text-[11px] font-bold text-primary uppercase tracking-wide mb-1">AI Suggestion</p>
+                                                <p className="text-sm text-foreground/90 leading-relaxed">{defect.aiRecommendation}</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        )}
+
+                                        {/* Action Buttons - Only for pending */}
+                                        {defect.status === 'pending' && (
+                                          <div className="flex flex-wrap gap-2 pt-1">
+                                            <Button
+                                              onClick={() => handleResolveDefect(defect)}
+                                              size="sm"
+                                              className="h-9 text-sm px-4 font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
+                                            >
+                                              {defect.resolutionType === 'auto' && (
+                                                <>
+                                                  <Sparkles className="w-4 h-4 mr-2" />
+                                                  Auto-Fix
+                                                </>
+                                              )}
+                                              {defect.resolutionType === 'translation' && (
+                                                <>
+                                                  <Languages className="w-4 h-4 mr-2" />
+                                                  Translate
+                                                </>
+                                              )}
+                                              {defect.resolutionType === 'upload' && (
+                                                <>
+                                                  <Upload className="w-4 h-4 mr-2" />
+                                                  Re-upload
+                                                </>
+                                              )}
+                                              {defect.resolutionType === 'rename' && (
+                                                <>
+                                                  <Type className="w-4 h-4 mr-2" />
+                                                  Rename
+                                                </>
+                                              )}
+                                              {defect.resolutionType === 'edit' && (
+                                                <>
+                                                  <Edit3 className="w-4 h-4 mr-2" />
+                                                  Edit Text
+                                                </>
+                                              )}
+                                            </Button>
+
+                                            {defect.similarCount && defect.similarCount > 0 && (
+                                              <Button
+                                                onClick={() => handleApplyToSimilar(defect)}
+                                                size="sm"
+                                                variant="ghost"
+                                                className="h-9 text-sm px-4 font-semibold border-primary/40 hover:bg-primary/10 hover:border-primary text-primary"
+                                              >
+                                                Apply to {defect.similarCount} similar
+                                              </Button>
+                                            )}
+
+                                            <Button
+                                              onClick={() => handleIgnoreDefect(defect.id)}
+                                              size="sm"
+                                              variant="ghost"
+                                              className="h-9 text-sm px-4 font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                                            >
+                                              Ignore
+                                            </Button>
+                                          </div>
+                                        )}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              )}
-
-                              {/* Action Buttons - Only for pending */}
-                              {defect.status === 'pending' && (
-                                <div className="flex flex-wrap gap-2 pt-1">
-                                  <Button
-                                    onClick={() => handleResolveDefect(defect)}
-                                    size="sm"
-                                    className="h-9 text-sm px-4 font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
-                                  >
-                                    {defect.resolutionType === 'auto' && (
-                                      <>
-                                        <Sparkles className="w-4 h-4 mr-2" />
-                                        Auto-Fix
-                                      </>
-                                    )}
-                                    {defect.resolutionType === 'translation' && (
-                                      <>
-                                        <Languages className="w-4 h-4 mr-2" />
-                                        Translate
-                                      </>
-                                    )}
-                                    {defect.resolutionType === 'upload' && (
-                                      <>
-                                        <Upload className="w-4 h-4 mr-2" />
-                                        Re-upload
-                                      </>
-                                    )}
-                                    {defect.resolutionType === 'rename' && (
-                                      <>
-                                        <Type className="w-4 h-4 mr-2" />
-                                        Rename
-                                      </>
-                                    )}
-                                    {defect.resolutionType === 'edit' && (
-                                      <>
-                                        <Edit3 className="w-4 h-4 mr-2" />
-                                        Edit Text
-                                      </>
-                                    )}
-                                  </Button>
-                                  
-                                  {defect.similarCount && defect.similarCount > 0 && (
-                                    <Button
-                                      onClick={() => handleApplyToSimilar(defect)}
-                                      size="sm"
-                                      variant="outline"
-                                      className="h-9 text-sm px-4 font-semibold border-primary/40 hover:bg-primary/10 hover:border-primary text-primary"
-                                    >
-                                      Apply to {defect.similarCount} similar
-                                    </Button>
-                                  )}
-                                  
-                                  <Button
-                                    onClick={() => handleIgnoreDefect(defect.id)}
-                                    size="sm"
-                                    variant="ghost"
-                                    className="h-9 text-sm px-4 font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                                  >
-                                    Ignore
-                                  </Button>
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                              );
+                            })}
                         </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-                  </div>
-                );
-              })}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
           )}
         </div>
 
         {/* Resolution Modals */}
-        
+
         {/* Translation Modal */}
         {resolutionModal === 'translation' && activeDefectForResolution && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -1640,9 +1633,9 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                   toast.success('Re-running Pre-Check...', {
                     description: activeDefectForResolution.title
                   });
-                  
+
                   setTimeout(() => {
-                    setDefects(prev => prev.map(d => 
+                    setDefects(prev => prev.map(d =>
                       d.id === activeDefectForResolution.id ? { ...d, status: 'resolved' } : d
                     ));
                     setIsReProcessing(false);
@@ -1728,102 +1721,101 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
         <div className="flex-1 overflow-y-auto px-8 py-6" ref={chatContainerRef}>
           <div className="min-h-full flex flex-col justify-end">
             <div className="space-y-6 pb-2">
-            {messages.map((message, index) => (
-              <div key={message.id}>
-                {/* Message Bubble */}
-                <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  {message.type === 'ai' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                      message.type === 'user'
+              {messages.map((message, index) => (
+                <div key={message.id}>
+                  {/* Message Bubble */}
+                  <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    {message.type === 'ai' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+                      </div>
+                    )}
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-5 py-4 ${message.type === 'user'
                         ? 'bg-primary text-primary-foreground'
                         : 'bg-card border border-border text-foreground shadow-sm'
-                    }`}
-                  >
-                    <p className="text-base leading-relaxed whitespace-pre-wrap">
-                      {message.type === 'ai' 
-                        ? message.content.slice(0, visibleChars[message.id] || message.content.length)
-                        : message.content
-                      }
-                    </p>
-                    
-                    {/* Show uploaded files */}
-                    {message.uploadedFiles && message.uploadedFiles.length > 0 && (
-                      <div className="mt-3 space-y-2">
-                        {message.uploadedFiles.map((file) => (
-                          <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
-                            <File className="w-4 h-4" />
-                            <span>{file.name}</span>
-                          </div>
-                        ))}
+                        }`}
+                    >
+                      <p className="text-base leading-relaxed whitespace-pre-wrap">
+                        {message.type === 'ai'
+                          ? message.content.slice(0, visibleChars[message.id] || message.content.length)
+                          : message.content
+                        }
+                      </p>
+
+                      {/* Show uploaded files */}
+                      {message.uploadedFiles && message.uploadedFiles.length > 0 && (
+                        <div className="mt-3 space-y-2">
+                          {message.uploadedFiles.map((file) => (
+                            <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
+                              <File className="w-4 h-4" />
+                              <span>{file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {message.type === 'user' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <User className="w-5 h-5 text-white" />
                       </div>
                     )}
                   </div>
-                  {message.type === 'user' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <User className="w-5 h-5 text-white" />
+
+                  {/* Options (Chips) */}
+                  {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && !isProcessing && typingMessageId !== message.id && (
+                    <div className="ml-16 mt-4 flex flex-wrap gap-2">
+                      {message.options.map((option) => {
+                        const Icon = option.icon;
+                        return (
+                          <button
+                            key={option.id}
+                            onClick={() => handleOptionSelect(option.id, option.label)}
+                            className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
+                          >
+                            {Icon && <Icon className="w-4 h-4" />}
+                            {option.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
+              ))}
 
-                {/* Options (Chips) */}
-                {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && !isProcessing && typingMessageId !== message.id && (
-                  <div className="ml-16 mt-4 flex flex-wrap gap-2">
-                    {message.options.map((option) => {
-                      const Icon = option.icon;
-                      return (
-                        <button
-                          key={option.id}
-                          onClick={() => handleOptionSelect(option.id, option.label)}
-                          className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
-                        >
-                          {Icon && <Icon className="w-4 h-4" />}
-                          {option.label}
-                        </button>
-                      );
-                    })}
+              {isTyping && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
                   </div>
-                )}
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                </div>
-                <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {isProcessing && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                </div>
-                <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                    <p className="text-sm text-foreground">
-                      Performing pre-check...
-                    </p>
+              {isProcessing && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+                  </div>
+                  <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      <p className="text-sm text-foreground">
+                        Performing pre-check...
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div ref={messagesEndRef} className="h-4" />
-          </div>
+              <div ref={messagesEndRef} className="h-4" />
+            </div>
           </div>
         </div>
 
@@ -1837,19 +1829,18 @@ Date: ${new Date().toLocaleDateString('en-IN')}`;
                 onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
                 placeholder={
                   (currentStage === 'initial' || currentStage === 'jurisdiction' || currentStage === 'case-type') && !([...messages].reverse().find(m => m.type === 'ai')?.options?.length)
-                    ? currentStage === 'initial' 
+                    ? currentStage === 'initial'
                       ? 'Type petitioner name here... ✍️'
                       : currentStage === 'jurisdiction'
-                      ? 'Type respondent name here... ✍️'
-                      : 'Type your case type here... ✍️'
+                        ? 'Type respondent name here... ✍️'
+                        : 'Type your case type here... ✍️'
                     : 'Type your message here...'
                 }
                 disabled={currentStage !== 'initial' && currentStage !== 'jurisdiction' && currentStage !== 'case-type'}
-                className={`w-full h-16 pl-6 pr-28 text-base rounded-2xl transition-all duration-300 ${
-                  (currentStage === 'initial' || currentStage === 'jurisdiction' || currentStage === 'case-type') && !([...messages].reverse().find(m => m.type === 'ai')?.options?.length)
-                    ? 'bg-primary/5 border-2 border-primary shadow-lg shadow-primary/20 animate-pulse'
-                    : 'bg-card border-2 border-border focus:border-primary'
-                } text-foreground`}
+                className={`w-full h-16 pl-6 pr-28 text-base rounded-2xl transition-all duration-300 ${(currentStage === 'initial' || currentStage === 'jurisdiction' || currentStage === 'case-type') && !([...messages].reverse().find(m => m.type === 'ai')?.options?.length)
+                  ? 'bg-primary/5 border-2 border-primary shadow-lg shadow-primary/20 animate-pulse'
+                  : 'bg-card border-2 border-border focus:border-primary'
+                  } text-foreground`}
               />
               <div className="absolute right-2 top-3 flex items-center gap-2">
                 <Button

@@ -253,15 +253,15 @@ export function FinalPreview({ intakeData, documents, onBack, onStartOver }: Fin
                       IN THE {intakeData.court === 'supreme-court' ? 'SUPREME COURT OF INDIA' : 'HIGH COURT OF DELHI AT NEW DELHI'}
                     </p>
                     <p className="text-sm text-muted-foreground">{intakeData.caseType.replace(/-/g, ' ').toUpperCase()} NO. _____ OF 2024</p>
-                    
+
                     <div className="py-6 space-y-3">
                       <div>
                         <p className="font-bold text-lg text-foreground">{intakeData.petitioner}</p>
                         <p className="text-sm text-muted-foreground">...Petitioner</p>
                       </div>
-                      
+
                       <p className="text-muted-foreground font-semibold">versus</p>
-                      
+
                       <div>
                         <p className="font-bold text-lg text-foreground">{intakeData.respondent}</p>
                         <p className="text-sm text-muted-foreground">...Respondent</p>
@@ -348,7 +348,7 @@ export function FinalPreview({ intakeData, documents, onBack, onStartOver }: Fin
                   <div className="flex-1">
                     <h3 className="font-bold text-foreground text-lg mb-2">Registry-Compliant Filing Ready!</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                      Your petition has been successfully scrutinized, all defects have been cured, and the filing 
+                      Your petition has been successfully scrutinized, all defects have been cured, and the filing
                       has been compiled according to court standards. The document is ready for e-filing submission.
                     </p>
                     <div className="flex items-center gap-2 text-xs text-green-700 dark:text-green-300">
@@ -371,7 +371,7 @@ export function FinalPreview({ intakeData, documents, onBack, onStartOver }: Fin
           <div className="flex items-center justify-between max-w-4xl mx-auto">
             <div className="flex gap-3">
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={onStartOver}
                 className="font-semibold"
               >

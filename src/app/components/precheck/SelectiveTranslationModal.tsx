@@ -79,11 +79,10 @@ export function SelectiveTranslationModal({
                 <button
                   key={page}
                   onClick={() => togglePage(page)}
-                  className={`aspect-square rounded-lg border-[0.5px] flex items-center justify-center text-sm font-semibold transition-all ${
-                    selectedPages.includes(page)
+                  className={`aspect-square rounded-lg border-[0.5px] flex items-center justify-center text-sm font-semibold transition-all ${selectedPages.includes(page)
                       ? 'bg-[#1E3A8A] border-[#1E3A8A] text-white shadow-lg'
                       : 'bg-card dark:bg-slate-800 border-border dark:border-white/20 text-foreground dark:text-white hover:border-[#1E3A8A] hover:bg-[#1E3A8A]/10'
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
@@ -105,7 +104,7 @@ export function SelectiveTranslationModal({
         <div className="bg-accent/30 dark:bg-slate-800/50 border-t-[0.5px] border-border dark:border-white/10 px-6 py-4 flex gap-3">
           <Button
             onClick={onClose}
-            variant="outline"
+            variant="ghost"
             className="flex-1 border-[0.5px] border-border dark:border-white/30"
           >
             Cancel

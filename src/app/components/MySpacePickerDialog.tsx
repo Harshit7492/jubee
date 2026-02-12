@@ -140,11 +140,10 @@ export function MySpacePickerDialog({ isOpen, onClose, onSelect }: MySpacePicker
                   <button
                     key={folder.id}
                     onClick={() => setSelectedFolder(folder.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
-                      selectedFolder === folder.id
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${selectedFolder === folder.id
                         ? 'bg-primary/10 text-primary'
                         : 'hover:bg-muted text-foreground'
-                    }`}
+                      }`}
                   >
                     <Icon className={`w-4 h-4 ${selectedFolder === folder.id ? 'text-primary' : folder.color}`} />
                     <span className="text-sm font-medium flex-1 text-left truncate">{folder.name}</span>
@@ -189,17 +188,15 @@ export function MySpacePickerDialog({ isOpen, onClose, onSelect }: MySpacePicker
                     <tr
                       key={doc.id}
                       onClick={() => toggleDocument(doc.id)}
-                      className={`border-b border-border hover:bg-muted/20 cursor-pointer transition-colors ${
-                        index % 2 === 0 ? 'bg-background' : 'bg-muted/5'
-                      }`}
+                      className={`border-b border-border hover:bg-muted/20 cursor-pointer transition-colors ${index % 2 === 0 ? 'bg-background' : 'bg-muted/5'
+                        }`}
                     >
                       <td className="px-4 py-3">
                         <div
-                          className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                            selectedDocuments.has(doc.id)
+                          className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${selectedDocuments.has(doc.id)
                               ? 'bg-primary border-primary'
                               : 'border-border hover:border-primary'
-                          }`}
+                            }`}
                         >
                           {selectedDocuments.has(doc.id) && (
                             <Check className="w-3 h-3 text-primary-foreground" />
@@ -256,7 +253,7 @@ export function MySpacePickerDialog({ isOpen, onClose, onSelect }: MySpacePicker
           <div className="flex items-center gap-3">
             <Button
               onClick={onClose}
-              variant="outline"
+              variant="ghost"
               className="h-10 px-6 rounded-xl border-2"
             >
               Cancel

@@ -133,7 +133,7 @@ export function FormatMismatchModal({
               setShowUploadOptions(false);
               onClose();
             }}
-            variant="outline"
+            variant="ghost"
             className="w-full border-[0.5px] border-border"
           >
             Cancel

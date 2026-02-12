@@ -116,7 +116,7 @@ export function CauseListsView() {
               </div>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline" className="border-border hover:bg-accent font-semibold">
+              <Button variant="ghost" className="border-border hover:bg-accent font-semibold">
                 <Download className="w-4 h-4 mr-2" />
                 Download PDF
               </Button>
@@ -251,11 +251,11 @@ export function CauseListsView() {
               Showing <span className="font-bold text-foreground">1-5</span> of{' '}
               <span className="font-bold text-foreground">24</span> listings
             </div>
-            
+
             {/* Pagination Controls */}
             <div className="flex items-center gap-2">
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
@@ -263,7 +263,7 @@ export function CauseListsView() {
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              
+
               <div className="flex items-center gap-1">
                 {[...Array(totalPages)].map((_, index) => {
                   const pageNumber = index + 1;
@@ -273,8 +273,8 @@ export function CauseListsView() {
                       variant={currentPage === pageNumber ? "default" : "ghost"}
                       size="sm"
                       onClick={() => setCurrentPage(pageNumber)}
-                      className={currentPage === pageNumber 
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold min-w-[2.5rem]" 
+                      className={currentPage === pageNumber
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold min-w-[2.5rem]"
                         : "hover:bg-accent text-foreground font-semibold min-w-[2.5rem]"
                       }
                     >
@@ -283,9 +283,9 @@ export function CauseListsView() {
                   );
                 })}
               </div>
-              
+
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}

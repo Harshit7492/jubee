@@ -28,9 +28,9 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
 
   const handleRedo = () => {
     if (!redoInstruction.trim()) return;
-    
+
     setIsRegenerating(true);
-    
+
     // Simulate AI regeneration
     setTimeout(() => {
       // Mock response based on instruction
@@ -47,7 +47,7 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
           "This document serves as proof of property ownership. The petitioner is the rightful owner of this property and has resided on it for the past 20 years."
         );
       }
-      
+
       setIsRegenerating(false);
       setShowRedoInput(false);
       setRedoInstruction('');
@@ -120,7 +120,7 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
             <div className="px-6 py-3 bg-accent/10 border-b-[0.5px] border-border">
               <div className="flex items-center gap-2">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   onClick={() => {
                     setShowRedoInput(!showRedoInput);
@@ -132,7 +132,7 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
                   Redo
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   onClick={() => {
                     setShowMSWord(true);
@@ -200,7 +200,7 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
                     <p className="text-sm font-semibold text-foreground">Certified English Translation</p>
                     <p className="text-xs text-muted-foreground mt-1">Annexure P-3 (Translation)</p>
                   </div>
-                  
+
                   {/* Translation Content */}
                   <div className="space-y-4 text-base leading-relaxed">
                     <p className="text-justify">{translatedText}</p>
@@ -208,19 +208,19 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
                       [ Corresponding English translation continues... ]
                     </p>
                     <p className="text-justify text-muted-foreground mt-4">
-                      The petitioner further submits that all necessary documents have been duly verified and authenticated. 
+                      The petitioner further submits that all necessary documents have been duly verified and authenticated.
                       The property in question has clear title and there are no encumbrances or disputes pending in any court of law.
                     </p>
                     <p className="text-justify text-muted-foreground">
-                      The petitioner has been paying all municipal taxes and utility bills regularly without any default. 
+                      The petitioner has been paying all municipal taxes and utility bills regularly without any default.
                       The property is registered under registration number XYZ/2004 dated 15th March 2004 in the office of the Sub-Registrar.
                     </p>
                     <p className="text-justify text-muted-foreground">
-                      It is humbly submitted that the petitioner has exhausted all alternative remedies available under law 
+                      It is humbly submitted that the petitioner has exhausted all alternative remedies available under law
                       and this Hon'ble Court is the only recourse for justice in this matter.
                     </p>
                     <p className="text-justify text-muted-foreground">
-                      The petitioner undertakes to abide by any orders or directions that this Hon'ble Court may be pleased to pass 
+                      The petitioner undertakes to abide by any orders or directions that this Hon'ble Court may be pleased to pass
                       in the interest of justice and equity.
                     </p>
                   </div>
@@ -230,8 +230,8 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
                   <div className="text-xs text-muted-foreground italic space-y-2">
                     <p className="font-semibold">Translator's Certificate:</p>
                     <p>
-                      I certify that this is a true and accurate translation of the original Hindi document 
-                      to the best of my knowledge and ability. The translation has been prepared in accordance 
+                      I certify that this is a true and accurate translation of the original Hindi document
+                      to the best of my knowledge and ability. The translation has been prepared in accordance
                       with the requirements of the {defect.documentName.includes('Supreme') ? 'Supreme Court of India' : 'Delhi High Court'}.
                     </p>
                     <p className="mt-4 font-semibold">
@@ -257,24 +257,21 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
               </div>
             )}
           </div>
-          
+
           <div className="grid grid-cols-2 gap-3 mb-4">
             {/* Append Option */}
             <button
               onClick={() => setSelectedMode('append')}
-              className={`p-4 rounded-xl border-[0.5px] transition-all text-left ${
-                selectedMode === 'append'
+              className={`p-4 rounded-xl border-[0.5px] transition-all text-left ${selectedMode === 'append'
                   ? 'border-primary bg-primary/5 shadow-lg'
                   : 'border-border hover:border-primary/50 hover:bg-accent'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-2 mb-2">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                  selectedMode === 'append' ? 'bg-primary' : 'bg-accent'
-                }`}>
-                  <FileText className={`w-4 h-4 ${
-                    selectedMode === 'append' ? 'text-white' : 'text-muted-foreground'
-                  }`} />
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${selectedMode === 'append' ? 'bg-primary' : 'bg-accent'
+                  }`}>
+                  <FileText className={`w-4 h-4 ${selectedMode === 'append' ? 'text-white' : 'text-muted-foreground'
+                    }`} />
                 </div>
                 <h4 className="font-semibold text-sm text-foreground">Translate + Append</h4>
               </div>
@@ -286,19 +283,16 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
             {/* Replace Option */}
             <button
               onClick={() => setSelectedMode('replace')}
-              className={`p-4 rounded-xl border-[0.5px] transition-all text-left ${
-                selectedMode === 'replace'
+              className={`p-4 rounded-xl border-[0.5px] transition-all text-left ${selectedMode === 'replace'
                   ? 'border-primary bg-primary/5 shadow-lg'
                   : 'border-border hover:border-primary/50 hover:bg-accent'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-2 mb-2">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                  selectedMode === 'replace' ? 'bg-primary' : 'bg-accent'
-                }`}>
-                  <ArrowRight className={`w-4 h-4 ${
-                    selectedMode === 'replace' ? 'text-white' : 'text-muted-foreground'
-                  }`} />
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${selectedMode === 'replace' ? 'bg-primary' : 'bg-accent'
+                  }`}>
+                  <ArrowRight className={`w-4 h-4 ${selectedMode === 'replace' ? 'text-white' : 'text-muted-foreground'
+                    }`} />
                 </div>
                 <h4 className="font-semibold text-sm text-foreground">Translate + Replace</h4>
               </div>
@@ -310,7 +304,7 @@ export function TranslationOverlay({ defect, onClose, onComplete }: TranslationO
 
           <div className="flex gap-3">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={onClose}
               className="flex-1 font-semibold border-[0.5px] dark:border-white/30"
             >

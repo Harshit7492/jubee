@@ -95,9 +95,8 @@ function DraggableDocument({ document, index, moveDocument }: DraggableDocumentP
   return (
     <div
       ref={(node) => drag(drop(node))}
-      className={`flex items-center gap-3 p-4 rounded-xl border-2 border-border bg-card hover:border-primary/50 transition-all cursor-move ${
-        isDragging ? 'opacity-50' : ''
-      }`}
+      className={`flex items-center gap-3 p-4 rounded-xl border-2 border-border bg-card hover:border-primary/50 transition-all cursor-move ${isDragging ? 'opacity-50' : ''
+        }`}
     >
       <GripVertical className="w-5 h-5 text-muted-foreground flex-shrink-0" />
       <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -134,19 +133,19 @@ export function CompilationStepper({
     const updatedDocs = [...documents];
     const [draggedDoc] = updatedDocs.splice(dragIndex, 1);
     updatedDocs.splice(hoverIndex, 0, draggedDoc);
-    
+
     // Update order numbers
     const reordered = updatedDocs.map((doc, index) => ({
       ...doc,
       order: index + 1,
     }));
-    
+
     onDocumentsUpdate(reordered);
   };
 
   const handleNext = () => {
     setCompletedSteps(new Set(completedSteps).add(currentStep.id));
-    
+
     if (currentStepIndex < steps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
     } else {
@@ -156,7 +155,7 @@ export function CompilationStepper({
 
   const handleSkip = () => {
     setSkippedSteps(new Set(skippedSteps).add(currentStep.id));
-    
+
     if (currentStepIndex < steps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
     } else {
@@ -202,7 +201,7 @@ export function CompilationStepper({
                   {documents.length} Documents
                 </Badge>
               </div>
-              
+
               <div className="space-y-2">
                 {documents.map((doc, index) => (
                   <DraggableDocument
@@ -452,36 +451,33 @@ export function CompilationStepper({
                   {/* Connector Line */}
                   {index < steps.length - 1 && (
                     <div
-                      className={`absolute left-5 top-12 w-0.5 h-12 ${
-                        isCompleted || isSkipped ? 'bg-[#008080]' : 'bg-border'
-                      }`}
+                      className={`absolute left-5 top-12 w-0.5 h-12 ${isCompleted || isSkipped ? 'bg-[#008080]' : 'bg-border'
+                        }`}
                     />
                   )}
 
                   {/* Step Card */}
                   <div
-                    className={`relative p-4 rounded-xl border-2 transition-all ${
-                      isCurrent
-                        ? 'border-[#008080] bg-[#008080]/5 shadow-lg'
-                        : isCompleted
+                    className={`relative p-4 rounded-xl border-2 transition-all ${isCurrent
+                      ? 'border-[#008080] bg-[#008080]/5 shadow-lg'
+                      : isCompleted
                         ? 'border-green-500/30 bg-green-50 dark:bg-green-900/10'
                         : isSkipped
-                        ? 'border-border/50 bg-accent/20'
-                        : 'border-border bg-card'
-                    }`}
+                          ? 'border-border/50 bg-accent/20'
+                          : 'border-border bg-card'
+                      }`}
                   >
                     <div className="flex items-start gap-3">
                       {/* Step Icon/Status */}
                       <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                          isCurrent
-                            ? 'bg-[#008080] text-white'
-                            : isCompleted
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${isCurrent
+                          ? 'bg-[#008080] text-white'
+                          : isCompleted
                             ? 'bg-green-500 text-white'
                             : isSkipped
-                            ? 'bg-muted text-muted-foreground'
-                            : 'bg-accent text-muted-foreground'
-                        }`}
+                              ? 'bg-muted text-muted-foreground'
+                              : 'bg-accent text-muted-foreground'
+                          }`}
                       >
                         {isCompleted ? (
                           <Check className="w-5 h-5" />
@@ -495,13 +491,12 @@ export function CompilationStepper({
                       {/* Step Info */}
                       <div className="flex-1 min-w-0">
                         <h4
-                          className={`font-semibold text-sm mb-1 ${
-                            isCurrent
-                              ? 'text-foreground'
-                              : isSkipped
+                          className={`font-semibold text-sm mb-1 ${isCurrent
+                            ? 'text-foreground'
+                            : isSkipped
                               ? 'text-muted-foreground line-through'
                               : 'text-foreground'
-                          }`}
+                            }`}
                         >
                           {step.title}
                         </h4>
@@ -555,7 +550,7 @@ export function CompilationStepper({
         <div className="px-8 py-5 border-t border-border/50 bg-card">
           <div className="flex items-center justify-between max-w-4xl mx-auto">
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={handleBack}
               className="font-semibold"
             >
@@ -566,7 +561,7 @@ export function CompilationStepper({
             <div className="flex gap-3">
               {currentStep.skippable && (
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={handleSkip}
                   className="font-semibold"
                 >

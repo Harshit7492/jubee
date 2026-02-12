@@ -582,11 +582,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               {!isCollapsed ? (
                 <button
                   onClick={handleNewChat}
-                  className={`w-full p-3 rounded-xl transition-all text-left group ${
-                    selectedView === 'new-chat'
+                  className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'new-chat'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <LayoutDashboard className={`w-5 h-5 ${selectedView === 'new-chat' ? 'text-primary-foreground' : 'text-blue-500'}`} />
@@ -598,11 +597,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               ) : (
                 <button
                   onClick={handleNewChat}
-                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                    selectedView === 'new-chat'
+                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'new-chat'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <LayoutDashboard className={`w-5 h-5 ${selectedView === 'new-chat' ? 'text-primary-foreground' : 'text-blue-500'}`} />
                 </button>
@@ -612,11 +610,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               {!isCollapsed ? (
                 <button
                   onClick={() => setSelectedView('recent-chats')}
-                  className={`w-full p-3 rounded-xl transition-all text-left group ${
-                    selectedView === 'recent-chats'
+                  className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'recent-chats'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <MessageSquare className={`w-5 h-5 ${selectedView === 'recent-chats' ? 'text-primary-foreground' : 'text-primary'}`} />
@@ -631,11 +628,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               ) : (
                 <button
                   onClick={() => setSelectedView('recent-chats')}
-                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                    selectedView === 'recent-chats'
+                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'recent-chats'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <MessageSquare className={`w-5 h-5 ${selectedView === 'recent-chats' ? 'text-primary-foreground' : 'text-primary'}`} />
                 </button>
@@ -645,11 +641,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               {!isCollapsed ? (
                 <button
                   onClick={() => setSelectedView('case-files')}
-                  className={`w-full p-3 rounded-xl transition-all text-left group ${
-                    selectedView === 'case-files'
+                  className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'case-files'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <FolderOpen className={`w-5 h-5 ${selectedView === 'case-files' ? 'text-primary-foreground' : 'text-amber-500'}`} />
@@ -664,11 +659,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               ) : (
                 <button
                   onClick={() => setSelectedView('case-files')}
-                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                    selectedView === 'case-files'
+                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'case-files'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <FolderOpen className={`w-5 h-5 ${selectedView === 'case-files' ? 'text-primary-foreground' : 'text-amber-500'}`} />
                 </button>
@@ -678,11 +672,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               {!isCollapsed ? (
                 <div
                   onClick={() => setSelectedView('recent-court-orders')}
-                  className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${
-                    selectedView === 'recent-court-orders'
+                  className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${selectedView === 'recent-court-orders'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <Gavel className={`w-5 h-5 ${selectedView === 'recent-court-orders' ? 'text-primary-foreground' : 'text-purple-500'}`} />
@@ -704,11 +697,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               ) : (
                 <button
                   onClick={() => setSelectedView('recent-court-orders')}
-                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                    selectedView === 'recent-court-orders'
+                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'recent-court-orders'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <Gavel className={`w-5 h-5 ${selectedView === 'recent-court-orders' ? 'text-primary-foreground' : 'text-purple-500'}`} />
                 </button>
@@ -727,11 +719,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                       setIsAutoCaveatDialogOpen(true);
                     }
                   }}
-                  className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${
-                    selectedView === 'auto-caveat'
+                  className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${selectedView === 'auto-caveat'
                       ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg'
                       : 'bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/20 hover:to-primary/10 text-foreground border border-primary/20'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <Bell className={`w-5 h-5 ${selectedView === 'auto-caveat' ? 'text-primary-foreground animate-pulse' : 'text-primary'}`} />
@@ -759,11 +750,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                       setIsAutoCaveatDialogOpen(true);
                     }
                   }}
-                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                    selectedView === 'auto-caveat'
+                  className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'auto-caveat'
                       ? 'bg-primary text-primary-foreground shadow-sm'
                       : 'hover:bg-accent text-foreground'
-                  }`}
+                    }`}
                 >
                   <Bell className={`w-5 h-5 ${selectedView === 'auto-caveat' ? 'text-primary-foreground animate-pulse' : 'text-primary'}`} />
                 </button>
@@ -881,7 +871,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                     <div className="flex items-center gap-3">
                       <Button
                         onClick={() => fileInputRef.current?.click()}
-                        variant="outline"
+                        variant="ghost"
                         className="border-border hover:bg-accent font-semibold h-11 px-5"
                       >
                         <Upload className="w-4 h-4 mr-2" />
@@ -921,7 +911,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                 {selectedView === 'new-chat' ? (
                   // AI Tools View (inline)
                   <div className="px-8 py-8">
-                    <CaseResearchBoard caseData={caseData} onBack={() => {}} onNavigate={onNavigate} />
+                    <CaseResearchBoard caseData={caseData} onBack={() => { }} onNavigate={onNavigate} />
                   </div>
                 ) : selectedView === 'case-files' && !selectedFolder ? (
                   // Case Files Grid - Show folders
@@ -959,7 +949,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                         </div>
                         <div className="flex gap-2">
                           <Button
-                            variant="outline"
+                            variant="ghost"
                             className="border-border hover:bg-accent font-semibold"
                           >
                             <Upload className="w-4 h-4 mr-1" />
@@ -970,7 +960,6 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                             className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
                           >
                             <ArrowLeft className="w-5 h-5 mr-2" />
-                            Back
                           </Button>
                         </div>
                       </div>
@@ -1231,11 +1220,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             {!isCollapsed ? (
               <button
                 onClick={handleNewChat}
-                className={`w-full p-3 rounded-xl transition-all text-left group ${
-                  selectedView === 'new-chat'
+                className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'new-chat'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <LayoutDashboard className={`w-5 h-5 ${selectedView === 'new-chat' ? 'text-primary-foreground' : 'text-blue-500'}`} />
@@ -1247,11 +1235,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             ) : (
               <button
                 onClick={handleNewChat}
-                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                  selectedView === 'new-chat'
+                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'new-chat'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <LayoutDashboard className={`w-5 h-5 ${selectedView === 'new-chat' ? 'text-primary-foreground' : 'text-blue-500'}`} />
               </button>
@@ -1261,11 +1248,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             {!isCollapsed ? (
               <button
                 onClick={() => setSelectedView('recent-chats')}
-                className={`w-full p-3 rounded-xl transition-all text-left group ${
-                  selectedView === 'recent-chats'
+                className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'recent-chats'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <MessageSquare className={`w-5 h-5 ${selectedView === 'recent-chats' ? 'text-primary-foreground' : 'text-primary'}`} />
@@ -1280,11 +1266,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             ) : (
               <button
                 onClick={() => setSelectedView('recent-chats')}
-                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                  selectedView === 'recent-chats'
+                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'recent-chats'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <MessageSquare className={`w-5 h-5 ${selectedView === 'recent-chats' ? 'text-primary-foreground' : 'text-primary'}`} />
               </button>
@@ -1294,11 +1279,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             {!isCollapsed ? (
               <button
                 onClick={() => setSelectedView('case-files')}
-                className={`w-full p-3 rounded-xl transition-all text-left group ${
-                  selectedView === 'case-files'
+                className={`w-full p-3 rounded-xl transition-all text-left group ${selectedView === 'case-files'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <FolderOpen className={`w-5 h-5 ${selectedView === 'case-files' ? 'text-primary-foreground' : 'text-amber-500'}`} />
@@ -1313,11 +1297,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             ) : (
               <button
                 onClick={() => setSelectedView('case-files')}
-                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                  selectedView === 'case-files'
+                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'case-files'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <FolderOpen className={`w-5 h-5 ${selectedView === 'case-files' ? 'text-primary-foreground' : 'text-amber-500'}`} />
               </button>
@@ -1327,11 +1310,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             {!isCollapsed ? (
               <div
                 onClick={() => setSelectedView('recent-court-orders')}
-                className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${
-                  selectedView === 'recent-court-orders'
+                className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${selectedView === 'recent-court-orders'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <Gavel className={`w-5 h-5 ${selectedView === 'recent-court-orders' ? 'text-primary-foreground' : 'text-purple-500'}`} />
@@ -1353,11 +1335,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             ) : (
               <button
                 onClick={() => setSelectedView('recent-court-orders')}
-                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                  selectedView === 'recent-court-orders'
+                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'recent-court-orders'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <Gavel className={`w-5 h-5 ${selectedView === 'recent-court-orders' ? 'text-primary-foreground' : 'text-purple-500'}`} />
               </button>
@@ -1376,11 +1357,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                     setIsAutoCaveatDialogOpen(true);
                   }
                 }}
-                className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${
-                  selectedView === 'auto-caveat'
+                className={`w-full p-3 rounded-xl transition-all text-left group cursor-pointer ${selectedView === 'auto-caveat'
                     ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg'
                     : 'bg-gradient-to-r from-primary/10 to-primary/5 hover:from-primary/20 hover:to-primary/10 text-foreground border border-primary/20'
-                }`}
+                  }`}
               >
                 <div className="flex items-center gap-3">
                   <Bell className={`w-5 h-5 ${selectedView === 'auto-caveat' ? 'text-primary-foreground animate-pulse' : 'text-primary'}`} />
@@ -1408,11 +1388,10 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                     setIsAutoCaveatDialogOpen(true);
                   }
                 }}
-                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${
-                  selectedView === 'auto-caveat'
+                className={`w-full p-3 rounded-xl transition-all flex items-center justify-center ${selectedView === 'auto-caveat'
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'hover:bg-accent text-foreground'
-                }`}
+                  }`}
               >
                 <Bell className={`w-5 h-5 ${selectedView === 'auto-caveat' ? 'text-primary-foreground animate-pulse' : 'text-primary'}`} />
               </button>
@@ -1537,7 +1516,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                   <div className="flex items-center gap-3">
                     <Button
                       onClick={() => fileInputRef.current?.click()}
-                      variant="outline"
+                      variant="ghost"
                       className="border-border hover:bg-accent font-semibold h-11 px-5"
                     >
                       <Upload className="w-4 h-4 mr-2" />
@@ -1577,7 +1556,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
               <div className="w-full">
                 {selectedView === 'new-chat' ? (
                   // AI Tools View (inline)
-                  <CaseResearchBoard caseData={caseData} onBack={() => {}} onNavigate={onNavigate} />
+                  <CaseResearchBoard caseData={caseData} onBack={() => { }} onNavigate={onNavigate} />
                 ) : selectedView === 'case-files' && !selectedFolder ? (
                   // Case Files Grid - Show folders
                   <CaseFilesView
@@ -1673,7 +1652,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
                     folder={selectedFolder}
                     documents={filteredDocuments}
                     onDocumentClick={handleSelectDocument}
-                    onUploadClick={() => {}}
+                    onUploadClick={() => { }}
                     onBackToFiles={() => setSelectedFolder('')}
                   />
                 )}
@@ -1782,7 +1761,7 @@ export function CaseDetailView({ caseData, onBack, onNavigate }: CaseDetailViewP
             {/* Modal Footer */}
             <div className="px-6 py-4 border-t border-border flex items-center justify-end gap-3">
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={() => setChatToView(null)}
               >
                 Close

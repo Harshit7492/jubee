@@ -65,10 +65,10 @@ export function PSITool({ onBack }: PSIToolProps) {
       <div className="bg-secondary/50 border-b border-border px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={onBack} 
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onBack}
               className="w-9 h-9 hover:bg-primary/10"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -76,7 +76,7 @@ export function PSITool({ onBack }: PSIToolProps) {
             <h3 className="text-xl font-bold text-foreground">Precedent Strength Index</h3>
           </div>
           {result && (
-            <Button variant="outline" className="border-border hover:bg-accent font-semibold">
+            <Button variant="ghost" className="border-border hover:bg-accent font-semibold">
               <Download className="w-4 h-4 mr-2" />
               Download Report
             </Button>
@@ -209,13 +209,12 @@ export function PSITool({ onBack }: PSIToolProps) {
               </div>
 
               {/* Recommendation */}
-              <div className={`border-2 rounded-xl p-6 ${
-                result.psiScore >= 80
+              <div className={`border-2 rounded-xl p-6 ${result.psiScore >= 80
                   ? 'bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/30'
                   : result.psiScore >= 60
-                  ? 'bg-[#FEF3C7] dark:bg-[#F59E0B]/10 border-[#F59E0B]/30'
-                  : 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30'
-              }`}>
+                    ? 'bg-[#FEF3C7] dark:bg-[#F59E0B]/10 border-[#F59E0B]/30'
+                    : 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30'
+                }`}>
                 <div className="flex items-center gap-3 mb-3">
                   <AlertCircle className={`w-6 h-6 ${getScoreColor(result.psiScore)}`} />
                   <h4 className="text-lg font-bold text-foreground">Recommendation</h4>
@@ -227,7 +226,7 @@ export function PSITool({ onBack }: PSIToolProps) {
 
               <Button
                 onClick={() => { setResult(null); setUploadedFile(null); }}
-                variant="outline"
+                variant="ghost"
                 className="w-full h-12 border-border hover:bg-accent font-semibold"
               >
                 Analyze Another Judgment

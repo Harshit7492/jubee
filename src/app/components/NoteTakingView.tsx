@@ -151,7 +151,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
 
   let filteredNotes = notes.filter(note => {
     const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          note.rawContent.toLowerCase().includes(searchQuery.toLowerCase());
+      note.rawContent.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesClient = !filterByClient || note.clientName === filterByClient;
     return matchesSearch && matchesClient;
   });
@@ -206,7 +206,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
     setIsListening(!isListening);
     if (!isListening) {
       toast.success('Started listening...');
-      
+
       // Demo transcript phrases for realistic legal meeting simulation
       const demoTranscript = [
         'Client mentioned the incident occurred on',
@@ -226,7 +226,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
         ' covering medical expenses, vehicle damage,',
         ' and compensation for pain and suffering.',
       ];
-      
+
       const intervalId = setInterval(() => {
         setTranscriptIndex(currentIdx => {
           if (currentIdx < demoTranscript.length) {
@@ -242,7 +242,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
         });
         setRecordingDuration(prev => prev + 1);
       }, 800);
-      
+
       setListeningIntervalId(intervalId);
     } else {
       toast.info('Paused listening');
@@ -257,7 +257,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
     if (!selectedNote) return;
 
     toast.info('Processing with AI...');
-    
+
     setTimeout(() => {
       const polishedContent = {
         summary: `Meeting summary for ${selectedNote.clientName || 'client'}. Key legal matter discussed with comprehensive strategy outlined.`,
@@ -362,7 +362,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
-    
+
     if (hours < 1) return 'Just now';
     if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     const days = Math.floor(hours / 24);
@@ -397,14 +397,14 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
   const handleResumeRecording = () => {
     setIsPaused(false);
     toast.success('Recording resumed');
-    
+
     const demoTranscript = [
       ' Additional points discussed',
       ' regarding the settlement terms.',
       ' Client wants to proceed with litigation',
       ' if settlement negotiations fail.',
     ];
-    
+
     const intervalId = setInterval(() => {
       setTranscriptIndex(currentIdx => {
         if (currentIdx < demoTranscript.length) {
@@ -420,7 +420,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
       });
       setRecordingDuration(prev => prev + 1);
     }, 800);
-    
+
     setListeningIntervalId(intervalId);
   };
 
@@ -453,7 +453,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
     setRecordingTitle('');
     toast.success('Recording saved successfully!');
   };
-  
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-background">
       {/* Header */}
@@ -469,7 +469,6 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                   size="sm"
                 >
                   <ArrowLeft className="w-5 h-5 mr-2" />
-                  Back
                 </Button>
                 <div className="h-6 w-px bg-border" />
               </>
@@ -520,7 +519,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                 {filteredNotes.length} {filteredNotes.length === 1 ? 'Note' : 'Notes'}
               </p>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto">
               {filteredNotes.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full px-6 text-center">
@@ -543,11 +542,11 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                           <Sparkles className="w-4 h-4 text-[#1E3A8A] flex-shrink-0 ml-2" />
                         )}
                       </div>
-                      
+
                       <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
                         {note.rawContent}
                       </p>
-                      
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           {note.clientName && (
@@ -590,7 +589,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                     placeholder="Note title..."
                   />
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 flex-wrap">
                     {selectedNote.clientName && (
@@ -610,7 +609,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                       {formatDate(selectedNote.updatedAt)}
                     </Badge>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {!isEditing ? (
                       <>
@@ -620,14 +619,14 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                             setEditContent(selectedNote.rawContent);
                             setEditTitle(selectedNote.title);
                           }}
-                          variant="outline"
+                          variant="ghost"
                           className="border-border hover:bg-accent font-semibold text-sm h-9 whitespace-nowrap"
                         >
                           Edit
                         </Button>
                         <Button
                           onClick={() => setSaveDialog(true)}
-                          variant="outline"
+                          variant="ghost"
                           className="border-border hover:bg-accent font-semibold text-sm h-9 whitespace-nowrap"
                         >
                           <FolderOpen className="w-4 h-4 mr-1" />
@@ -635,7 +634,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                         </Button>
                         <Button
                           onClick={() => setShareDialog(true)}
-                          variant="outline"
+                          variant="ghost"
                           className="border-border hover:bg-accent font-semibold text-sm h-9 whitespace-nowrap"
                         >
                           <Share2 className="w-4 h-4 mr-1" />
@@ -650,7 +649,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                             setEditContent(selectedNote.rawContent);
                             setEditTitle(selectedNote.title);
                           }}
-                          variant="outline"
+                          variant="ghost"
                           className="border-border hover:bg-accent font-semibold text-sm h-9 whitespace-nowrap"
                         >
                           Cancel
@@ -727,11 +726,11 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                           {/* Timeline Scrubber */}
                           <div className="space-y-2">
                             <div className="relative h-2 bg-muted rounded-full overflow-hidden cursor-pointer group">
-                              <div 
+                              <div
                                 className="absolute inset-y-0 left-0 bg-primary transition-all"
                                 style={{ width: `${selectedNote.duration ? (currentTime / selectedNote.duration) * 100 : 0}%` }}
                               />
-                              <div 
+                              <div
                                 className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
                                 style={{ left: `calc(${selectedNote.duration ? (currentTime / selectedNote.duration) * 100 : 0}% - 8px)` }}
                               />
@@ -753,7 +752,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                             >
                               <SkipBack className="w-5 h-5 text-foreground" />
                             </button>
-                            
+
                             <button
                               onClick={handleTogglePlayback}
                               className="w-14 h-14 rounded-full bg-primary hover:bg-primary/90 flex items-center justify-center transition-all shadow-lg shadow-primary/30"
@@ -764,7 +763,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                                 <Play className="w-6 h-6 text-primary-foreground ml-0.5" />
                               )}
                             </button>
-                            
+
                             <button
                               onClick={() => {
                                 if (selectedNote.duration) {
@@ -803,7 +802,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                   {isEditing && !isListening && (
                     <div className="flex-1" />
                   )}
-                  
+
                   {isEditing && isListening && (
                     <div className="flex items-center gap-3 flex-1">
                       {isPaused ? (
@@ -823,7 +822,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                           Pause
                         </button>
                       )}
-                      
+
                       <button
                         onClick={handleStopRecording}
                         className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all bg-red-500 text-white hover:bg-red-600 shadow-lg shadow-red-500/30"
@@ -831,7 +830,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                         <MicOff className="w-4 h-4" />
                         Stop
                       </button>
-                      
+
                       <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-xl ml-auto">
                         <Clock className="w-4 h-4 text-muted-foreground" />
                         <span className="text-sm font-mono text-foreground">
@@ -852,8 +851,8 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
       {/* Save to Case Dialog */}
       {saveDialog && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setSaveDialog(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
@@ -889,7 +888,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                 <div className="flex gap-3">
                   <Button
                     onClick={() => setSaveDialog(false)}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 border-border hover:bg-accent font-semibold"
                   >
                     Cancel
@@ -911,8 +910,8 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
       {/* Share Dialog */}
       {shareDialog && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setShareDialog(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
@@ -954,7 +953,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                 <div className="flex gap-3">
                   <Button
                     onClick={() => setShareDialog(false)}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 border-border hover:bg-accent font-semibold"
                   >
                     Cancel
@@ -977,8 +976,8 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
       {/* Save Recording Dialog */}
       {saveRecordingDialog && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setSaveRecordingDialog(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
@@ -1024,7 +1023,7 @@ Judge asked about Rangappa v. Sri Mohan precedent application. Need to submit wr
                 <div className="flex gap-3">
                   <Button
                     onClick={() => setSaveRecordingDialog(false)}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 border-border hover:bg-accent font-semibold"
                   >
                     Cancel

@@ -14,7 +14,7 @@ interface CalendarEvent {
 
 export function CalendarView() {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 22)); // January 22, 2026
-  
+
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
@@ -74,9 +74,9 @@ export function CalendarView() {
   const isToday = (day: number | null) => {
     if (!day) return false;
     const today = new Date(2026, 0, 22); // Fixed "today" for demo
-    return day === today.getDate() && 
-           currentDate.getMonth() === today.getMonth() && 
-           currentDate.getFullYear() === today.getFullYear();
+    return day === today.getDate() &&
+      currentDate.getMonth() === today.getMonth() &&
+      currentDate.getFullYear() === today.getFullYear();
   };
 
   const hasEvents = (day: number | null) => {
@@ -127,7 +127,7 @@ export function CalendarView() {
                 </h2>
                 <div className="flex gap-2">
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     onClick={previousMonth}
                     className="border-border hover:bg-accent font-semibold"
@@ -135,7 +135,7 @@ export function CalendarView() {
                     <ChevronLeft className="w-4 h-4" />
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     onClick={nextMonth}
                     className="border-border hover:bg-accent font-semibold"
@@ -222,7 +222,7 @@ export function CalendarView() {
                 {/* Separator */}
                 <div className="border-t border-border pt-6 mt-6">
                   <h3 className="text-sm font-medium text-[rgb(221,221,221)] mb-4">Upcoming Events</h3>
-                  
+
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-accent transition-colors cursor-pointer">
                       <div className="w-12 text-center">

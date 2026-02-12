@@ -235,14 +235,14 @@ export function TypingTool({ onBack }: TypingToolProps) {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-               <Button
-              onClick={onBack}
-              variant="ghost"
-              size="icon"
-              className="h-10 w-10 rounded-xl hover:bg-accent"
-            >
-              <ArrowLeft className="w-5 h-5 text-foreground" />
-            </Button>
+              <Button
+                onClick={onBack}
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-xl hover:bg-accent"
+              >
+                <ArrowLeft className="w-5 h-5 text-foreground" />
+              </Button>
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                 <Type className="w-6 h-6 text-primary" />
               </div>
@@ -263,11 +263,10 @@ export function TypingTool({ onBack }: TypingToolProps) {
             {/* Upload PDF Document */}
             <div
               onClick={() => !uploadedFile && fileInputRef.current?.click()}
-              className={`group relative border-2 rounded-xl p-6 transition-all duration-300 ${
-                uploadedFile
+              className={`group relative border-2 rounded-xl p-6 transition-all duration-300 ${uploadedFile
                   ? 'cursor-not-allowed bg-muted/30 border-border/40'
                   : 'cursor-pointer bg-card border-border hover:border-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/5'
-              }`}
+                }`}
             >
               <input
                 ref={fileInputRef}
@@ -290,7 +289,7 @@ export function TypingTool({ onBack }: TypingToolProps) {
 
             {/* Add from My Space */}
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => !uploadedFile && setShowMySpaceBrowser(true)}
               disabled={!!uploadedFile}
               className="group relative border-2 !border-border rounded-xl p-6 transition-all duration-300 cursor-pointer hover:!border-primary hover:bg-primary/5 hover:shadow-md hover:shadow-primary/5 h-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:!border-border disabled:hover:shadow-none bg-transparent"
@@ -359,11 +358,10 @@ export function TypingTool({ onBack }: TypingToolProps) {
                     key={court.id}
                     onClick={() => uploadedFile && setSelectedCourt(selectedCourt?.id === court.id ? null : court)}
                     disabled={!uploadedFile}
-                    className={`p-4 border-2 rounded-xl text-left transition-all duration-300 disabled:cursor-not-allowed ${
-                      selectedCourt?.id === court.id
+                    className={`p-4 border-2 rounded-xl text-left transition-all duration-300 disabled:cursor-not-allowed ${selectedCourt?.id === court.id
                         ? 'border-primary bg-primary/5 shadow-lg shadow-primary/10'
                         : 'border-border hover:border-primary/50'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       <p className="font-bold text-sm text-foreground">{court.name}</p>
@@ -408,9 +406,8 @@ export function TypingTool({ onBack }: TypingToolProps) {
                   <span className="text-sm font-bold text-foreground">Customize Formatting</span>
                 </div>
                 <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground transition-transform ${
-                    customizeFormat ? 'rotate-180' : ''
-                  }`}
+                  className={`w-5 h-5 text-muted-foreground transition-transform ${customizeFormat ? 'rotate-180' : ''
+                    }`}
                 />
               </button>
 
@@ -598,7 +595,7 @@ export function TypingTool({ onBack }: TypingToolProps) {
             </div>
             <div className="flex items-center gap-2">
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={() => setShowHistorySidebar(!showHistorySidebar)}
                 className="h-9"
@@ -847,11 +844,10 @@ export function TypingTool({ onBack }: TypingToolProps) {
                           </div>
                         )}
                         <div
-                          className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                            message.isAI
+                          className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                               ? 'bg-muted border-[0.5px] border-border'
                               : 'bg-[#1E3A8A] text-white'
-                          }`}
+                            }`}
                         >
                           <p className="text-sm leading-relaxed">{message.text}</p>
                           <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>
@@ -906,9 +902,8 @@ export function TypingTool({ onBack }: TypingToolProps) {
           {currentStep === 'review' && (
             <button
               onClick={() => setShowAIChat(!showAIChat)}
-              className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-                showAIChat ? 'scale-0' : 'scale-100'
-              }`}
+              className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showAIChat ? 'scale-0' : 'scale-100'
+                }`}
             >
               <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />

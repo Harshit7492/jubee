@@ -92,14 +92,13 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
             className="hover:bg-accent h-10 px-4 rounded-xl"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
-            Back
           </Button>
           <div className="h-6 w-px bg-border" />
           <h2 className="text-lg font-semibold text-foreground">
             {folderLabels[folder]}
           </h2>
         </div>
-        
+
         {/* Document Count */}
         <div>
           <p className="text-sm text-muted-foreground">
@@ -163,9 +162,8 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                 {filteredDocuments.map((doc, index) => (
                   <tr
                     key={doc.id}
-                    className={`border-b border-border hover:bg-muted/20 cursor-pointer transition-colors ${
-                      index % 2 === 0 ? 'bg-card' : 'bg-muted/5'
-                    }`}
+                    className={`border-b border-border hover:bg-muted/20 cursor-pointer transition-colors ${index % 2 === 0 ? 'bg-card' : 'bg-muted/5'
+                      }`}
                     onClick={() => onDocumentClick(doc)}
                   >
                     <td className="px-6 py-4">
@@ -260,7 +258,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
               <Share2 className="w-4 h-4" />
               Share
             </button>
-            <button 
+            <button
               onClick={() => {
                 toast.success('Download started!');
                 setContextMenu(null);
@@ -299,14 +297,14 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
       {/* Share Dialog */}
       {shareDialog.isOpen && shareDialog.docId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setShareDialog({ isOpen: false, docId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 <div className="relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col items-start pt-[32px] px-[24px] relative w-full">
@@ -322,7 +320,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
                         onClick={() => setShareDialog({ isOpen: false, docId: null })}
@@ -379,7 +377,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                   <div className="content-stretch flex gap-[12px] items-center justify-end pb-[24px] px-[24px] pt-[12px] relative w-full">
                     <Button
                       onClick={() => setShareDialog({ isOpen: false, docId: null })}
-                      variant="outline"
+                      variant="ghost"
                       className="rounded-xl h-12 px-6"
                     >
                       Close
@@ -395,14 +393,14 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
       {/* Rename Dialog */}
       {renameDialog.isOpen && renameDialog.docId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setRenameDialog({ isOpen: false, docId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 <div className="relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col items-start pt-[32px] px-[24px] relative w-full">
@@ -418,7 +416,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
                         onClick={() => setRenameDialog({ isOpen: false, docId: null })}
@@ -445,7 +443,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                   <div className="content-stretch flex gap-[12px] items-center justify-end pb-[24px] px-[24px] pt-[12px] relative w-full">
                     <Button
                       onClick={() => setRenameDialog({ isOpen: false, docId: null })}
-                      variant="outline"
+                      variant="ghost"
                       className="rounded-xl h-12 px-6"
                     >
                       Cancel
@@ -470,14 +468,14 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
       {/* Delete Dialog */}
       {deleteDialog.isOpen && deleteDialog.docId && (
         <>
-          <div 
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={() => setDeleteDialog({ isOpen: false, docId: null })}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="bg-white dark:bg-card relative rounded-[20px] w-full max-w-md pointer-events-auto">
               <div aria-hidden="true" className="absolute border border-border inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_32px_-4px_rgba(30,58,138,0.12),0px_3px_12px_-2px_rgba(30,58,138,0.06)]" />
-              
+
               <div className="content-stretch flex flex-col items-center overflow-clip relative rounded-[inherit] size-full">
                 <div className="relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col items-start pt-[32px] px-[24px] relative w-full">
@@ -493,7 +491,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                     </div>
                     <div className="h-[20px] shrink-0 w-full" />
                     <div className="h-px relative shrink-0 w-full bg-border" />
-                    
+
                     <div className="absolute content-stretch flex items-center p-[12px] right-0 top-[-0.5px]">
                       <button
                         onClick={() => setDeleteDialog({ isOpen: false, docId: null })}
@@ -515,7 +513,7 @@ export function CaseFolderView({ folder, documents, onDocumentClick, onUploadCli
                   <div className="content-stretch flex gap-[12px] items-center justify-end pb-[24px] px-[24px] pt-[12px] relative w-full">
                     <Button
                       onClick={() => setDeleteDialog({ isOpen: false, docId: null })}
-                      variant="outline"
+                      variant="ghost"
                       className="rounded-xl h-12 px-6"
                     >
                       Cancel

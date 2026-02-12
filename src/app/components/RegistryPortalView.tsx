@@ -38,18 +38,18 @@ export function RegistryPortalView() {
   // Flow state
   const [stage, setStage] = useState<FlowStage>('create');
   const [scanProgress, setScanProgress] = useState(0);
-  
+
   // Form state
   const [caseName, setCaseName] = useState('');
   const [selectedCourt, setSelectedCourt] = useState('');
   const [filingType, setFilingType] = useState<'petition' | 'application' | 'misc' | 'orders-judgements'>('petition');
   const [prepareIndex, setPrepareIndex] = useState(true);
-  
+
   // Files state
   const [petitionFile, setPetitionFile] = useState<File | null>(null);
   const [annexureFiles, setAnnexureFiles] = useState<File[]>([]);
   const [annexures, setAnnexures] = useState<AnnexureItem[]>([]);
-  
+
   // Defects state
   const [defects, setDefects] = useState<DefectItem[]>([]);
   const [fixingDefect, setFixingDefect] = useState<DefectItem | null>(null);
@@ -61,7 +61,7 @@ export function RegistryPortalView() {
   const [highlightedText, setHighlightedText] = useState<string>('');
   const [resolutionChoice, setResolutionChoice] = useState<'upload' | 'replace' | 'remove' | null>(null);
   const [currentDefectId, setCurrentDefectId] = useState<number | null>(null);
-  
+
   const petitionInputRef = useRef<HTMLInputElement>(null);
   const annexureInputRef = useRef<HTMLInputElement>(null);
 
@@ -175,7 +175,7 @@ export function RegistryPortalView() {
       toast.error('Please upload petition document');
       return;
     }
-    
+
     // Move to mapping stage
     setAnnexures(mockAnnexures);
     setStage('mapping');
@@ -184,7 +184,7 @@ export function RegistryPortalView() {
   const handleProceedToScan = () => {
     setStage('scanning');
     setScanProgress(0);
-    
+
     const scanInterval = setInterval(() => {
       setScanProgress(prev => {
         if (prev >= 100) {
@@ -211,11 +211,11 @@ export function RegistryPortalView() {
 
   const handleResolutionChoice = (choice: 'upload' | 'replace' | 'remove') => {
     setResolutionChoice(choice);
-    
+
     if (choice === 'remove' && fixingDefect?.type === 'Annexure Missing') {
       // Store the defect ID before clearing fixingDefect
       setCurrentDefectId(fixingDefect.id);
-      
+
       // Load mock petition content with the annexure reference highlighted
       const mockPetitionContent = `IN THE SUPREME COURT OF INDIA
 
@@ -274,17 +274,17 @@ DATE: 10TH FEBRUARY 2026`;
   const handleSaveWordEditorContent = (content: string) => {
     if (currentDefectId && resolutionChoice === 'remove') {
       // Mark the defect as fixed
-      setDefects(prev => prev.map(d => 
-        d.id === currentDefectId 
+      setDefects(prev => prev.map(d =>
+        d.id === currentDefectId
           ? { ...d, status: 'fixed' as const }
           : d
       ));
-      
+
       // Close the Word editor
       setIsWordEditorOpen(false);
       setCurrentDefectId(null);
       setResolutionChoice(null);
-      
+
       toast.success('Reference removed successfully', {
         description: 'The defect has been resolved. Petition updated.'
       });
@@ -345,8 +345,8 @@ DATE: 10TH FEBRUARY 2026`;
               </div>
             </div>
             {stage === 'report' && (
-              <Button 
-                variant="outline" 
+              <Button
+                variant="ghost"
                 className="border-primary/30 text-primary hover:bg-primary/10 font-semibold"
                 onClick={() => setStage('create')}
               >
@@ -408,11 +408,10 @@ DATE: 10TH FEBRUARY 2026`;
                     {(['petition', 'application', 'misc', 'orders-judgements'] as const).map((type) => (
                       <label
                         key={type}
-                        className={`flex-1 flex items-center gap-2 px-3 py-3 rounded-lg border-2 cursor-pointer transition-all ${
-                          filingType === type
-                            ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
-                            : 'border-border hover:border-primary/50 bg-card'
-                        }`}
+                        className={`flex-1 flex items-center gap-2 px-3 py-3 rounded-lg border-2 cursor-pointer transition-all ${filingType === type
+                          ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
+                          : 'border-border hover:border-primary/50 bg-card'
+                          }`}
                       >
                         <input
                           type="radio"
@@ -622,13 +621,13 @@ DATE: 10TH FEBRUARY 2026`;
                             </td>
                             <td className="py-4 px-2">
                               <Badge
-                                variant="outline"
+                                variant="ghost"
                                 className={
                                   annexure.source === 'auto'
                                     ? 'border-primary/20 text-primary bg-primary/10 font-semibold'
                                     : annexure.source === 'missing'
-                                    ? 'border-red-200 text-red-600 bg-red-50 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 font-semibold'
-                                    : 'border-border text-muted-foreground font-semibold'
+                                      ? 'border-red-200 text-red-600 bg-red-50 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 font-semibold'
+                                      : 'border-border text-muted-foreground font-semibold'
                                 }
                               >
                                 {annexure.source === 'auto' ? 'From Petition' : annexure.source === 'missing' ? 'Missing' : 'Manual'}
@@ -665,7 +664,7 @@ DATE: 10TH FEBRUARY 2026`;
               {/* Bottom Actions */}
               <div className="p-6 bg-muted border-t border-border flex justify-between">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   onClick={() => setStage('create')}
                   className="border-border hover:bg-accent font-semibold"
                 >
@@ -706,11 +705,10 @@ DATE: 10TH FEBRUARY 2026`;
                   ].map((step, idx) => (
                     <div
                       key={idx}
-                      className={`flex items-center gap-4 p-4 rounded-xl transition-all ${
-                        scanProgress > step.threshold
-                          ? 'bg-gradient-to-r from-primary/10 to-primary/5'
-                          : 'bg-muted'
-                      }`}
+                      className={`flex items-center gap-4 p-4 rounded-xl transition-all ${scanProgress > step.threshold
+                        ? 'bg-gradient-to-r from-primary/10 to-primary/5'
+                        : 'bg-muted'
+                        }`}
                     >
                       {scanProgress > step.threshold ? (
                         <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
@@ -758,7 +756,7 @@ DATE: 10TH FEBRUARY 2026`;
                     )}
                   </div>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     className="border-border text-foreground hover:bg-accent"
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -865,7 +863,7 @@ DATE: 10TH FEBRUARY 2026`;
                       Fix Now
                     </Button>
                     <Button
-                      variant="outline"
+                      variant="ghost"
                       size="sm"
                       onClick={() => handleMarkForLater(defect.id)}
                       className="flex-1 border-border hover:bg-accent"
@@ -973,7 +971,7 @@ DATE: 10TH FEBRUARY 2026`;
                     <div>
                       <h3 className="text-lg font-semibold text-red-900 dark:text-red-300 mb-2">Pending Defects</h3>
                       <p className="text-sm text-red-800 dark:text-red-400">
-                        You have {defects.filter(d => d.status === 'pending').length} defect(s) remaining. 
+                        You have {defects.filter(d => d.status === 'pending').length} defect(s) remaining.
                         The court registry may raise objections during scrutiny. It's recommended to address these before filing.
                       </p>
                     </div>
@@ -984,7 +982,7 @@ DATE: 10TH FEBRUARY 2026`;
               {/* Available Actions */}
               <div className="space-y-3">
                 <h3 className="text-lg font-semibold text-foreground mb-4">What's Next?</h3>
-                
+
                 <Button
                   className="w-full h-14 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 text-primary-foreground font-bold justify-between"
                 >
@@ -994,7 +992,7 @@ DATE: 10TH FEBRUARY 2026`;
 
                 <div className="grid grid-cols-2 gap-3">
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     className="h-12 border-border hover:bg-accent font-semibold"
                     onClick={() => {
                       setStage('report');
@@ -1003,7 +1001,7 @@ DATE: 10TH FEBRUARY 2026`;
                     View Defect Report
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     className="h-12 border-border hover:bg-accent font-semibold"
                   >
                     Send to Workflow
@@ -1011,7 +1009,7 @@ DATE: 10TH FEBRUARY 2026`;
                 </div>
 
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   className="w-full h-12 border-primary/30 text-primary hover:bg-primary/10 font-semibold"
                   onClick={() => {
                     setStage('create');
@@ -1031,7 +1029,7 @@ DATE: 10TH FEBRUARY 2026`;
               <div className="mt-6 p-4 bg-muted/50 rounded-lg">
                 <p className="text-xs text-muted-foreground text-center">
                   <AlertCircle className="w-3 h-3 inline mr-1" />
-                  This pre-check is based on publicly available court rules. Jubee cannot guarantee acceptance by court registry. 
+                  This pre-check is based on publicly available court rules. Jubee cannot guarantee acceptance by court registry.
                   Always verify with your court's latest guidelines before filing.
                 </p>
               </div>
@@ -1056,20 +1054,20 @@ DATE: 10TH FEBRUARY 2026`;
               </div>
               <div className="flex gap-3">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   className="border-border hover:bg-accent font-semibold"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Download Defect Report
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   className="border-border hover:bg-accent font-semibold"
                 >
                   Re-Run Pre-Check
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   className="border-red-200 text-red-600 hover:bg-red-50 dark:bg-red-500/10 dark:border-red-500/20 dark:text-red-400 font-semibold"
                   onClick={handleProceedWithoutFixing}
                 >
@@ -1108,7 +1106,7 @@ DATE: 10TH FEBRUARY 2026`;
                 <X className="w-5 h-5" />
               </Button>
             </div>
-            
+
             {fixingDefect.type === 'Annexure Missing' ? (
               <div className="p-8">
                 <div className="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-xl">
@@ -1182,7 +1180,7 @@ DATE: 10TH FEBRUARY 2026`;
                   </div>
                 </div>
                 <div className="bg-muted border-t border-border p-6 flex justify-end gap-3 rounded-b-2xl">
-                  <Button variant="outline" onClick={() => setFixingDefect(null)} className="font-semibold">Cancel</Button>
+                  <Button variant="ghost" onClick={() => setFixingDefect(null)} className="font-semibold">Cancel</Button>
                   <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-lg shadow-primary/30">
                     Submit & Re-check
                   </Button>

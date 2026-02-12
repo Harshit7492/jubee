@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { 
-  Scale, ArrowLeft, Upload, FileText, Download, Save, Bot, User, Send, 
+import {
+  Scale, ArrowLeft, Upload, FileText, Download, Save, Bot, User, Send,
   Paperclip, TrendingUp, AlertCircle, CheckCircle, XCircle, ChevronRight,
   ChevronDown, Globe, Target, Shield, Lightbulb, BookOpen, AlertTriangle, X, ExternalLink
 } from 'lucide-react';
@@ -86,10 +86,10 @@ interface ASIArgument {
   strengthScore: number;
 }
 
-type ConversationStage = 
-  | 'mode-selection' 
-  | 'psi-judgments' 
-  | 'psi-context' 
+type ConversationStage =
+  | 'mode-selection'
+  | 'psi-judgments'
+  | 'psi-context'
   | 'psi-court-selection'
   | 'psi-bench-selection'
   | 'psi-judge-selection'
@@ -224,9 +224,9 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       timestamp: new Date(),
       options
     };
-    
+
     setMessages(prev => [...prev, newMessage]);
-    
+
     // Start typewriter effect for this message
     setTypingMessageId(newMessage.id);
     setVisibleChars(prev => ({ ...prev, [newMessage.id]: 0 }));
@@ -401,7 +401,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
     setSelectedCourt(courtName);
     setJurisdiction(courtName);
     addUserMessage(courtName);
-    
+
     setTimeout(() => {
       setIsTyping(false);
       proceedToPSIBenchSelection();
@@ -424,7 +424,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
 
   const handleBenchSelect = (benchId: string, benchLabel: string) => {
     setIsTyping(true);
-    
+
     if (benchId === 'skip-bench') {
       addUserMessage('Skip bench selection');
       setSelectedBench('');
@@ -432,7 +432,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       addUserMessage(benchLabel);
       setSelectedBench(benchLabel);
     }
-    
+
     setTimeout(() => {
       setIsTyping(false);
       proceedToPSIJudgeSelection();
@@ -465,12 +465,12 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
 
   const handlePSIJudgeModalConfirm = (selectedJudgesList: Array<{ id: string; name: string; gender: 'Mr.' | 'Ms.' }>) => {
     setIsJudgeModalOpen(false);
-    
+
     if (selectedJudgesList.length === 0) {
       // Skip judge selection
       setIsTyping(true);
       setSelectedJudge('');
-      
+
       setTimeout(() => {
         setIsTyping(false);
         proceedToPSIBadLaws();
@@ -479,7 +479,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       const judgeNames = selectedJudgesList.map(j => `${j.gender} ${j.name}`).join(', ');
       setSelectedJudge(judgeNames);
       addUserMessage(judgeNames);
-      
+
       setIsTyping(true);
       setTimeout(() => {
         setIsTyping(false);
@@ -662,7 +662,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
 
   const handleASIBenchSelect = (benchId: string, benchLabel: string) => {
     setIsTyping(true);
-    
+
     if (benchId === 'skip-bench') {
       addUserMessage('Skip bench selection');
       setSelectedBench('');
@@ -670,7 +670,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       addUserMessage(benchLabel);
       setSelectedBench(benchLabel);
     }
-    
+
     setTimeout(() => {
       setIsTyping(false);
       proceedToASIJudgeSelection();
@@ -703,12 +703,12 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
 
   const handleASIJudgeModalConfirm = (selectedJudgesList: Array<{ id: string; name: string; gender: 'Mr.' | 'Ms.' }>) => {
     setIsJudgeModalOpen(false);
-    
+
     if (selectedJudgesList.length === 0) {
       // Skip judge selection
       setIsTyping(true);
       setSelectedJudge('');
-      
+
       setTimeout(() => {
         setIsTyping(false);
         processASIAnalysis();
@@ -717,7 +717,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       const judgeNames = selectedJudgesList.map(j => `${j.gender} ${j.name}`).join(', ');
       setSelectedJudge(judgeNames);
       addUserMessage(judgeNames);
-      
+
       setIsTyping(true);
       setTimeout(() => {
         setIsTyping(false);
@@ -823,7 +823,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage(
-          newDocs.length === 1 
+          newDocs.length === 1
             ? 'One file received. Would you like to add more or continue?'
             : `Perfect! I've received ${newDocs.length} argument document(s). Would you like to add more or continue?`,
           [
@@ -895,7 +895,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
       setTimeout(() => {
         setIsTyping(false);
         addAIMessage(
-          newDocs.length === 1 
+          newDocs.length === 1
             ? 'One file received. Would you like to add more or continue?'
             : `Perfect! I've received ${newDocs.length} argument document(s). Would you like to add more or continue?`,
           [
@@ -995,11 +995,11 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
     // Simulate AI response with PSI/ASI specific context
     setTimeout(() => {
       setIsAIChatTyping(false);
-      
-      const responseText = currentStage === 'psi-results' 
+
+      const responseText = currentStage === 'psi-results'
         ? "I can help you understand the PSI scores, explain Jubee Contra findings, suggest how to strengthen your precedent selection, or provide guidance on citation strategies. What would you like to know?"
         : "I can help you analyze the ASI scores, explain strength ratings, suggest improvements to your arguments, or provide guidance on supporting evidence. What would you like to discuss?";
-      
+
       setChatMessages(prev => [...prev, {
         id: (Date.now() + 1).toString(),
         text: responseText,
@@ -1055,7 +1055,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
               {enableBadLawsCheck && psiResults.some(r => r.badLaws.length > 0) && (
                 <Button
                   onClick={handleSaveBadLaws}
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   className="font-semibold border-yellow-500/30 bg-yellow-500/5 hover:bg-yellow-500/10 text-yellow-700 dark:text-yellow-400"
                 >
@@ -1065,7 +1065,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
               )}
               <Button
                 onClick={handleSaveToMySpace}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -1074,7 +1074,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
               </Button>
               <Button
                 onClick={handleDownloadReport}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -1131,7 +1131,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           Case {index + 1}
                         </Badge>
                         <h3 className="text-xl font-bold text-foreground group cursor-pointer hover:text-primary transition-colors flex items-center gap-2">
-                          <span 
+                          <span
                             className="underline cursor-pointer"
                             onClick={() => setSelectedCaseDetail(result)}
                           >
@@ -1165,7 +1165,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </span>
                     </div>
                     <div className="h-1.5 bg-border rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${result.metrics.contextProximity}%` }}
                       />
@@ -1180,7 +1180,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </span>
                     </div>
                     <div className="h-1.5 bg-border rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${result.metrics.benchStrength}%` }}
                       />
@@ -1195,7 +1195,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </span>
                     </div>
                     <div className="h-1.5 bg-border rounded-full overflow-hidden mb-2">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${result.metrics.citationFrequency}%` }}
                       />
@@ -1213,7 +1213,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </span>
                     </div>
                     <div className="h-1.5 bg-border rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${100 - result.metrics.stageProceedingMismatch}%` }}
                       />
@@ -1228,7 +1228,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </span>
                     </div>
                     <div className="h-1.5 bg-border rounded-full overflow-hidden mb-2">
-                      <div 
+                      <div
                         className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${100 - result.metrics.courtMismatch}%` }}
                       />
@@ -1242,13 +1242,12 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
 
                   <div className="p-4 bg-muted/30 rounded-xl">
                     <p className="text-xs font-semibold text-muted-foreground mb-2">Overruling Status</p>
-                    <Badge className={`${
-                      result.metrics.overrulingStatus === 'Active' 
-                        ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/30' 
+                    <Badge className={`${result.metrics.overrulingStatus === 'Active'
+                        ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/30'
                         : result.metrics.overrulingStatus === 'Partially Overruled'
-                        ? 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/30'
-                        : 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30'
-                    } font-semibold`}>
+                          ? 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/30'
+                          : 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30'
+                      } font-semibold`}>
                       {result.metrics.overrulingStatus}
                     </Badge>
                     {result.metrics.overrulingStatus === 'Active' && (
@@ -1289,15 +1288,15 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                 <div className="space-y-4">
                   {(() => {
                     let badLawCounter = 0;
-                    return psiResults.map((result, resultIndex) => 
+                    return psiResults.map((result, resultIndex) =>
                       result.badLaws.length > 0 ? (
                         <div key={resultIndex}>
                           <div className="space-y-2">
                             {result.badLaws.map((badLaw) => {
                               badLawCounter++;
                               return (
-                                <div 
-                                  key={badLaw.id} 
+                                <div
+                                  key={badLaw.id}
                                   className="p-4 bg-muted/30 border border-border rounded-lg"
                                 >
                                   <div className="flex items-start gap-3 mb-3">
@@ -1317,24 +1316,23 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                                       )}
                                       <p className="text-xs text-muted-foreground leading-relaxed">{badLaw.explanation}</p>
                                     </div>
-                                    <Badge 
-                                      className={`text-xs capitalize flex-shrink-0 ${
-                                        badLaw.severity === 'high' 
-                                          ? 'bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/10' 
-                                          : badLaw.severity === 'medium' 
-                                          ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/10' 
-                                          : 'bg-primary/10 text-primary border-primary/20 hover:bg-primary/10'
-                                      }`}
+                                    <Badge
+                                      className={`text-xs capitalize flex-shrink-0 ${badLaw.severity === 'high'
+                                          ? 'bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/10'
+                                          : badLaw.severity === 'medium'
+                                            ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/10'
+                                            : 'bg-primary/10 text-primary border-primary/20 hover:bg-primary/10'
+                                        }`}
                                     >
                                       {badLaw.severity}
                                     </Badge>
                                   </div>
-                                  
+
                                   {/* CTAs */}
                                   <div className="flex items-center gap-2 pt-2 border-t border-border/50">
                                     <Button
                                       onClick={() => toast.success('Opening case law in new tab...')}
-                                      variant="outline"
+                                      variant="ghost"
                                       size="sm"
                                       className="h-8 text-xs font-semibold border-border hover:bg-accent hover:border-primary/30"
                                     >
@@ -1343,7 +1341,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                                     </Button>
                                     <Button
                                       onClick={() => setSelectedBadLaw({ caseName: result.caseName, citation: result.citation, badLaw })}
-                                      variant="outline"
+                                      variant="ghost"
                                       size="sm"
                                       className="h-8 text-xs font-semibold border-border hover:bg-accent hover:border-primary/30"
                                     >
@@ -1354,7 +1352,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                                       onClick={() => {
                                         toast.success('Opening judgement in new tab...');
                                       }}
-                                      variant="outline"
+                                      variant="ghost"
                                       size="sm"
                                       className="h-8 text-xs font-semibold border-border hover:bg-accent hover:border-primary/30"
                                     >
@@ -1459,11 +1457,10 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                         </div>
                       )}
                       <div
-                        className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                          message.isAI
+                        className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                             ? 'bg-muted border-[0.5px] border-border'
                             : 'bg-[#1E3A8A] text-white'
-                        }`}
+                          }`}
                       >
                         <p className="text-sm leading-relaxed">{message.text}</p>
                         <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>
@@ -1472,7 +1469,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </div>
                     </div>
                   ))}
-                  
+
                   {isAIChatTyping && (
                     <div className="flex gap-3 items-start">
                       <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -1517,9 +1514,8 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
         {/* Floating Chat Toggle Button */}
         <button
           onClick={() => setShowAIChat(!showAIChat)}
-          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-            showAIChat ? 'scale-0' : 'scale-100'
-          }`}
+          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showAIChat ? 'scale-0' : 'scale-100'
+            }`}
         >
           <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
@@ -1537,27 +1533,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
             onSave={handleSaveDocument}
           />
         )}
-        
+
         {/* Detailed Analysis Dialog */}
         {selectedBadLaw && (
           <Dialog open={!!selectedBadLaw} onOpenChange={() => setSelectedBadLaw(null)}>
             <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="text-xl font-bold text-foreground flex items-center gap-2">
-                  <AlertTriangle className={`w-5 h-5 ${
-                    selectedBadLaw.badLaw.severity === 'high' 
-                      ? 'text-red-500' 
-                      : selectedBadLaw.badLaw.severity === 'medium' 
-                      ? 'text-yellow-500' 
-                      : 'text-blue-500'
-                  }`} />
+                  <AlertTriangle className={`w-5 h-5 ${selectedBadLaw.badLaw.severity === 'high'
+                      ? 'text-red-500'
+                      : selectedBadLaw.badLaw.severity === 'medium'
+                        ? 'text-yellow-500'
+                        : 'text-blue-500'
+                    }`} />
                   Detailed Jubee Contra Analysis
                 </DialogTitle>
                 <DialogDescription>
                   Comprehensive analysis of the detected Jubee Contra issue and its implications
                 </DialogDescription>
               </DialogHeader>
-              
+
               <div className="space-y-4 pt-4">
                 {/* Case Information */}
                 <div className="bg-muted/30 border border-border rounded-lg p-4">
@@ -1570,14 +1565,13 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       <p className="text-sm font-bold text-foreground mb-1">{selectedBadLaw.caseName}</p>
                       <p className="text-xs text-muted-foreground">{selectedBadLaw.citation}</p>
                     </div>
-                    <Badge 
-                      className={`text-xs capitalize ${
-                        selectedBadLaw.badLaw.severity === 'high' 
-                          ? 'bg-red-500/10 text-red-600 border-red-500/20' 
-                          : selectedBadLaw.badLaw.severity === 'medium' 
-                          ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20' 
-                          : 'bg-primary/10 text-primary border-primary/20'
-                      }`}
+                    <Badge
+                      className={`text-xs capitalize ${selectedBadLaw.badLaw.severity === 'high'
+                          ? 'bg-red-500/10 text-red-600 border-red-500/20'
+                          : selectedBadLaw.badLaw.severity === 'medium'
+                            ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20'
+                            : 'bg-primary/10 text-primary border-primary/20'
+                        }`}
                     >
                       {selectedBadLaw.badLaw.severity} severity
                     </Badge>
@@ -1663,7 +1657,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       toast.success('Jubee Contra analysis saved to My Space');
                       setSelectedBadLaw(null);
                     }}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 h-10 font-semibold border-border hover:bg-accent"
                   >
                     <Save className="w-4 h-4 mr-2" />
@@ -1688,7 +1682,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                   In-depth breakdown of the Precedent Strength Index score and metrics
                 </DialogDescription>
               </DialogHeader>
-              
+
               <div className="space-y-6 pt-4">
                 {/* Case Header */}
                 <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6">
@@ -1700,27 +1694,25 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                         <Badge variant="secondary" className="text-xs">
                           {selectedCaseDetail.metrics.overrulingStatus}
                         </Badge>
-                        <Badge 
-                          className={`text-xs ${
-                            selectedCaseDetail.metrics.indexScore >= 75 
-                              ? 'bg-green-500/10 text-green-600 border-green-500/20' 
-                              : selectedCaseDetail.metrics.indexScore >= 50 
-                              ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20' 
-                              : 'bg-red-500/10 text-red-600 border-red-500/20'
-                          }`}
+                        <Badge
+                          className={`text-xs ${selectedCaseDetail.metrics.indexScore >= 75
+                              ? 'bg-green-500/10 text-green-600 border-green-500/20'
+                              : selectedCaseDetail.metrics.indexScore >= 50
+                                ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20'
+                                : 'bg-red-500/10 text-red-600 border-red-500/20'
+                            }`}
                         >
                           {selectedCaseDetail.metrics.indexScore >= 75 ? 'Strong Precedent' : selectedCaseDetail.metrics.indexScore >= 50 ? 'Moderate Precedent' : 'Weak Precedent'}
                         </Badge>
                       </div>
                     </div>
                     <div className="bg-card border-2 border-primary rounded-xl p-6 text-center min-w-[120px]">
-                      <div className={`text-4xl font-bold mb-1 ${
-                        selectedCaseDetail.metrics.indexScore >= 75 
-                          ? 'text-green-500' 
-                          : selectedCaseDetail.metrics.indexScore >= 50 
-                          ? 'text-yellow-500' 
-                          : 'text-red-500'
-                      }`}>
+                      <div className={`text-4xl font-bold mb-1 ${selectedCaseDetail.metrics.indexScore >= 75
+                          ? 'text-green-500'
+                          : selectedCaseDetail.metrics.indexScore >= 50
+                            ? 'text-yellow-500'
+                            : 'text-red-500'
+                        }`}>
                         {selectedCaseDetail.metrics.indexScore}
                       </div>
                       <div className="text-xs font-semibold text-muted-foreground">PSI SCORE</div>
@@ -1755,28 +1747,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Context Proximity</h5>
                           <p className="text-xs text-muted-foreground">How closely the case facts align with your situation</p>
                         </div>
-                        <span className={`text-2xl font-bold ${
-                          selectedCaseDetail.metrics.contextProximity >= 75 ? 'text-green-500' : 
-                          selectedCaseDetail.metrics.contextProximity >= 50 ? 'text-yellow-500' : 'text-red-500'
-                        }`}>
+                        <span className={`text-2xl font-bold ${selectedCaseDetail.metrics.contextProximity >= 75 ? 'text-green-500' :
+                            selectedCaseDetail.metrics.contextProximity >= 50 ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
                           {selectedCaseDetail.metrics.contextProximity}%
                         </span>
                       </div>
                       <div className="h-2 bg-border rounded-full overflow-hidden mb-3">
-                        <div 
-                          className={`h-full rounded-full transition-all ${
-                            selectedCaseDetail.metrics.contextProximity >= 75 ? 'bg-green-500' : 
-                            selectedCaseDetail.metrics.contextProximity >= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                          }`}
+                        <div
+                          className={`h-full rounded-full transition-all ${selectedCaseDetail.metrics.contextProximity >= 75 ? 'bg-green-500' :
+                              selectedCaseDetail.metrics.contextProximity >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                            }`}
                           style={{ width: `${selectedCaseDetail.metrics.contextProximity}%` }}
                         />
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.contextProximity >= 75 
+                        {selectedCaseDetail.metrics.contextProximity >= 75
                           ? 'Excellent alignment! The factual circumstances and legal issues in this case are very similar to yours, making it a highly relevant precedent.'
-                          : selectedCaseDetail.metrics.contextProximity >= 50 
-                          ? 'Moderate alignment. While there are similarities, some factual differences exist that may require careful distinction in your arguments.'
-                          : 'Limited alignment. The factual context differs significantly from your case, which may weaken its persuasive value.'
+                          : selectedCaseDetail.metrics.contextProximity >= 50
+                            ? 'Moderate alignment. While there are similarities, some factual differences exist that may require careful distinction in your arguments.'
+                            : 'Limited alignment. The factual context differs significantly from your case, which may weaken its persuasive value.'
                         }
                       </p>
                     </div>
@@ -1788,28 +1778,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Stage/Proceeding Match</h5>
                           <p className="text-xs text-muted-foreground">Alignment with your case's procedural stage</p>
                         </div>
-                        <span className={`text-2xl font-bold ${
-                          selectedCaseDetail.metrics.stageProceedingMismatch <= 25 ? 'text-green-500' : 
-                          selectedCaseDetail.metrics.stageProceedingMismatch <= 50 ? 'text-yellow-500' : 'text-red-500'
-                        }`}>
+                        <span className={`text-2xl font-bold ${selectedCaseDetail.metrics.stageProceedingMismatch <= 25 ? 'text-green-500' :
+                            selectedCaseDetail.metrics.stageProceedingMismatch <= 50 ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
                           {100 - selectedCaseDetail.metrics.stageProceedingMismatch}%
                         </span>
                       </div>
                       <div className="h-2 bg-border rounded-full overflow-hidden mb-3">
-                        <div 
-                          className={`h-full rounded-full transition-all ${
-                            selectedCaseDetail.metrics.stageProceedingMismatch <= 25 ? 'bg-green-500' : 
-                            selectedCaseDetail.metrics.stageProceedingMismatch <= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                          }`}
+                        <div
+                          className={`h-full rounded-full transition-all ${selectedCaseDetail.metrics.stageProceedingMismatch <= 25 ? 'bg-green-500' :
+                              selectedCaseDetail.metrics.stageProceedingMismatch <= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                            }`}
                           style={{ width: `${100 - selectedCaseDetail.metrics.stageProceedingMismatch}%` }}
                         />
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.stageProceedingMismatch <= 25 
+                        {selectedCaseDetail.metrics.stageProceedingMismatch <= 25
                           ? 'Perfect match! This precedent was decided at a similar procedural stage, making it highly applicable to your current proceedings.'
-                          : selectedCaseDetail.metrics.stageProceedingMismatch <= 50 
-                          ? 'Partial match. The procedural stage differs somewhat, so consider whether the legal principles still fully apply.'
-                          : 'Significant mismatch. This case was decided at a different procedural stage, which may limit its direct applicability.'
+                          : selectedCaseDetail.metrics.stageProceedingMismatch <= 50
+                            ? 'Partial match. The procedural stage differs somewhat, so consider whether the legal principles still fully apply.'
+                            : 'Significant mismatch. This case was decided at a different procedural stage, which may limit its direct applicability.'
                         }
                       </p>
                     </div>
@@ -1821,28 +1809,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Court Hierarchy Match</h5>
                           <p className="text-xs text-muted-foreground">Binding authority for your target court</p>
                         </div>
-                        <span className={`text-2xl font-bold ${
-                          selectedCaseDetail.metrics.courtMismatch <= 25 ? 'text-green-500' : 
-                          selectedCaseDetail.metrics.courtMismatch <= 50 ? 'text-yellow-500' : 'text-red-500'
-                        }`}>
+                        <span className={`text-2xl font-bold ${selectedCaseDetail.metrics.courtMismatch <= 25 ? 'text-green-500' :
+                            selectedCaseDetail.metrics.courtMismatch <= 50 ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
                           {100 - selectedCaseDetail.metrics.courtMismatch}%
                         </span>
                       </div>
                       <div className="h-2 bg-border rounded-full overflow-hidden mb-3">
-                        <div 
-                          className={`h-full rounded-full transition-all ${
-                            selectedCaseDetail.metrics.courtMismatch <= 25 ? 'bg-green-500' : 
-                            selectedCaseDetail.metrics.courtMismatch <= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                          }`}
+                        <div
+                          className={`h-full rounded-full transition-all ${selectedCaseDetail.metrics.courtMismatch <= 25 ? 'bg-green-500' :
+                              selectedCaseDetail.metrics.courtMismatch <= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                            }`}
                           style={{ width: `${100 - selectedCaseDetail.metrics.courtMismatch}%` }}
                         />
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.courtMismatch <= 25 
+                        {selectedCaseDetail.metrics.courtMismatch <= 25
                           ? 'Strong binding authority! This precedent from a higher or same court will carry significant weight in your proceedings.'
-                          : selectedCaseDetail.metrics.courtMismatch <= 50 
-                          ? 'Moderate authority. While persuasive, this precedent may not be strictly binding on your target court.'
-                          : 'Limited binding authority. This precedent comes from a different jurisdiction and may have persuasive value only.'
+                          : selectedCaseDetail.metrics.courtMismatch <= 50
+                            ? 'Moderate authority. While persuasive, this precedent may not be strictly binding on your target court.'
+                            : 'Limited binding authority. This precedent comes from a different jurisdiction and may have persuasive value only.'
                         }
                         {selectedCaseDetail.metrics.courtMismatchDetails && (
                           <span className="block mt-2 font-semibold text-primary">
@@ -1859,28 +1845,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Bench Strength</h5>
                           <p className="text-xs text-muted-foreground">Size and composition of the deciding bench</p>
                         </div>
-                        <span className={`text-2xl font-bold ${
-                          selectedCaseDetail.metrics.benchStrength >= 75 ? 'text-green-500' : 
-                          selectedCaseDetail.metrics.benchStrength >= 50 ? 'text-yellow-500' : 'text-red-500'
-                        }`}>
+                        <span className={`text-2xl font-bold ${selectedCaseDetail.metrics.benchStrength >= 75 ? 'text-green-500' :
+                            selectedCaseDetail.metrics.benchStrength >= 50 ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
                           {selectedCaseDetail.metrics.benchStrength}%
                         </span>
                       </div>
                       <div className="h-2 bg-border rounded-full overflow-hidden mb-3">
-                        <div 
-                          className={`h-full rounded-full transition-all ${
-                            selectedCaseDetail.metrics.benchStrength >= 75 ? 'bg-green-500' : 
-                            selectedCaseDetail.metrics.benchStrength >= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                          }`}
+                        <div
+                          className={`h-full rounded-full transition-all ${selectedCaseDetail.metrics.benchStrength >= 75 ? 'bg-green-500' :
+                              selectedCaseDetail.metrics.benchStrength >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                            }`}
                           style={{ width: `${selectedCaseDetail.metrics.benchStrength}%` }}
                         />
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.benchStrength >= 75 
+                        {selectedCaseDetail.metrics.benchStrength >= 75
                           ? 'Constitutional bench or larger bench! Decisions by larger benches carry more weight and are less likely to be overruled.'
-                          : selectedCaseDetail.metrics.benchStrength >= 50 
-                          ? 'Regular bench. The decision has standard precedential value based on court hierarchy.'
-                          : 'Single judge or smaller bench. May be overruled by larger benches in future.'
+                          : selectedCaseDetail.metrics.benchStrength >= 50
+                            ? 'Regular bench. The decision has standard precedential value based on court hierarchy.'
+                            : 'Single judge or smaller bench. May be overruled by larger benches in future.'
                         }
                       </p>
                     </div>
@@ -1892,28 +1876,26 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Citation Frequency</h5>
                           <p className="text-xs text-muted-foreground">How often this case is cited in subsequent judgments</p>
                         </div>
-                        <span className={`text-2xl font-bold ${
-                          selectedCaseDetail.metrics.citationFrequency >= 75 ? 'text-green-500' : 
-                          selectedCaseDetail.metrics.citationFrequency >= 50 ? 'text-yellow-500' : 'text-red-500'
-                        }`}>
+                        <span className={`text-2xl font-bold ${selectedCaseDetail.metrics.citationFrequency >= 75 ? 'text-green-500' :
+                            selectedCaseDetail.metrics.citationFrequency >= 50 ? 'text-yellow-500' : 'text-red-500'
+                          }`}>
                           {selectedCaseDetail.metrics.citationFrequency}%
                         </span>
                       </div>
                       <div className="h-2 bg-border rounded-full overflow-hidden mb-3">
-                        <div 
-                          className={`h-full rounded-full transition-all ${
-                            selectedCaseDetail.metrics.citationFrequency >= 75 ? 'bg-green-500' : 
-                            selectedCaseDetail.metrics.citationFrequency >= 50 ? 'bg-yellow-500' : 'bg-red-500'
-                          }`}
+                        <div
+                          className={`h-full rounded-full transition-all ${selectedCaseDetail.metrics.citationFrequency >= 75 ? 'bg-green-500' :
+                              selectedCaseDetail.metrics.citationFrequency >= 50 ? 'bg-yellow-500' : 'bg-red-500'
+                            }`}
                           style={{ width: `${selectedCaseDetail.metrics.citationFrequency}%` }}
                         />
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.citationFrequency >= 75 
+                        {selectedCaseDetail.metrics.citationFrequency >= 75
                           ? 'Landmark case! Frequently cited by courts, indicating its importance and acceptance as settled law.'
-                          : selectedCaseDetail.metrics.citationFrequency >= 50 
-                          ? 'Moderately cited. The case has reasonable recognition but may not be a leading authority.'
-                          : 'Rarely cited. This precedent may have limited acceptance or may address a narrow legal point.'
+                          : selectedCaseDetail.metrics.citationFrequency >= 50
+                            ? 'Moderately cited. The case has reasonable recognition but may not be a leading authority.'
+                            : 'Rarely cited. This precedent may have limited acceptance or may address a narrow legal point.'
                         }
                       </p>
                     </div>
@@ -1925,22 +1907,21 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           <h5 className="text-sm font-bold text-foreground mb-1">Overruling Status</h5>
                           <p className="text-xs text-muted-foreground">Current legal validity of this precedent</p>
                         </div>
-                        <Badge className={`text-sm font-bold ${
-                          selectedCaseDetail.metrics.overrulingStatus === 'Active' 
-                            ? 'bg-green-500/10 text-green-600 border-green-500/20' 
+                        <Badge className={`text-sm font-bold ${selectedCaseDetail.metrics.overrulingStatus === 'Active'
+                            ? 'bg-green-500/10 text-green-600 border-green-500/20'
                             : selectedCaseDetail.metrics.overrulingStatus === 'Partially Overruled'
-                            ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20'
-                            : 'bg-red-500/10 text-red-600 border-red-500/20'
-                        }`}>
+                              ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20'
+                              : 'bg-red-500/10 text-red-600 border-red-500/20'
+                          }`}>
                           {selectedCaseDetail.metrics.overrulingStatus}
                         </Badge>
                       </div>
                       <p className="text-xs text-foreground bg-muted/30 rounded-lg p-3 leading-relaxed">
-                        {selectedCaseDetail.metrics.overrulingStatus === 'Active' 
+                        {selectedCaseDetail.metrics.overrulingStatus === 'Active'
                           ? 'Good law! This precedent has not been overruled and remains fully applicable as binding authority.'
                           : selectedCaseDetail.metrics.overrulingStatus === 'Partially Overruled'
-                          ? 'Caution required. Some aspects of this judgment have been overruled. Verify which specific holdings remain valid.'
-                          : 'Overruled! This precedent is no longer good law. Do not rely on it as it has been explicitly overruled by a later judgment.'
+                            ? 'Caution required. Some aspects of this judgment have been overruled. Verify which specific holdings remain valid.'
+                            : 'Overruled! This precedent is no longer good law. Do not rely on it as it has been explicitly overruled by a later judgment.'
                         }
                       </p>
                     </div>
@@ -1954,11 +1935,11 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                     Jubee's Conclusion
                   </h4>
                   <p className="text-sm text-foreground leading-relaxed">
-                    {selectedCaseDetail.metrics.indexScore >= 75 
+                    {selectedCaseDetail.metrics.indexScore >= 75
                       ? 'This is a strong precedent that you should definitely cite in your arguments. The high PSI score indicates excellent alignment with your case context, strong judicial authority, and reliable legal standing.'
-                      : selectedCaseDetail.metrics.indexScore >= 50 
-                      ? 'This precedent has moderate strength and can be used to support your arguments, but consider supplementing it with stronger authorities. Pay attention to the metrics that scored lower and address potential counterarguments.'
-                      : 'Exercise caution when relying on this precedent. The low PSI score indicates significant weaknesses in context alignment, judicial authority, or legal validity. Consider finding alternative precedents with higher scores.'
+                      : selectedCaseDetail.metrics.indexScore >= 50
+                        ? 'This precedent has moderate strength and can be used to support your arguments, but consider supplementing it with stronger authorities. Pay attention to the metrics that scored lower and address potential counterarguments.'
+                        : 'Exercise caution when relying on this precedent. The low PSI score indicates significant weaknesses in context alignment, judicial authority, or legal validity. Consider finding alternative precedents with higher scores.'
                     }
                   </p>
                 </div>
@@ -1979,7 +1960,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                     onClick={() => {
                       toast.success('Opening full judgment...');
                     }}
-                    variant="outline"
+                    variant="ghost"
                     className="flex-1 h-11 font-semibold border-border hover:bg-accent"
                   >
                     <BookOpen className="w-4 h-4 mr-2" />
@@ -1987,7 +1968,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                   </Button>
                   <Button
                     onClick={() => setSelectedCaseDetail(null)}
-                    variant="outline"
+                    variant="ghost"
                     className="h-11 px-4 font-semibold border-border hover:bg-accent"
                   >
                     Close
@@ -2036,7 +2017,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
             <div className="flex items-center gap-2">
               <Button
                 onClick={handleSaveToMySpace}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -2045,7 +2026,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
               </Button>
               <Button
                 onClick={handleDownloadReport}
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="font-semibold border-border hover:bg-accent"
               >
@@ -2079,12 +2060,11 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                         <Badge variant="secondary" className="text-xs">
                           {argument.casesReliedUpon.length} Cases
                         </Badge>
-                        <Badge 
-                          className={`text-xs ${
-                            argument.vulnerabilities.length === 0 
+                        <Badge
+                          className={`text-xs ${argument.vulnerabilities.length === 0
                               ? 'bg-green-500/10 text-green-600 border-green-500/30'
                               : 'bg-yellow-500/10 text-yellow-600 border-yellow-500/30'
-                          }`}
+                            }`}
                         >
                           {argument.vulnerabilities.length} {argument.vulnerabilities.length === 1 ? 'Vulnerability' : 'Vulnerabilities'}
                         </Badge>
@@ -2101,10 +2081,9 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                           </div>
                         </div>
                       </div>
-                      <ChevronDown 
-                        className={`w-5 h-5 text-muted-foreground transition-transform ${
-                          expandedArguments.has(argument.id) ? 'rotate-180' : ''
-                        }`}
+                      <ChevronDown
+                        className={`w-5 h-5 text-muted-foreground transition-transform ${expandedArguments.has(argument.id) ? 'rotate-180' : ''
+                          }`}
                       />
                     </div>
                   </div>
@@ -2161,7 +2140,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                                 <span className="text-xs font-semibold text-foreground">{caseRef.relevance}%</span>
                               </div>
                               <div className="h-2 bg-border rounded-full overflow-hidden">
-                                <div 
+                                <div
                                   className="h-full bg-primary rounded-full transition-all"
                                   style={{ width: `${caseRef.relevance}%` }}
                                 />
@@ -2184,8 +2163,8 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                         </div>
                         <div className="space-y-3">
                           {argument.vulnerabilities.map((vuln) => (
-                            <div 
-                              key={vuln.id} 
+                            <div
+                              key={vuln.id}
                               className="p-4 rounded-lg border border-border bg-muted/20"
                             >
                               <div className="flex items-start justify-between gap-3 mb-2">
@@ -2197,14 +2176,13 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                                     {vuln.type.replace('-', ' ')}
                                   </p>
                                 </div>
-                                <Badge 
-                                  className={`text-xs capitalize flex-shrink-0 ${
-                                    vuln.severity === 'high' 
-                                      ? 'bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/10' 
-                                      : vuln.severity === 'medium' 
-                                      ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/10' 
-                                      : 'bg-primary/10 text-primary border-primary/20 hover:bg-primary/10'
-                                  }`}
+                                <Badge
+                                  className={`text-xs capitalize flex-shrink-0 ${vuln.severity === 'high'
+                                      ? 'bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/10'
+                                      : vuln.severity === 'medium'
+                                        ? 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/10'
+                                        : 'bg-primary/10 text-primary border-primary/20 hover:bg-primary/10'
+                                    }`}
                                 >
                                   {vuln.severity}
                                 </Badge>
@@ -2305,11 +2283,10 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                         </div>
                       )}
                       <div
-                        className={`max-w-[280px] rounded-2xl px-4 py-3 ${
-                          message.isAI
+                        className={`max-w-[280px] rounded-2xl px-4 py-3 ${message.isAI
                             ? 'bg-muted border-[0.5px] border-border'
                             : 'bg-[#1E3A8A] text-white'
-                        }`}
+                          }`}
                       >
                         <p className="text-sm leading-relaxed">{message.text}</p>
                         <p className={`text-[10px] mt-1.5 ${message.isAI ? 'text-muted-foreground' : 'text-white/70'}`}>
@@ -2318,7 +2295,7 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
                       </div>
                     </div>
                   ))}
-                  
+
                   {isAIChatTyping && (
                     <div className="flex gap-3 items-start">
                       <div className="w-8 h-8 rounded-full bg-[#1E3A8A] flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -2363,9 +2340,8 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
         {/* Floating Chat Toggle Button */}
         <button
           onClick={() => setShowAIChat(!showAIChat)}
-          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${
-            showAIChat ? 'scale-0' : 'scale-100'
-          }`}
+          className={`fixed bottom-8 right-8 w-14 h-14 rounded-full bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center z-40 group ${showAIChat ? 'scale-0' : 'scale-100'
+            }`}
         >
           <img src={jubeeLogo} alt="Jubee" className="w-7 h-7 object-contain" />
           <span className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
@@ -2420,102 +2396,101 @@ export function SITool({ onBack, onToolChange, activeTool }: SIToolProps) {
         <div className="flex-1 overflow-y-auto px-8 py-6" ref={chatContainerRef}>
           <div className="min-h-full flex flex-col justify-end">
             <div className="space-y-6 pb-2">
-            {messages.map((message, index) => (
-              <div key={message.id}>
-                {/* Message Bubble */}
-                <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  {message.type === 'ai' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+              {messages.map((message, index) => (
+                <div key={message.id}>
+                  {/* Message Bubble */}
+                  <div className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    {message.type === 'ai' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+                      </div>
+                    )}
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-5 py-4 ${message.type === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-card border border-border text-foreground shadow-sm'
+                        }`}
+                    >
+                      <p className="text-base leading-relaxed whitespace-pre-wrap">
+                        {message.type === 'ai'
+                          ? message.content.slice(0, visibleChars[message.id] || message.content.length)
+                          : message.content
+                        }
+                      </p>
+
+                      {/* Show uploaded files */}
+                      {message.uploadedFiles && message.uploadedFiles.length > 0 && (
+                        <div className="mt-3 space-y-2">
+                          {message.uploadedFiles.map((file) => (
+                            <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
+                              <FileText className="w-4 h-4" />
+                              <span>{file.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                      message.type === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-card border border-border text-foreground shadow-sm'
-                    }`}
-                  >
-                    <p className="text-base leading-relaxed whitespace-pre-wrap">
-                      {message.type === 'ai' 
-                        ? message.content.slice(0, visibleChars[message.id] || message.content.length)
-                        : message.content
-                      }
-                    </p>
-                    
-                    {/* Show uploaded files */}
-                    {message.uploadedFiles && message.uploadedFiles.length > 0 && (
-                      <div className="mt-3 space-y-2">
-                        {message.uploadedFiles.map((file) => (
-                          <div key={file.id} className="flex items-center gap-2 text-sm bg-primary-foreground/10 rounded-lg px-3 py-2">
-                            <FileText className="w-4 h-4" />
-                            <span>{file.name}</span>
-                          </div>
-                        ))}
+                    {message.type === 'user' && (
+                      <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <User className="w-5 h-5 text-white" />
                       </div>
                     )}
                   </div>
-                  {message.type === 'user' && (
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <User className="w-5 h-5 text-white" />
+
+                  {/* Options (Chips) */}
+                  {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && !isProcessing && typingMessageId !== message.id && (
+                    <div className="ml-16 mt-4 flex flex-wrap gap-2">
+                      {message.options.map((option) => {
+                        const Icon = option.icon;
+                        return (
+                          <button
+                            key={option.id}
+                            onClick={() => handleOptionSelect(option.id, option.label)}
+                            className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
+                          >
+                            {Icon && <Icon className="w-4 h-4" />}
+                            {option.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
+              ))}
 
-                {/* Options (Chips) */}
-                {message.type === 'ai' && message.options && index === messages.length - 1 && !isTyping && !isProcessing && typingMessageId !== message.id && (
-                  <div className="ml-16 mt-4 flex flex-wrap gap-2">
-                    {message.options.map((option) => {
-                      const Icon = option.icon;
-                      return (
-                        <button
-                          key={option.id}
-                          onClick={() => handleOptionSelect(option.id, option.label)}
-                          className="px-4 py-2.5 bg-card hover:bg-primary/10 border-2 border-border hover:border-primary rounded-xl transition-all hover:shadow-md flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary"
-                        >
-                          {Icon && <Icon className="w-4 h-4" />}
-                          {option.label}
-                        </button>
-                      );
-                    })}
+              {isTyping && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
                   </div>
-                )}
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                </div>
-                <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {isProcessing && (
-              <div className="flex gap-3 justify-start">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
-                </div>
-                <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                    <p className="text-sm text-foreground">
-                      Jubee is evaluating Strength Index...
-                    </p>
+              {isProcessing && (
+                <div className="flex gap-3 justify-start">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <img src={jubeeLogo} alt="Jubee AI" className="w-6 h-6 object-contain" />
+                  </div>
+                  <div className="bg-card border border-border rounded-2xl px-5 py-4 shadow-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      <p className="text-sm text-foreground">
+                        Jubee is evaluating Strength Index...
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            <div ref={messagesEndRef} className="h-4" />
-          </div>
+              <div ref={messagesEndRef} className="h-4" />
+            </div>
           </div>
         </div>
 
